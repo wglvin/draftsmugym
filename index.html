@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gymnasium & Fitness Centre | Singapore Management University (SMU)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:site_name" content="Singapore Management University (SMU)">
+    <meta property="og:title" content="Gymnasium & Fitness Centre | Singapore Management University (SMU)">
+    <meta property="og:url"
+        content="https://www.smu.edu.sg/campus-life/facilities/student-facilities/gymnasium-fitness-centre">
+    <meta property="og:image" content="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <img src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg" alt="SMU Logo">
+        <h2>Singapore Management University</h2>
+        <button id="auth-btn" class="auth-btn">Login / Sign Up</button>
+    </header>
+    <section class="hero">
+        <h1>Gymnasium & Fitness Centre</h1>
+    </section>
+    <div class="content">
+        <section class="main-section">
+            <p>
+                SMU’s Gymnasium & Fitness Centre, located at the School of Computing & Information Systems 1, has three
+                levels of facilities:
+                <strong>a free weights section at the mezzanine level</strong>,
+                and <strong>cardio machines & treadmills on the first floor</strong> overlooking the SMU Campus Green.
+            </p>
+            <p>
+                The gym features strength-training equipment, stack-weight machines, kettlebells, and a TRX system to
+                cater to different training purposes and fitness levels.
+            </p>
+            <p>
+                <strong>All users must observe good gym etiquette and follow facility rules for safety and
+                    hygiene.</strong>
+            </p>
+        </section>
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>Location</h3>
+                <p>
+                    #B1 Basement Concourse<br>
+                    School of Computing & Information Systems 1, SMU
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Crowd Level</h3>
+                <div class="crowd-level">35 / 50</div>
+                <p>
+                    <strong>Mezzanine:</strong> 60% full<br>
+                    <strong>First Floor:</strong> 70% full
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Opening Hours</h3>
+                <ul>
+                    <li>Weekdays: 8.00am – 1.30pm</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.00pm
+                        – 7.30pm</li>
+                    <li>Closed on Saturdays, Sundays,<br>&nbsp;&nbsp;&nbsp;and Public Holidays</li>
+                </ul>
+            </div>
+        </div>
+        <div class="announcements">
+            <h3>Announcements</h3>
+            <p>
+                <strong>[Gym Etiquette]</strong> Please observe good gym etiquette:
+            <ul>
+                <li>Wipe down equipment after use</li>
+                <li>Return weights to their designated racks</li>
+                <li>Respect others' personal space</li>
+                <li>Use headphones when listening to music</li>
+            </ul>
+            </p>
+            <p>
+                <strong>[Gym Attire]</strong> Please bring the following items:
+            <ul>
+                <li>Sports Attire</li>
+                <li>Water Bottle</li>
+                <li>Towel, show at the counter</li>
+                <li>SMU Card, to exchange for locker key</li>
+            </ul>
+            </p>
+        </div>
+        <div class="contact">
+            <h3>Contact</h3>
+            <p>
+                <strong>Address:</strong> 81 Victoria Street, Singapore 188065<br>
+                <strong>Email:</strong>
+                <a href="mailto:smugym@smu.edu.sg">smugym@smu.edu.sg</a>
+            </p>
+            <p>
+                <a href="https://maps.smu.edu.sg/">Getting to SMU</a> |
+                <a href="https://www.smu.edu.sg/campus-life/visiting-smu/carpark-information">Carpark Info</a>
+            </p>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Singapore Management University. All Rights Reserved.
+    </footer>
+
+    <!-- Modal for Login/Sign Up -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span id="close-auth-modal" class="auth-modal-close">&times;</span>
+            <div style="display:flex;gap:2em;justify-content:center;margin-bottom:1em;">
+                <button id="show-login" class="auth-modal-tab active">Login</button>
+                <button id="show-register" class="auth-modal-tab">Sign Up</button>
+            </div>
+            <form id="login-form" style="display:block;">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <form id="register-form" style="display:none;">
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <div id="auth-error"></div>
+        </div>
+    </div>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SMU Gymnasium – Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <img src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg" alt="SMU Logo">
+    <h2>Singapore Management University</h2>
+    <button id="logout-btn" class="auth-btn" style="top:18px;right:32px;">Logout</button>
+  </header>
+  <section class="hero">
+      <h1>Gym User Dashboard</h1>
+  </section>
+  <div class="content">
+    <h3>Welcome, <span id="user-email"></span></h3>
+    <section id="workout-logger"></section>
+  </div>
+  <footer>
+    &copy; 2025 Singapore Management University. All Rights Reserved.
+  </footer>
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="auth-dashboard.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

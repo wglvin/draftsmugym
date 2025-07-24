@@ -1,0 +1,426 @@
+:root {
+    --smu-blue: #002855;
+    --smu-light-blue: #e5ebf4;
+    --smu-accent: #004aad;
+    --smu-bg: #fafafc;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--smu-bg);
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+header {
+    background: var(--smu-blue);
+    color: #fff;
+    padding: 1.5rem 0 1rem 0;
+    text-align: center;
+    position: relative;
+}
+
+header img {
+    height: 48px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 8px;
+}
+
+header h2 {
+    margin: .5rem 0 0 0;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+.hero {
+    background: url('gym.png') center/cover no-repeat;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 0 0 24px 24px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.hero::after {
+    content: "";
+    background: linear-gradient(0deg, #002855b0 85%, transparent 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.hero h1 {
+    position: relative;
+    color: #fff;
+    margin: 0 0 22px 28px;
+    font-size: 2.2rem;
+    z-index: 1;
+    font-weight: 700;
+    text-shadow: 1px 2px 8px #123;
+}
+
+.content {
+    margin: auto;
+    max-width: 900px;
+    background: #fff;
+    padding: 2.2rem 2rem 2rem 2rem;
+    border-radius: 20px;
+    position: relative;
+    top: -40px;
+    box-shadow: 0 2px 16px #0028550a;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.6rem;
+    margin: 2rem 0 1.6rem 0;
+}
+
+.info-card {
+    background: var(--smu-light-blue);
+    border-radius: 10px;
+    padding: 1.3rem 1.1rem;
+    min-width: 130px;
+    flex: 1 1 0;
+}
+
+.info-card h3 {
+    font-size: 1.05rem;
+    color: var(--smu-blue);
+    margin-top: 0;
+}
+
+.info-card p,
+.info-card ul {
+    margin: .4em 0 0 0;
+    font-size: 1.01em;
+}
+
+.info-card ul {
+    padding-left: 0em;
+}
+
+.info-card ul li {
+    margin-bottom: .4em;
+    list-style-type: none;
+}
+
+.main-section {
+    margin-bottom: 2rem;
+}
+
+.main-section strong {
+    color: var(--smu-accent);
+}
+
+.crowd-level {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: .5em 0;
+}
+
+.announcements {
+    background: #f9fafc;
+    border-left: 4px solid var(--smu-accent);
+    border-radius: 10px;
+    margin-top: 1.7em;
+    margin-bottom: 1.5em;
+    padding: 1.1em 1.3em;
+    box-shadow: 0 1px 6px #00285516;
+    max-height: 170px;
+    overflow-y: auto;
+}
+
+.announcements h3 {
+    margin-top: 0;
+    margin-bottom: .2em;
+    color: var(--smu-accent);
+}
+
+.announcements ul {
+    margin-top: .5em;
+    margin-bottom: 0;
+    padding-left: 1.25em;
+}
+
+.announcements li {
+    list-style-type: disc;
+    margin-bottom: 0.25em;
+}
+
+.contact {
+    background: #f0f4fa;
+    padding: 1.25em 1.5em;
+    border-radius: 10px;
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
+    box-shadow: 0 1px 6px #00285516;
+}
+
+.contact a {
+    color: var(--smu-accent);
+}
+
+.contact h3 {
+    margin: .2em 0 .7em 0;
+}
+
+footer {
+    background: var(--smu-blue);
+    color: #fff;
+    text-align: center;
+    padding: .8em 0;
+    font-size: .95em;
+    border-radius: 0 0 0 0;
+}
+
+/* Login/Signup Modal Styles */
+.auth-btn {
+    position: absolute;
+    top: 18px;
+    right: 32px;
+    z-index: 10;
+    background: #004aad;
+    color: #fff;
+    padding: 0.55em 1.7em;
+    border: none;
+    border-radius: 7px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 1px 5px #0002;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+
+.auth-btn:hover {
+    background: #002855;
+}
+
+/* Modal dialog styles */
+.auth-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #00335538;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-modal.show {
+    display: flex;
+}
+
+.auth-modal-content {
+    background: #fff;
+    max-width: 370px;
+    width: 86vw;
+    padding: 1.2em 1.2em 1.2em 1.2em;
+    border-radius: 9px;
+    position: relative;
+    box-shadow: 0 2px 24px #00285534;
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 1.4em;
+    cursor: pointer;
+    color: #888;
+}
+
+.auth-modal-tab {
+    font-size: 1em;
+    background: #f1f5fa;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 0.3em 1.1em;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+}
+
+.auth-modal-tab.active,
+.auth-modal-tab:hover {
+    background: #004aad;
+    color: #fff;
+}
+
+#auth-modal input[type=email],
+#auth-modal input[type=password] {
+    width: 100%;
+    margin-bottom: 0.7em;
+    padding: 0.55em;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 1em;
+}
+
+#auth-modal button[type=submit] {
+    width: 100%;
+    background: #004aad;
+    color: #fff;
+    border: none;
+    padding: 0.7em;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 0.5em;
+}
+
+#auth-error {
+    color: #c02828;
+    font-size: .98em;
+    margin-top: 0.7em;
+    min-height: 1em;
+}
+
+/* Dashboard Workout Log Section (optional improvement) */
+#workout-logger {
+    margin-top: 2em;
+}
+
+#workout-logger select,
+#workout-logger input {
+    margin-bottom: 0.7em;
+    padding: 0.45em 0.8em;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 1em;
+}
+
+#workout-logger button[type=submit] {
+    background: #004aad;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6em 1.8em;
+    font-size: 1em;
+}
+
+/* Responsive for mobile */
+@media (max-width: 760px) {
+    .content {
+        padding: 1.1em 0.6em 1em 0.6em;
+        border-radius: 0;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+    }
+
+    .hero {
+        height: 105px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+        margin: 0 0 1em 1em;
+    }
+
+    .auth-btn {
+        right: 10px;
+        top: 12px;
+    }
+
+    .auth-modal-content {
+        max-width: 99vw;
+    }
+}
+
+ul {
+    margin: 0;
+    padding-left: 1.2em;
+}
+
+h3,
+h4 {
+    margin-top: 0.4em;
+}
+
+.smu-exercise-card {
+    background: var(--smu-light-blue);
+    border-radius: 20px;
+    margin: 1.6em 0 2em 0;
+    padding: 1.2em 1.2em 1em 1.2em;
+    box-shadow: 0 1px 13px #00285516;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.smu-ex-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: .70em;
+}
+
+.smu-ex-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 1em;
+    filter: drop-shadow(0 1px 2px #00285514);
+}
+
+.smu-ex-title {
+    font-size: 1.12em;
+    font-weight: 700;
+    color: var(--smu-blue);
+    letter-spacing: 1.3px;
+}
+
+.smu-ex-type {
+    color: var(--smu-accent);
+    margin-left: .15em;
+    font-size: .95em;
+}
+
+.smu-sets-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.05em;
+}
+
+.smu-sets-table th {
+    color: var(--smu-accent);
+    font-weight: 600;
+    background: #f5f7fa;
+    font-size: .99em;
+    letter-spacing: .04em;
+    border-bottom: 2px solid #c2d6f3;
+    padding: .27em 0 .18em 0;
+    text-align: left;
+}
+
+.smu-sets-table td {
+    color: #002855;
+    font-size: 1.07em;
+    padding: .38em .25em .27em .13em;
+    border: none;
+}
+
+.smu-sets-table tr:not(:first-child):nth-child(even) td {
+    background: #f6f8fa;
+}
+
+.smu-warmup td {
+    color: #d7a719;
+    font-weight: bold;
+    background: #f6efd4;
+}
+
+.smu-sets-table tr td:first-child {
+    font-weight: bold;
+}
