@@ -11,79 +11,158 @@ const EXERCISES = [
   { name: 'Elliptical', type: 'cardio' }
 ];
 
-let exerciseOptions = EXERCISES.map(x => `<option value="${x.name}" data-type="${x.type}">${x.name}</option>`).join('');
+let workoutSession = []; // Array of { exercise, type, weight, reps, etc. } for *current* exercise before saving
 
-document.getElementById('workout-logger').innerHTML = `
-  <h4>Log a Workout</h4>
-  <form id="log-form">
-    <select id="exercise" required>
-      <option value="">Select exercise</option>
-      ${exerciseOptions}
-    </select>
-    <div id="strength-fields">
-      <input type="number" id="weight" min="1" placeholder="Weight (kg)">
-      <input type="number" id="reps" min="1" placeholder="Reps">
-      <input type="number" id="sets" min="1" placeholder="Sets">
-    </div>
-    <div id="cardio-fields" style="display:none">
-      <input type="number" id="duration" min="1" placeholder="Duration (min)">
-      <input type="number" id="distance" min="0" step="0.01" placeholder="Distance (km)">
-    </div>
-    <button type="submit">Log</button>
-  </form>
-  <div id="log-history"></div>
-`;
+function renderLogger() {
+  let exerciseOptions = EXERCISES.map(x => `<option value="${x.name}" data-type="${x.type}">${x.name}</option>`).join('');
+  document.getElementById('workout-logger').innerHTML = `
+    <h4>Log a Workout</h4>
+    <form id="workout-select-form">
+        <select id="exercise" required>
+          <option value="">Select exercise</option>
+          ${exerciseOptions}
+        </select>
+    </form>
+    <div id="exercise-log-fields"></div>
+    <div id="session-sets-list"></div>
+    <div id="log-history"></div>
+  `;
 
-// Show/hide fields depending on exercise type
-document.getElementById('exercise').onchange = function () {
-  let selected = this.value;
-  let type = EXERCISES.find(x => x.name === selected)?.type;
-  document.getElementById('strength-fields').style.display = (type === 'strength') ? '' : 'none';
-  document.getElementById('cardio-fields').style.display = (type === 'cardio') ? '' : 'none';
-};
-
-document.getElementById('log-form').onsubmit = async (e) => {
-  e.preventDefault();
-  const exercise = document.getElementById('exercise').value;
-  const type = EXERCISES.find(x => x.name === exercise)?.type;
-  
-  if (!exercise) return alert('Select an exercise');
-
-  let log = {
-    userId: user.uid,
-    exercise,
-    type,
-    timestamp: serverTimestamp(),
+  document.getElementById('exercise').onchange = function () {
+    const selected = this.value;
+    if (!selected) {
+      document.getElementById('exercise-log-fields').innerHTML = '';
+      workoutSession = [];
+      renderSetsList();
+      return;
+    }
+    const type = EXERCISES.find(x => x.name === selected)?.type;
+    workoutSession = [];
+    // Show entry form per set/session
+    if (type === 'strength') {
+      document.getElementById('exercise-log-fields').innerHTML = `
+        <form id="add-set-form" class="smu-add-set">
+          <input type="number" id="weight" min="1" placeholder="Weight (kg)" required>
+          <input type="number" id="reps" min="1" placeholder="Reps" required>
+          <button type="submit">+ Add Set</button>
+        </form>
+      `;
+      document.getElementById('add-set-form').onsubmit = (e) => {
+        e.preventDefault();
+        let weight = parseFloat(document.getElementById('weight').value);
+        let reps = parseInt(document.getElementById('reps').value);
+        if (weight < 1 || reps < 1) {
+          alert('Please enter valid values');
+          return;
+        }
+        // Add to current session
+        workoutSession.push({ exercise: selected, type, weight, reps });
+        renderSetsList();
+        e.target.reset();
+      }
+    } else {
+      document.getElementById('exercise-log-fields').innerHTML = `
+        <form id="add-set-form" class="smu-add-set">
+          <input type="number" id="duration" min="1" placeholder="Duration (min)" required>
+          <input type="number" id="distance" min="0" step="0.01" placeholder="Distance (km)" required>
+          <button type="submit">+ Add Session</button>
+        </form>
+      `;
+      document.getElementById('add-set-form').onsubmit = (e) => {
+        e.preventDefault();
+        let duration = parseInt(document.getElementById('duration').value);
+        let distance = parseFloat(document.getElementById('distance').value);
+        if (duration < 1 || isNaN(distance) || distance < 0) {
+          alert('Please enter valid values');
+          return;
+        }
+        workoutSession.push({ exercise: selected, type, duration, distance });
+        renderSetsList();
+        e.target.reset();
+      }
+    }
+    renderSetsList();
   };
 
-  if(type === 'strength') {
-    let weight = parseInt(document.getElementById('weight').value);
-    let reps = parseInt(document.getElementById('reps').value);
-    let sets = parseInt(document.getElementById('sets').value);
-    if (weight < 1 || reps < 1 || sets < 1) return alert('Please enter valid values');
-    log.weight = weight;
-    log.reps = reps;
-    log.sets = sets;
-    log.volume = weight * reps * sets;
-  } else {
-    let duration = parseInt(document.getElementById('duration').value);
-    let distance = parseFloat(document.getElementById('distance').value);
-    if (duration < 1 || isNaN(distance) || distance < 0) return alert('Please enter valid values');
-    log.duration = duration;
-    log.distance = distance;
-  }
+  // Initially blank
+  renderSetsList();
+}
 
-  await addDoc(collection(db, "workouts"), log);
-  alert('Workout logged!');
-  loadWorkoutHistory(user.uid);
+function renderSetsList() {
+  // Small table of sets for the *current* exercise
+  let html = '';
+  if (workoutSession.length === 0) {
+    document.getElementById('session-sets-list').innerHTML = '';
+    // Optionally, show a "Save All" button only if there are sets!
+    return;
+  }
+  const type = workoutSession[0]?.type;
+  html += `<table class="smu-sets-table"><thead><tr>`;
+  if (type === 'strength')
+    html += `<th>Set</th><th>Weight (kg)</th><th>Reps</th><th></th>`;
+  else
+    html += `<th>Session</th><th>Duration (min)</th><th>Distance (km)</th><th></th>`;
+  html += `</tr></thead><tbody>`;
+  workoutSession.forEach((set, i) => {
+    html += '<tr>';
+    html += `<td>${i + 1}</td>`;
+    if (type === 'strength') {
+      html += `<td>${set.weight}</td><td>${set.reps}</td>`;
+    } else {
+      html += `<td>${set.duration}</td><td>${set.distance.toFixed(2)}</td>`;
+    }
+    html += `<td><button onclick="removeSet(${i})" style="color:#a52e2e;background:none;border:none;cursor:pointer;font-weight:bold;">×</button></td>`;
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  html += `<button id="save-all-sets" class="smu-save-btn" style="margin-top:8px;">Save All to Log</button>`;
+  document.getElementById('session-sets-list').innerHTML = html;
+
+  document.getElementById('save-all-sets').onclick = async function () {
+    // Save all sets to Firestore individually
+    const user = auth.currentUser;
+    if (!user) return alert("You must be logged in.");
+    for (const set of workoutSession) {
+      const entry = {
+        userId: user.uid,
+        exercise: set.exercise,
+        type: set.type,
+        timestamp: serverTimestamp()
+      };
+      if (set.type === 'strength') {
+        entry.weight = set.weight;
+        entry.reps = set.reps;
+        // Only 1 set at a time, so set sets: 1 (or just omit)
+        entry.sets = 1;
+        entry.volume = set.weight * set.reps;
+      } else {
+        entry.duration = set.duration;
+        entry.distance = set.distance;
+      }
+      await addDoc(collection(db, "workouts"), entry);
+    }
+    alert('Workout(s) logged!');
+    workoutSession = [];
+    renderSetsList();
+    await loadWorkoutHistory(user.uid);
+    // Optionally: clear exercise select
+    document.getElementById('exercise').value = '';
+    document.getElementById('exercise-log-fields').innerHTML = '';
+  };
+}
+
+// Make removeSet globally callable
+window.removeSet = (index) => {
+  workoutSession.splice(index, 1);
+  renderSetsList();
 };
 
-
+// ---- refactor loadWorkoutHistory as before ---- //
 async function loadWorkoutHistory(uid) {
   const q = query(collection(db, "workouts"), where("userId", "==", uid), orderBy("timestamp", "desc"));
   const snap = await getDocs(q);
 
-  // Group by exercise (latest first)
+  // Group by exercise
   let logs = {};
   snap.forEach(doc => {
     const d = doc.data();
@@ -103,19 +182,18 @@ async function loadWorkoutHistory(uid) {
     <table class="smu-sets-table">
       <thead><tr>`;
 
-    if(type === 'strength')
-      html += `<th>SETS</th><th>KG</th><th>REPS</th>`;
+    if (type === 'strength')
+      html += `<th>Set</th><th>Weight (kg)</th><th>Reps</th>`;
     else
       html += `<th>Session</th><th>Duration (min)</th><th>Distance (km)</th>`;
-
     html += `</tr></thead><tbody>`;
 
     entries.forEach((d, i) => {
       html += "<tr>";
-      if(type === 'strength')
-        html += `<td>${d.sets || ''}</td><td>${d.weight || ''}</td><td>${d.reps || ''}</td>`;
+      if (type === 'strength')
+        html += `<td>${i + 1}</td><td>${d.weight || ''}</td><td>${d.reps || ''}</td>`;
       else
-        html += `<td>${i+1}</td><td>${d.duration || ''}</td><td>${d.distance != null ? d.distance.toFixed(2) : ''}</td>`;
+        html += `<td>${i + 1}</td><td>${d.duration || ''}</td><td>${d.distance != null ? d.distance.toFixed(2) : ''}</td>`;
       html += "</tr>";
     });
 
@@ -123,7 +201,13 @@ async function loadWorkoutHistory(uid) {
   }
 
   document.getElementById('log-history').innerHTML = html || "<div style='color:#555'>No workouts yet.</div>";
-};
+}
 
-loadWorkoutHistory(user.uid);
+// ---- INITIALIZE ON LOGIN ---- //
+auth.onAuthStateChanged(user => {
+  if (!user) return;
+  renderLogger();
+  loadWorkoutHistory(user.uid);
+});
+
 

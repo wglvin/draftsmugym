@@ -424,3 +424,32 @@ h4 {
 .smu-sets-table tr td:first-child {
     font-weight: bold;
 }
+
+.smu-add-set input[type="number"] {
+    width: 100px;
+    margin-right: 7px;
+    margin-bottom: 0;
+}
+
+.smu-add-set button {
+    background: var(--smu-blue);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 18px;
+    font-size: 1em;
+}
+
+.smu-save-btn {
+    background: var(--smu-accent);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    font-size: 1em;
+}
+
+.smu-sets-table th,
+.smu-sets-table td {
+    text-align: center;
+}
