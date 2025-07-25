@@ -3,6 +3,7 @@ import { db, auth } from "./firebase-config.js";
 import {
   collection, addDoc, query, where, getDocs, orderBy, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { renderFoodOrder } from "./food-order.js";
 
 const EXERCISES = [
   { name: 'Bench Press', type: 'strength' },
@@ -208,6 +209,7 @@ auth.onAuthStateChanged(user => {
   if (!user) return;
   renderLogger();
   loadWorkoutHistory(user.uid);
+  renderFoodOrder();
 });
 
 
