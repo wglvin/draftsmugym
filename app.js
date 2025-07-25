@@ -15,32 +15,32 @@ const EXERCISES = [
 let workoutSession = []; // Array of { exercise, type, weight, reps, etc. } for *current* exercise before saving
 
 function renderLogger() {
-  let exerciseOptions = EXERCISES.map(x => `<option value="${x.name}" data-type="${x.type}">${x.name}</option>`).join('');
   document.getElementById('workout-logger').innerHTML = `
-    <h4>Log a Workout</h4>
-    <form id="workout-select-form">
-        <select id="exercise" required>
-          <option value="">Select exercise</option>
-          ${exerciseOptions}
-        </select>
-    </form>
-    <div id="exercise-log-fields"></div>
-    <div id="session-sets-list"></div>
-    <div id="log-history"></div>
-  `;
+  <h4>Log a Workout</h4>
+  <form id="workout-select-form" autocomplete="off">
+    <input type="text" id="exercise-search" placeholder="Search exercise..." required list="exercise-list">
+    <datalist id="exercise-list">
+      ${EXERCISES.map(x => `<option value="${x.name}"></option>`).join('')}
+    </datalist>
+  </form>
+  <div id="exercise-log-fields"></div>
+  <div id="session-sets-list"></div>
+  <div id="log-history"></div>
+`;
 
-  document.getElementById('exercise').onchange = function () {
+  // This is the only input handler needed now!
+  document.getElementById('exercise-search').oninput = function () {
     const selected = this.value;
-    if (!selected) {
+    const exObj = EXERCISES.find(x => x.name.toLowerCase() === selected.toLowerCase());
+    if (!exObj) {
       document.getElementById('exercise-log-fields').innerHTML = '';
       workoutSession = [];
       renderSetsList();
       return;
     }
-    const type = EXERCISES.find(x => x.name === selected)?.type;
+
     workoutSession = [];
-    // Show entry form per set/session
-    if (type === 'strength') {
+    if (exObj.type === 'strength') {
       document.getElementById('exercise-log-fields').innerHTML = `
         <form id="add-set-form" class="smu-add-set">
           <input type="number" id="weight" min="1" placeholder="Weight (kg)" required>
@@ -56,8 +56,7 @@ function renderLogger() {
           alert('Please enter valid values');
           return;
         }
-        // Add to current session
-        workoutSession.push({ exercise: selected, type, weight, reps });
+        workoutSession.push({ exercise: selected, type: exObj.type, weight, reps });
         renderSetsList();
         e.target.reset();
       }
@@ -77,7 +76,7 @@ function renderLogger() {
           alert('Please enter valid values');
           return;
         }
-        workoutSession.push({ exercise: selected, type, duration, distance });
+        workoutSession.push({ exercise: selected, type: exObj.type, duration, distance });
         renderSetsList();
         e.target.reset();
       }
@@ -85,7 +84,6 @@ function renderLogger() {
     renderSetsList();
   };
 
-  // Initially blank
   renderSetsList();
 }
 
