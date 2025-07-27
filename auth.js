@@ -66,6 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
             errorDiv.textContent = err.message;
         }
     };
+    function showTab(tab) {
+        document.getElementById('dashboard-section').style.display = tab === 'dashboard' ? 'block' : 'none';
+        document.getElementById('workout-section').style.display = tab === 'workout' ? 'block' : 'none';
+        document.getElementById('food-section').style.display = tab === 'food' ? 'block' : 'none';
+        document.getElementById('trainer-section').style.display = tab === 'trainer' ? 'block' : 'none';
+        // update active link
+        // ...
+    }
 
+    document.getElementById('nav-dashboard').onclick = () => showTab('dashboard');
+    document.getElementById('nav-workout').onclick = () => showTab('workout');
+    document.getElementById('nav-food').onclick = () => showTab('food');
+    document.getElementById('nav-trainer').onclick = () => showTab('trainer');
+    // Initially, show dashboard
+    showTab('dashboard');
 });
 

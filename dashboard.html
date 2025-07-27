@@ -1,20 +1,32 @@
 <!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>SMU Gymnasium – Dashboard</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <header>
     <img src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg" alt="SMU Logo">
     <h2>Singapore Management University</h2>
     <button id="logout-btn" class="auth-btn" style="top:18px;right:32px;">Logout</button>
   </header>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#" id="nav-dashboard" class="active">Dashboard</a></li>
+      <li><a href="#" id="nav-workout">Workout Log</a></li>
+      <li><a href="#" id="nav-food">Food Orders</a></li>
+      <li><a href="#" id="nav-trainer">Personal Trainer</a></li>
+      <li style="float:right"><button id="logout-btn" class="auth-btn">Logout</button></li>
+    </ul>
+  </nav>
+
   <section class="hero">
-      <h1>Gym User Dashboard</h1>
+    <h1>Gym User Dashboard</h1>
   </section>
   <div class="content">
     <h3>Welcome, <span id="user-email"></span></h3>
@@ -29,4 +41,5 @@
   <script type="module" src="app.js"></script>
   <script type="module" src="food-order.js"></script>
 </body>
+
 </html>
