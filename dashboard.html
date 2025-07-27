@@ -1,4 +1,3 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,7 @@
   <header>
     <img src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg" alt="SMU Logo">
     <h2>Singapore Management University</h2>
-    <button id="logout-btn" class="auth-btn" style="top:18px;right:32px;">Logout</button>
+    <button id="logout-btn-header" class="auth-btn" style="top:18px;right:32px;">Logout</button>
   </header>
   <nav class="navbar">
     <ul>
@@ -21,7 +20,6 @@
       <li><a href="#" id="nav-workout">Workout Log</a></li>
       <li><a href="#" id="nav-food">Food Orders</a></li>
       <li><a href="#" id="nav-trainer">Personal Trainer</a></li>
-      <li style="float:right"><button id="logout-btn" class="auth-btn">Logout</button></li>
     </ul>
   </nav>
 
@@ -30,16 +28,56 @@
   </section>
   <div class="content">
     <h3>Welcome, <span id="user-email"></span></h3>
-    <section id="workout-logger"></section>
-    <section id="food-order-section"></section>
+    <div id="dashboard-section">
+      <!-- You can add dashboard summary here if desired -->
+      <p>Welcome to your SMU Gym Super App Dashboard! Use the navigation above.</p>
+    </div>
+    <div id="workout-section" style="display:none;">
+      <h3>Workout Logger</h3>
+      <section id="workout-logger"></section>
+      <h4>Workout History</h4>
+      <div id="log-history"></div>
+    </div>
+    <div id="food-section" style="display:none;">
+      <h3>Order Your Post-Workout Meal</h3>
+      <section id="food-order-section"></section>
+      <h4>My Meal Orders</h4>
+      <div id="food-order-history"></div>
+    </div>
+    <div id="trainer-section" style="display:none;">
+      <h3>Book a Personal Trainer</h3>
+      <form id="trainer-booking-form" class="dashboard-card">
+        <label for="trainer-select">Trainer:</label>
+        <select id="trainer-select" required>
+          <option value="">Select…</option>
+          <option value="coachlim">Coach Lim (Strength)</option>
+          <option value="coachtan">Coach Tan (Cardio)</option>
+          <option value="coachlee">Coach Lee (Stretch & Recovery)</option>
+        </select>
+        <br>
+        <label for="booking-date">Date:</label>
+        <input type="date" id="booking-date" required>
+        <br>
+        <label for="booking-time">Time:</label>
+        <input type="time" id="booking-time" required>
+        <br>
+        <button type="submit">Book Trainer</button>
+        <div id="trainer-booking-message" style="margin-top:1em;"></div>
+      </form>
+      <h4>My Bookings</h4>
+      <div id="trainer-bookings-history"></div>
+    </div>
   </div>
   <footer>
     &copy; 2025 Singapore Management University. All Rights Reserved.
   </footer>
   <script type="module" src="firebase-config.js"></script>
   <script type="module" src="auth-dashboard.js"></script>
+  <script type="module" src="spa-nav.js"></script>
   <script type="module" src="app.js"></script>
+  <script type="module" src="workout.js"></script>
   <script type="module" src="food-order.js"></script>
+  <script type="module" src="trainer-booking.js"></script>
 </body>
 
 </html>

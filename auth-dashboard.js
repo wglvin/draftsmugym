@@ -1,21 +1,26 @@
-// auth-dashboard.js
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
-const logoutBtn = document.getElementById('logout-btn');
 function getUserName(email) {
     return email.split('@')[0];
 }
 
-const userEmailSpan = document.getElementById('user-email');
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logout-btn-header');
+    const userEmailSpan = document.getElementById('user-email');
 
-onAuthStateChanged(auth, user => {
-    if (user) {
-        userEmailSpan.textContent = getUserName(user.email);
-    } else {
-        window.location.href = "index.html";
+    onAuthStateChanged(auth, user => {
+        if (user) {
+            if (userEmailSpan) userEmailSpan.textContent = getUserName(user.email);
+        } else {
+            window.location.href = "index.html";
+        }
+    });
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            await signOut(auth);
+            window.location.href = "index.html";
+        });
     }
 });
-if (logoutBtn) {
-    logoutBtn.onclick = () => signOut(auth).then(() => window.location.href = "index.html");
-}
