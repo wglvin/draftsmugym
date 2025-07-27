@@ -1,9 +1,17 @@
-/* styles.css */
 :root {
     --smu-blue: #002855;
     --smu-light-blue: #e5ebf4;
     --smu-accent: #004aad;
-    --smu-bg: #fafafc;
+    --smu-bg: #f7f9fa;
+    --shadow: 0 4px 32px rgba(7, 28, 64, 0.09);
+    --radius: 16px;
+    --transition: 0.14s;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
 }
 
 body {
@@ -11,28 +19,55 @@ body {
     background: var(--smu-bg);
     margin: 0;
     padding: 0;
-    color: #222;
+    color: #212840;
+    min-height: 100vh;
+    /* makes sure body fills viewport */
+    display: flex;
+    flex-direction: column;
+    /* stack children vertically */
 }
 
 header {
     background: var(--smu-blue);
     color: #fff;
-    padding: 1.5rem 0 1rem 0;
+    padding: 1.4rem .2rem 1.2rem .2rem;
     text-align: center;
     position: relative;
+    box-shadow: 0 1px 10px #01245810;
 }
 
 header img {
     height: 48px;
-    display: inline-block;
     vertical-align: middle;
     margin-bottom: 8px;
 }
 
 header h2 {
     margin: .5rem 0 0 0;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
+    font-size: 1.48rem;
+    letter-spacing: 2.2px;
+}
+
+.auth-btn {
+    position: absolute;
+    top: 22px;
+    right: 42px;
+    background: var(--smu-accent);
+    color: #fff;
+    padding: .5em 1.5em;
+    border: none;
+    border-radius: 7px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 2px 7px #00335519;
+    font-family: inherit;
+    transition: background var(--transition);
+    z-index: 10;
+}
+
+.auth-btn:hover {
+    background: #0051c3;
+    color: #fafaff;
 }
 
 .hero {
@@ -40,15 +75,16 @@ header h2 {
     height: 190px;
     display: flex;
     align-items: flex-end;
-    border-radius: 0 0 24px 24px;
+    border-radius: 0 0 var(--radius) var(--radius);
     position: relative;
-    overflow: hidden;
     margin-bottom: 2rem;
+    overflow: hidden;
 }
+
 
 .hero::after {
     content: "";
-    background: linear-gradient(0deg, #002855b0 85%, transparent 100%);
+    background: linear-gradient(0deg, #002855c6 80%, transparent 100%);
     position: absolute;
     left: 0;
     top: 0;
@@ -66,51 +102,79 @@ header h2 {
     text-shadow: 1px 2px 8px #123;
 }
 
-.content {
-    margin: auto;
-    max-width: 900px;
-    background: #fff;
-    padding: 2.2rem 2rem 2rem 2rem;
-    border-radius: 20px;
-    position: relative;
-    top: -40px;
-    box-shadow: 0 2px 16px #0028550a;
+.navbar {
+    background: #f3f5f7;
+    margin-bottom: .7rem;
+    border-bottom: 1.2px solid #d8e1f6;
+    box-shadow: 0 1px 7px #c2d6f320;
 }
 
-.info-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.6rem;
-    margin: 2rem 0 1.6rem 0;
-}
-
-.info-card {
-    background: var(--smu-light-blue);
-    border-radius: 10px;
-    padding: 1.3rem 1.1rem;
-    min-width: 130px;
-    flex: 1 1 0;
-}
-
-.info-card h3 {
-    font-size: 1.05rem;
-    color: var(--smu-blue);
-    margin-top: 0;
-}
-
-.info-card p,
-.info-card ul {
-    margin: .4em 0 0 0;
-    font-size: 1.01em;
-}
-
-.info-card ul {
-    padding-left: 0em;
-}
-
-.info-card ul li {
-    margin-bottom: .4em;
+.navbar ul {
     list-style-type: none;
+    margin: 0;
+    padding: 0 18px;
+    overflow: hidden;
+    display: flex;
+    min-height: 49px;
+    align-items: center;
+    gap: .5em;
+}
+
+.navbar li {
+    float: left;
+    margin: 0 .4em;
+}
+
+.navbar li a {
+    display: block;
+    color: var(--smu-blue);
+    text-align: center;
+    padding: 13px 18px 12px 18px;
+    text-decoration: none;
+    border-radius: 7px 7px 0 0;
+    font-weight: 500;
+    font-size: 1.08em;
+    transition: var(--transition), color var(--transition);
+}
+
+.navbar li a.active,
+.navbar li a:hover {
+    background-color: var(--smu-accent);
+    color: #fff;
+}
+
+/* Style navigation section like a sleek sidebar/menu */
+nav ul,
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+nav ul li,
+.menu-list li {
+    margin: 12px 0;
+}
+
+nav ul li a,
+.menu-list li a {
+    display: block;
+    color: #29409e;
+    text-decoration: none;
+    padding: 11px 23px;
+    border-radius: 8px;
+    background: #f1f4fa;
+    font-weight: 500;
+    font-size: 1.07em;
+    transition: background 0.18s, color 0.14s;
+    box-shadow: 0 1px 8px #c2d6f320;
+}
+
+nav ul li a:hover,
+.menu-list li a:hover,
+nav ul li a.active {
+    background: #002855;
+    color: #fff;
 }
 
 .main-section {
@@ -156,55 +220,290 @@ header h2 {
     margin-bottom: 0.25em;
 }
 
-.contact {
-    background: #f0f4fa;
-    padding: 1.25em 1.5em;
-    border-radius: 10px;
-    margin-top: 2.5em;
-    margin-bottom: 0.5em;
-    box-shadow: 0 1px 6px #00285516;
+.content {
+    margin: auto;
+    max-width: 900px;
+    background: #fff;
+    padding: 2.1rem 2rem 2.1rem 2.2rem;
+    border-radius: var(--radius);
+    position: relative;
+    top: 20px;
+    min-height: 600px;
+    min-width: 330px;
+    box-shadow: var(--shadow);
 }
 
-.contact a {
+h3 {
+    color: var(--smu-blue);
+    margin-bottom: .4em;
+    font-weight: 700;
+}
+
+h4 {
     color: var(--smu-accent);
+    margin-bottom: .5em;
 }
 
-.contact h3 {
-    margin: .2em 0 .7em 0;
+.dashboard-card {
+    background: var(--smu-light-blue);
+    border-radius: 10px;
+    margin-bottom: 1.1em;
+    padding: 1em 1.2em;
+    box-shadow: 0 1px 7px #00335511;
+}
+
+/* --- Unified Card Container --- */
+.dashboard-card {
+    background: var(--smu-light-blue, #e5ebf4);
+    border-radius: 11px;
+    margin-bottom: 1.1em;
+    padding: 1em 1.2em;
+    box-shadow: 0 1px 7px #00335515;
+}
+
+/* --- Workout History/Logger Styles --- */
+.smu-exercise-card {
+    background: var(--smu-light-blue, #e5ebf4);
+    border-radius: 16px;
+    margin: 1.6em 0 2em 0;
+    padding: 1.15em 1em 1.2em 1.3em;
+    box-shadow: 0 2px 24px #004aad15;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.smu-ex-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: .70em;
+}
+
+.smu-ex-icon {
+    width: 38px;
+    height: 38px;
+    margin-right: .9em;
+    filter: drop-shadow(0 1px 2px #00285512);
+}
+
+.smu-ex-title {
+    font-size: 1.09em;
+    font-weight: 700;
+    color: var(--smu-blue, #002855);
+    letter-spacing: 1px;
+}
+
+/* Workout logger tables */
+.smu-sets-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    margin: 0.6em 0;
+}
+
+.smu-sets-table th {
+    color: var(--smu-accent, #004aad);
+    font-weight: 600;
+    background: #f5f7fa;
+    border-bottom: 2px solid #c2d6f3;
+    padding: 0.40em 0.1em;
+    text-align: center;
+}
+
+.smu-sets-table td {
+    color: #223570;
+    font-size: 1.07em;
+    padding: .30em .13em;
+    border: none;
+    text-align: center;
+}
+
+.smu-sets-table tr:nth-child(even) td {
+    background: #f6f8fa;
+}
+
+.smu-sets-table tr td:first-child {
+    font-weight: bold;
+    background: #f7fbff;
+}
+
+/* Remove/Edit workout buttons in tables (more visual style) */
+.edit-workout-btn,
+.delete-workout-btn,
+.remove-set-btn {
+    color: #fff;
+    background: var(--smu-accent, #004aad);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 14px;
+    margin: 0 2px;
+    font-size: 0.92em;
+    cursor: pointer;
+    transition: background 0.17s;
+    font-weight: 500;
+}
+
+.edit-workout-btn {
+    background: #27923c;
+}
+
+.delete-workout-btn,
+.remove-set-btn {
+    background: #b02a2a;
+}
+
+.edit-workout-btn:hover {
+    background: #168026;
+}
+
+.delete-workout-btn:hover,
+.remove-set-btn:hover {
+    background: #7a1616;
+}
+
+/* --- Form/Fields Styling (All Modules) --- */
+form,
+.smu-add-set {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+}
+
+form label {
+    color: #245;
+    font-size: 1.03em;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    padding: .45em .85em;
+    font-size: 1em;
+    transition: border-color 0.14s;
+    outline: none;
+    box-sizing: border-box;
+    background: #fbfbfd;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--smu-accent, #004aad);
+    background: #f9faff;
+}
+
+button:not(.edit-workout-btn):not(.delete-workout-btn):not(.remove-set-btn),
+.smu-save-btn {
+    background: var(--smu-blue, #002855);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 27px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: .4em;
+    margin-bottom: .3em;
+    box-shadow: 0 2px 7px #00335510;
+    transition: background 0.16s;
+}
+
+button:not(.edit-workout-btn):not(.delete-workout-btn):not(.remove-set-btn):hover,
+.smu-save-btn:hover {
+    background: var(--smu-accent, #004aad);
+}
+
+/* For disable state for forms */
+input:disabled,
+select:disabled,
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: #e5eaea;
+}
+
+#food-order-message,
+#trainer-booking-message {
+    font-size: 1.07em;
+    color: #177e33;
+    margin-top: 0.7em;
+    min-height: 1.1em;
+}
+
+#food-order-message.error,
+#trainer-booking-message.error {
+    color: #c02828;
+}
+
+#log-history>i,
+#food-order-history>i,
+#trainer-bookings-history>i {
+    color: #888;
+    font-style: italic;
+}
+
+/**********
+* Responsive tweaks for table/cards
+**********/
+@media (max-width: 700px) {
+
+    .dashboard-card,
+    .smu-exercise-card {
+        padding: .7em .6em .8em .8em;
+        min-width: 0;
+        max-width: 99vw;
+    }
+
+    .smu-sets-table th,
+    .smu-sets-table td {
+        font-size: 0.86em;
+    }
 }
 
 footer {
     background: var(--smu-blue);
     color: #fff;
     text-align: center;
-    padding: .8em 0;
-    font-size: .95em;
-    border-radius: 0 0 0 0;
-}
-
-/* Login/Signup Modal Styles */
-.auth-btn {
-    position: absolute;
-    top: 18px;
-    right: 32px;
-    z-index: 10;
-    background: #004aad;
-    color: #fff;
-    padding: 0.55em 1.7em;
-    border: none;
-    border-radius: 7px;
+    padding: 1em 0 .7em 0;
     font-size: 1em;
-    cursor: pointer;
-    box-shadow: 0 1px 5px #0002;
-    font-family: inherit;
-    transition: background 0.15s;
+    border-radius: 0 0 var(--radius) var(--radius);
+    margin-top: 2em;
+    margin-bottom: 0;
 }
 
-.auth-btn:hover {
-    background: #002855;
+@media (max-width: 760px) {
+    .content {
+        padding: .9em .4em .7em .7em;
+        border-radius: 0;
+    }
+
+    .hero {
+        height: 105px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+        margin: 0 0 .8em 1.2em;
+    }
+
+    header {
+        padding: .9rem .1rem .8rem .1rem;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        gap: .05em;
+    }
+
+    .smu-exercise-card {
+        padding: .8em .3em .9em .8em;
+        max-width: 99vw;
+    }
 }
 
-/* Modal dialog styles */
 .auth-modal {
     display: none;
     position: fixed;
@@ -224,233 +523,251 @@ footer {
 
 .auth-modal-content {
     background: #fff;
-    max-width: 370px;
-    width: 86vw;
+    max-width: 360px;
+    width: 93vw;
     padding: 1.2em 1.2em 1.2em 1.2em;
-    border-radius: 9px;
+    border-radius: 11px;
+    box-shadow: 0 2px 24px #00285539;
     position: relative;
-    box-shadow: 0 2px 24px #00285534;
 }
 
 .auth-modal-close {
     position: absolute;
-    top: 10px;
-    right: 14px;
+    top: 12px;
+    right: 16px;
     font-size: 1.4em;
     cursor: pointer;
-    color: #888;
+    color: #555;
 }
 
 .auth-modal-tab {
     font-size: 1em;
     background: #f1f5fa;
-    color: #333;
+    color: #183862;
     border: none;
     border-radius: 5px;
-    padding: 0.3em 1.1em;
+    padding: 0.38em 1.14em;
     cursor: pointer;
-    transition: background 0.1s, color 0.1s;
+    box-shadow: 0 1px 4px #0033550b;
 }
 
 .auth-modal-tab.active,
 .auth-modal-tab:hover {
-    background: #004aad;
+    background: var(--smu-accent);
     color: #fff;
 }
 
 #auth-modal input[type=email],
 #auth-modal input[type=password] {
     width: 100%;
-    margin-bottom: 0.7em;
-    padding: 0.55em;
+    margin-bottom: .7em;
+    padding: .6em;
     border-radius: 5px;
-    border: 1px solid #bbb;
-    font-size: 1em;
+    border: 1px solid #bcbccc;
+    font-size: 1.07em;
+    background: #f9f9fc;
+    color: #253;
 }
 
 #auth-modal button[type=submit] {
     width: 100%;
-    background: #004aad;
+    background: var(--smu-accent);
     color: #fff;
     border: none;
-    padding: 0.7em;
+    padding: .7em;
     border-radius: 5px;
     font-size: 1em;
-    margin-top: 0.5em;
+    margin-top: .5em;
+    box-shadow: 0 1px 4px #0033550c;
 }
 
 #auth-error {
     color: #c02828;
     font-size: .98em;
-    margin-top: 0.7em;
+    margin-top: .7em;
     min-height: 1em;
 }
 
-/* Dashboard Workout Log Section (optional improvement) */
-#workout-logger {
+/* Util classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 1em;
+}
+
+.mt-2 {
     margin-top: 2em;
 }
 
-#workout-logger select,
-#workout-logger input {
-    margin-bottom: 0.7em;
-    padding: 0.45em 0.8em;
-    border-radius: 6px;
-    border: 1px solid #bbb;
-    font-size: 1em;
+.p-1 {
+    padding: 1em;
 }
 
-#workout-logger button[type=submit] {
+.p-2 {
+    padding: 2em;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    background: #eef2fa;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c7d8ec;
+    border-radius: 8px;
+}
+
+.layout-flex {
+    display: flex;
+    gap: 30px;
+}
+
+.sidebar {
+    min-width: 200px;
+    background: #e6eeff;
+    border-radius: 10px;
+    padding: 22px 12px;
+    box-shadow: 0 2px 16px #29409e0f;
+    height: fit-content;
+}
+
+.main-content {
+    flex: 1 1 auto;
+}
+
+.main-content,
+.content,
+.layout-flex {
+    flex: 1 0 auto !important;
+    /* let your "main" stretch and fill any excess space */
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #004aad;
+}
+
+.menu-list li a,
+nav ul li a {
+    display: block;
+    color: #29409e;
+    background: #f1f4fa;
+    padding: 11px 23px;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    transition: background 0.15s, color 0.14s;
+}
+
+.menu-list li a:hover,
+nav ul li a:hover,
+nav ul li a.active {
+    background: #002855;
+    color: #fff;
+}
+
+button,
+.button {
     background: #004aad;
     color: #fff;
     border: none;
-    border-radius: 6px;
-    padding: 0.6em 1.8em;
-    font-size: 1em;
+    border-radius: 7px;
+    padding: 10px 33px;
+    margin: 5px 4px;
+    font-size: 1.08em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.15s;
+    min-width: 96px;
+    box-shadow: 0 2px 7px #00335519;
 }
 
-/* Responsive for mobile */
-@media (max-width: 760px) {
-    .content {
-        padding: 1.1em 0.6em 1em 0.6em;
-        border-radius: 0;
-    }
-
-    .info-cards {
-        grid-template-columns: 1fr;
-        gap: 0.9rem;
-    }
-
-    .hero {
-        height: 105px;
-        border-radius: 0 0 12px 12px;
-    }
-
-    .hero h1 {
-        font-size: 1.3rem;
-        margin: 0 0 1em 1em;
-    }
-
-    .auth-btn {
-        right: 10px;
-        top: 12px;
-    }
-
-    .auth-modal-content {
-        max-width: 99vw;
-    }
+button:hover,
+.button:hover {
+    background: #002855;
+    color: #eaf0fb;
 }
 
-ul {
-    margin: 0;
-    padding-left: 1.2em;
+.info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.6rem;
+    margin: 2rem 0 1.6rem 0;
 }
 
-h3,
-h4 {
-    margin-top: 0.4em;
-}
-
-.smu-exercise-card {
+.info-card {
     background: var(--smu-light-blue);
-    border-radius: 20px;
-    margin: 1.6em 0 2em 0;
-    padding: 1.2em 1.2em 1em 1.2em;
-    box-shadow: 0 1px 13px #00285516;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 10px;
+    padding: 1.3rem 1.1rem;
+    min-width: 130px;
+    flex: 1 1 0;
 }
 
-.smu-ex-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: .70em;
-}
-
-.smu-ex-icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 1em;
-    filter: drop-shadow(0 1px 2px #00285514);
-}
-
-.smu-ex-title {
-    font-size: 1.12em;
-    font-weight: 700;
+.info-card h3 {
+    font-size: 1.05rem;
     color: var(--smu-blue);
-    letter-spacing: 1.3px;
+    margin-top: 0;
 }
 
-.smu-ex-type {
-    color: var(--smu-accent);
-    margin-left: .15em;
-    font-size: .95em;
+.info-card p,
+.info-card ul {
+    margin: .4em 0 0 0;
+    font-size: 1.01em;
 }
 
-.smu-sets-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1.05em;
+.info-card ul {
+    padding-left: 0em;
 }
 
-.smu-sets-table th {
-    color: var(--smu-accent);
-    font-weight: 600;
-    background: #f5f7fa;
-    font-size: .99em;
-    letter-spacing: .04em;
-    border-bottom: 2px solid #c2d6f3;
-    padding: .27em 0 .18em 0;
-    text-align: left;
+.info-card ul li {
+    margin-bottom: .4em;
+    list-style-type: none;
 }
 
-.smu-sets-table td {
-    color: #002855;
-    font-size: 1.07em;
-    padding: .38em .25em .27em .13em;
-    border: none;
+.dashboard-card {
+    min-width: 220px;
+    flex: 1 1 220px;
+    max-width: 320px;
 }
 
-.smu-sets-table tr:not(:first-child):nth-child(even) td {
-    background: #f6f8fa;
-}
-
-.smu-warmup td {
-    color: #d7a719;
-    font-weight: bold;
-    background: #f6efd4;
-}
-
-.smu-sets-table tr td:first-child {
-    font-weight: bold;
-}
-
-.smu-add-set input[type="number"] {
-    width: 100px;
-    margin-right: 7px;
-    margin-bottom: 0;
-}
-
-.smu-add-set button {
-    background: var(--smu-blue);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 6px 18px;
-    font-size: 1em;
-}
-
-.smu-save-btn {
-    background: var(--smu-accent);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 20px;
-    font-size: 1em;
-}
-
-.smu-sets-table th,
-.smu-sets-table td {
-    text-align: center;
+/* Stack cards vertically on smaller screens */
+@media (max-width: 900px) {
+    .info-cards {
+        flex-direction: column;
+        min-width: 0;
+        gap: 1em;
+    }
 }

@@ -1,36 +1,39 @@
-// spa-nav.js
 document.addEventListener('DOMContentLoaded', () => {
   const tabs = [
-    { btn: 'nav-dashboard', section: 'dashboard-section' },
-    { btn: 'nav-workout', section: 'workout-section' },
-    { btn: 'nav-food', section: 'food-section' },
-    { btn: 'nav-trainer', section: 'trainer-section' }
+    { navId: 'nav-dashboard', sectionId: 'dashboard-section' },
+    { navId: 'nav-workout', sectionId: 'workout-section' },
+    { navId: 'nav-food', sectionId: 'food-section' },
+    { navId: 'nav-trainer', sectionId: 'trainer-section' }
   ];
 
-  tabs.forEach(({ btn, section }) => {
-    const navBtn = document.getElementById(btn);
-    const sec = document.getElementById(section);
-    if (navBtn && sec) {
-      navBtn.addEventListener('click', e => {
+  function showTab(idxToShow) {
+    tabs.forEach(({ navId, sectionId }, idx) => {
+      const navEl = document.getElementById(navId);
+      const secEl = document.getElementById(sectionId);
+      if (navEl) navEl.classList.toggle('active', idx === idxToShow);
+      if (secEl) secEl.style.display = idx === idxToShow ? 'block' : 'none';
+    });
+  }
+
+  tabs.forEach(({ navId }, idx) => {
+    const navEl = document.getElementById(navId);
+    if (navEl) {
+      navEl.addEventListener('click', e => {
         e.preventDefault();
-        tabs.forEach(({ btn: b, section: s }) => {
-          document.getElementById(b)?.classList.remove('active');
-          document.getElementById(s)?.style.setProperty('display', 'none');
-        });
-        navBtn.classList.add('active');
-        sec.style.display = 'block';
+        showTab(idx);
+
+        // Optional: Section-specific hooks
+        if (navId === 'nav-workout' && typeof window.renderLogger === 'function') {
+          window.renderLogger();
+        }
+        if (navId === 'nav-food' && typeof window.renderFoodOrder === 'function') {
+          window.renderFoodOrder();
+        }
+        // ...add more hooks if needed
       });
     }
   });
 
-  // Initially, show only dashboard
-  tabs.forEach(({ section, btn }, idx) => {
-    const sec = document.getElementById(section);
-    const navBtn = document.getElementById(btn);
-    if (sec && navBtn) {
-      sec.style.display = idx === 0 ? 'block' : 'none';
-      if (idx === 0) navBtn.classList.add('active');
-      else navBtn.classList.remove('active');
-    }
-  });
+  // Default: Dashboard shown
+  showTab(0);
 });

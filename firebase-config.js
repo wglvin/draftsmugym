@@ -3,8 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebas
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
-
-
+// Use your actual Firebase config here
 const firebaseConfig = {
   apiKey: "AIzaSyBnROafjY8Dn-1U9S-PWY5DlZJYtz3jUjw",
   authDomain: "smu-gym.firebaseapp.com",
@@ -16,7 +15,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
-// export const analytics = getAnalytics(app); // Comment out if not using analytics
