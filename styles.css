@@ -1,4 +1,14 @@
 :root {
+<<<<<<< HEAD
+  --smu-blue: #002855;
+  --smu-light-blue: #e5ebf4;
+  --smu-accent: #004aad;
+  --smu-bg: #f7f9fa;
+  --smu-yellow: #ffe152;
+  --shadow: 0 4px 32px rgba(7, 28, 64, 0.09);
+  --radius: 16px;
+  --transition: 0.14s;
+=======
     --smu-blue: #002855;
     --smu-light-blue: #e5ebf4;
     --smu-accent: #004aad;
@@ -7,6 +17,7 @@
     --shadow: 0 4px 32px rgba(7, 28, 64, 0.09);
     --radius: 16px;
     --transition: 0.14s;
+>>>>>>> upstream/main
 }
 
 /* ========= BASICS & RESET ========= */
@@ -51,6 +62,19 @@ a {
 
 /* ========= HEADER & FOOTER ========= */
 header {
+<<<<<<< HEAD
+  background: var(--smu-blue);
+  color: #fff;
+  /* padding: 1.4rem 0.2rem 1.2rem 0.2rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 1px 10px #01245810; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+=======
     background: var(--smu-blue);
     color: #fff;
     padding: 1.4rem .2rem 1.2rem .2rem;
@@ -58,15 +82,51 @@ header {
     position: relative;
     box-shadow: 0 1px 10px #01245810;
     padding-bottom: 1.5rem;
+>>>>>>> upstream/main
 }
 
 header img {
+<<<<<<< HEAD
+  float: left;
+  margin-right: 16px;
+  height: 65px;
+  vertical-align: middle;
+  margin-bottom: 8px;
+  margin-right: 1.5rem;
+=======
     height: 48px;
     display: block;
     margin: 0 auto 7px auto;
+>>>>>>> upstream/main
 }
 
 header h2 {
+<<<<<<< HEAD
+  /* margin: 0.5rem 0 0 0; */
+  font-size: 1.48rem;
+  font-family: "Oswald", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  letter-spacing: 1px;
+  flex: 1; /* Take up remaining space */
+  text-align: justify; /* Center text (handles longer title) */
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  header h2 {
+    display: none;
+  }
+}
+
+footer {
+  background: var(--smu-blue);
+  color: #fff;
+  text-align: center;
+  padding: 1em 0 0.7em 0;
+  font-size: 1em;
+  border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 2em;
+=======
     margin: .5rem 0 0 0;
     font-size: 1.48rem;
     letter-spacing: 2.2px;
@@ -80,10 +140,48 @@ footer {
     font-size: 1em;
     border-radius: 0 0 var(--radius) var(--radius);
     margin-top: 2em;
+>>>>>>> upstream/main
 }
 
 /* ========= AUTH BUTTONS & MODAL ========= */
 .auth-btn {
+<<<<<<< HEAD
+  position: absolute;
+  top: 28px;
+  right: 42px;
+  background: var(--smu-accent);
+  color: #fff;
+  padding: 0.5em 1.5em;
+  border: none;
+  border-radius: 7px;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 2px 7px #00335519;
+  font-family: inherit;
+  transition: background var(--transition);
+  z-index: 10;
+}
+
+@media (max-width: 700px) {
+  .auth-btn {
+    position: absolute;
+    top: 28px;
+    right: 10px;
+    background: var(--smu-accent);
+    color: #fff;
+    padding: 0.5em 1.5em;
+    border: none;
+    border-radius: 7px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 2px 7px #00335519;
+    font-family: inherit;
+    transition: background var(--transition);
+    z-index: 10;
+  }
+}
+
+=======
     position: absolute;
     top: 22px;
     right: 42px;
@@ -100,6 +198,7 @@ footer {
     z-index: 10;
 }
 
+>>>>>>> upstream/main
 .auth-btn:hover {
     background: #0051c3;
     color: #fafaff;
@@ -107,6 +206,22 @@ footer {
 
 /* --- Modal for login/signup --- */
 .auth-modal {
+<<<<<<< HEAD
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #00335538;
+  align-items: center;
+  justify-content: center;
+}
+.auth-modal.show {
+  display: flex;
+}
+=======
     display: none;
     position: fixed;
     z-index: 9999;
@@ -123,6 +238,7 @@ footer {
     display: flex;
 }
 
+>>>>>>> upstream/main
 .auth-modal-content {
     background: #fff;
     max-width: 360px;
@@ -134,15 +250,34 @@ footer {
 }
 
 .auth-modal-close {
+<<<<<<< HEAD
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.4em;
+  cursor: pointer;
+  color: #555;
+=======
     position: absolute;
     top: 12px;
     right: 16px;
     font-size: 1.4em;
     cursor: pointer;
     color: #555;
+>>>>>>> upstream/main
 }
 
 .auth-modal-tab {
+<<<<<<< HEAD
+  font-size: 1em;
+  background: #f1f5fa;
+  color: #183862;
+  border: none;
+  border-radius: 5px;
+  padding: 0.38em 1.14em;
+  cursor: pointer;
+  box-shadow: 0 1px 4px #0033550b;
+=======
     font-size: 1em;
     background: #f1f5fa;
     color: #183862;
@@ -151,6 +286,7 @@ footer {
     padding: 0.38em 1.14em;
     cursor: pointer;
     box-shadow: 0 1px 4px #0033550b;
+>>>>>>> upstream/main
 }
 
 .auth-modal-tab.active,
@@ -158,6 +294,29 @@ footer {
     background: var(--smu-accent);
     color: #fff;
 }
+<<<<<<< HEAD
+#auth-modal input[type="email"],
+#auth-modal input[type="password"] {
+  width: 100%;
+  margin-bottom: 0.7em;
+  padding: 0.6em;
+  border-radius: 5px;
+  border: 1px solid #bcbccc;
+  font-size: 1.07em;
+  background: #f9f9fc;
+  color: #253;
+}
+#auth-modal button[type="submit"] {
+  width: 100%;
+  background: var(--smu-accent);
+  color: #fff;
+  border: none;
+  padding: 0.7em;
+  border-radius: 5px;
+  font-size: 1em;
+  margin-top: 0.5em;
+  box-shadow: 0 1px 4px #0033550c;
+=======
 
 #auth-modal input[type=email],
 #auth-modal input[type=password] {
@@ -181,17 +340,36 @@ footer {
     font-size: 1em;
     margin-top: .5em;
     box-shadow: 0 1px 4px #0033550c;
+>>>>>>> upstream/main
 }
 
 #auth-error {
+<<<<<<< HEAD
+  color: #c02828;
+  font-size: 0.98em;
+  margin-top: 0.7em;
+  min-height: 1em;
+=======
     color: #c02828;
     font-size: .98em;
     margin-top: .7em;
     min-height: 1em;
+>>>>>>> upstream/main
 }
 
 /* ========= HERO SECTION ========= */
 .hero {
+<<<<<<< HEAD
+  background: url("gym.png") center/cover no-repeat;
+  height: 190px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 0 0 var(--radius) var(--radius);
+  position: relative;
+  margin-bottom: 2rem;
+  /* overflow: hidden; */
+  padding-top: 2rem;
+=======
     background: url('gym.png') center/cover no-repeat;
     height: 190px;
     display: flex;
@@ -200,9 +378,19 @@ footer {
     position: relative;
     margin-bottom: 2rem;
     overflow: hidden;
+>>>>>>> upstream/main
 }
 
 .hero::after {
+<<<<<<< HEAD
+  content: "";
+  background: linear-gradient(0deg, #002855c6 80%, transparent 100%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+=======
     content: "";
     background: linear-gradient(0deg, #002855c6 80%, transparent 100%);
     position: absolute;
@@ -210,9 +398,19 @@ footer {
     top: 0;
     right: 0;
     bottom: 0;
+>>>>>>> upstream/main
 }
 
 .hero h1 {
+<<<<<<< HEAD
+  position: relative;
+  color: #fff;
+  margin: 0 0 22px 28px;
+  font-size: 2.2rem;
+  z-index: 1;
+  font-weight: 700;
+  text-shadow: 1px 2px 8px #123;
+=======
     position: relative;
     color: #fff;
     margin: 0 0 22px 28px;
@@ -220,17 +418,50 @@ footer {
     z-index: 1;
     font-weight: 700;
     text-shadow: 1px 2px 8px #123;
+>>>>>>> upstream/main
 }
 
 /* ========= NAVIGATION & SIDEBAR ========= */
 .navbar {
+<<<<<<< HEAD
+  background: #f3f5f7;
+  margin-bottom: 0.7rem;
+  border-bottom: 1.2px solid #d8e1f6;
+  box-shadow: 0 1px 7px #c2d6f320;
+=======
     background: #f3f5f7;
     margin-bottom: .7rem;
     border-bottom: 1.2px solid #d8e1f6;
     box-shadow: 0 1px 7px #c2d6f320;
+>>>>>>> upstream/main
 }
 
 .navbar ul {
+<<<<<<< HEAD
+  display: flex;
+  min-height: 49px;
+  align-items: center;
+  gap: 0.5em;
+  list-style: none;
+  margin: 0;
+  padding: 0 18px;
+  overflow: hidden;
+}
+.navbar li {
+  float: left;
+  margin: 0 0.4em;
+}
+.navbar li a {
+  display: block;
+  color: var(--smu-blue);
+  text-align: center;
+  padding: 13px 18px 12px 18px;
+  text-decoration: none;
+  border-radius: 7px 7px 0 0;
+  font-weight: 500;
+  font-size: 1.08em;
+  transition: var(--transition), color var(--transition);
+=======
     display: flex;
     min-height: 49px;
     align-items: center;
@@ -256,6 +487,7 @@ footer {
     font-weight: 500;
     font-size: 1.08em;
     transition: var(--transition), color var(--transition);
+>>>>>>> upstream/main
 }
 
 .navbar li a.active,
@@ -291,13 +523,52 @@ footer {
   background: #004aad;
   color: #fff;
 }
+<<<<<<< HEAD
+.menu-list {
+  list-style: none;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+.menu-list li {
+  margin: 12px 0;
+}
+.menu-list li a {
+  display: block;
+  color: #29409e;
+  background: #f1f4fa;
+  padding: 11px 23px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1.07em;
+  box-shadow: 0 1px 8px #c2d6f320;
+  margin-bottom: 6px;
+  transition: background 0.15s, color 0.14s;
+}
+.menu-list li a:hover,
+.menu-list li a.active {
+  background: #002855;
+  color: #fff;
+}
+.layout-flex {
+  display: flex;
+  gap: 30px;
+=======
 
 .layout-flex {
     display: flex;
     gap: 30px;
+>>>>>>> upstream/main
 }
 
 .sidebar {
+<<<<<<< HEAD
+  min-width: 200px;
+  background: #e6eeff;
+  border-radius: 10px;
+  padding: 22px 12px;
+  box-shadow: 0 2px 16px #29409e0f;
+  height: fit-content;
+=======
     background: #edf2fa;
     border-radius: 24px;
     margin-top: 30px;
@@ -306,6 +577,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 14px;
+>>>>>>> upstream/main
 }
 
 .main-content {
@@ -314,6 +586,18 @@ footer {
 
 /* ========= MAIN CONTENT/CARDS ========= */
 .content {
+<<<<<<< HEAD
+  margin: auto;
+  max-width: 900px;
+  background: #fff;
+  padding: 2.1rem 2rem 2.1rem 2.2rem;
+  border-radius: var(--radius);
+  position: relative;
+  top: 20px;
+  min-height: auto;
+  min-width: 330px;
+  box-shadow: var(--shadow);
+=======
     margin: auto;
     max-width: 900px;
     background: #fff;
@@ -324,9 +608,20 @@ footer {
     min-height: 600px;
     min-width: 330px;
     box-shadow: var(--shadow);
+>>>>>>> upstream/main
 }
 
 .dashboard-card {
+<<<<<<< HEAD
+  background: var(--smu-light-blue, #e5ebf4);
+  border-radius: 11px;
+  margin-bottom: 1.1em;
+  padding: 1em 1.2em;
+  box-shadow: 0 1px 7px #00335515;
+  min-width: 220px;
+  flex: 1 1 220px;
+  max-width: 320px;
+=======
     background: var(--smu-light-blue, #e5ebf4);
     border-radius: 11px;
     margin-bottom: 1.1em;
@@ -335,18 +630,37 @@ footer {
     min-width: 220px;
     flex: 1 1 220px;
     max-width: 320px;
+>>>>>>> upstream/main
 }
 
 .dashboard-overview-flex {
+<<<<<<< HEAD
+  display: flex;
+  flex-direction: row;
+  gap: 2.2em;
+  margin-bottom: 2em;
+  margin-top: 0.5em;
+  justify-content: flex-start;
+=======
     display: flex;
     flex-direction: row;
     gap: 2.2em;
     margin-bottom: 2em;
     margin-top: 0.5em;
     justify-content: flex-start;
+>>>>>>> upstream/main
 }
 
 .dashboard-overview-flex .dashboard-card {
+<<<<<<< HEAD
+  min-width: 290px;
+  max-width: 330px;
+  flex: 1 1 0;
+  min-height: 175px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+=======
     min-width: 290px;
     max-width: 330px;
     flex: 1 1 0;
@@ -354,42 +668,80 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+>>>>>>> upstream/main
 }
 
 /* Stack cards vertically */
 @media (max-width: 900px) {
+<<<<<<< HEAD
+  .dashboard-overview-flex {
+    flex-direction: column;
+    gap: 1em;
+  }
+=======
     .dashboard-overview-flex {
         flex-direction: column;
         gap: 1em;
     }
+>>>>>>> upstream/main
 }
 
 /* ========= INFO CARDS ========= */
 .info-cards {
+<<<<<<< HEAD
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.6rem;
+  margin: 2rem 0 1.6rem 0;
+=======
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.6rem;
     margin: 2rem 0 1.6rem 0;
+>>>>>>> upstream/main
 }
 
 .info-card {
+<<<<<<< HEAD
+  background: var(--smu-light-blue);
+  border-radius: 10px;
+  padding: 1.3rem 1.1rem;
+  min-width: 130px;
+  flex: 1 1 0;
+=======
     background: var(--smu-light-blue);
     border-radius: 10px;
     padding: 1.3rem 1.1rem;
     min-width: 130px;
     flex: 1 1 0;
+>>>>>>> upstream/main
 }
 
 .info-card h3 {
+<<<<<<< HEAD
+  font-size: 1.05rem;
+  color: var(--smu-blue);
+  margin-top: 0;
+=======
     font-size: 1.05rem;
     color: var(--smu-blue);
     margin-top: 0;
+>>>>>>> upstream/main
 }
 
 .info-card p,
 .info-card ul {
+<<<<<<< HEAD
+  margin: 0.4em 0 0 0;
+  font-size: 1.01em;
+}
+.info-card ul li {
+  margin-bottom: 0.4em;
+  list-style-type: none;
+=======
     margin: .4em 0 0 0;
     font-size: 1.01em;
+>>>>>>> upstream/main
 }
 
 .info-card ul li {
@@ -398,15 +750,33 @@ footer {
 }
 
 @media (max-width: 900px) {
+<<<<<<< HEAD
+  .info-cards {
+    flex-direction: column;
+    min-width: 0;
+    gap: 1em;
+  }
+=======
     .info-cards {
         flex-direction: column;
         min-width: 0;
         gap: 1em;
     }
+>>>>>>> upstream/main
 }
 
 /* ========= ANNOUNCEMENTS ========= */
 .announcements {
+<<<<<<< HEAD
+  background: #f9fafc;
+  border-left: 4px solid var(--smu-accent);
+  border-radius: 10px;
+  margin: 1.7em 0 1.5em 0;
+  padding: 1.1em 1.3em;
+  box-shadow: 0 1px 6px #00285516;
+  max-height: 170px;
+  overflow-y: auto;
+=======
     background: #f9fafc;
     border-left: 4px solid var(--smu-accent);
     border-radius: 10px;
@@ -415,9 +785,23 @@ footer {
     box-shadow: 0 1px 6px #00285516;
     max-height: 170px;
     overflow-y: auto;
+>>>>>>> upstream/main
 }
 
 .announcements h3 {
+<<<<<<< HEAD
+  margin-top: 0;
+  margin-bottom: 0.2em;
+  color: var(--smu-accent);
+}
+.announcements ul {
+  margin: 0.5em 0 0 0;
+  padding-left: 1.25em;
+}
+.announcements li {
+  list-style-type: disc;
+  margin-bottom: 0.25em;
+=======
     margin-top: 0;
     margin-bottom: .2em;
     color: var(--smu-accent);
@@ -431,17 +815,53 @@ footer {
 .announcements li {
     list-style-type: disc;
     margin-bottom: 0.25em;
+>>>>>>> upstream/main
 }
 
 /* ========= FORMS & INPUTS ========= */
 form,
 .smu-add-set {
+<<<<<<< HEAD
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+=======
     display: flex;
     flex-direction: column;
     gap: .7em;
+>>>>>>> upstream/main
 }
 
 form label {
+<<<<<<< HEAD
+  color: #245;
+  font-size: 1.03em;
+  font-weight: 600;
+}
+input,
+select,
+textarea {
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  padding: 0.45em 0.85em;
+  font-size: 1em;
+  transition: border-color 0.14s;
+  outline: none;
+  background: #fbfbfd;
+}
+input:focus,
+select:focus {
+  border-color: var(--smu-accent, #004aad);
+  background: #f9faff;
+}
+input:disabled,
+select:disabled,
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #e5eaea;
+}
+=======
     color: #245;
     font-size: 1.03em;
     font-weight: 600;
@@ -473,6 +893,7 @@ button:disabled {
     background: #e5eaea;
 }
 
+>>>>>>> upstream/main
 button,
 .button,
 .smu-save-btn,
@@ -481,6 +902,21 @@ button,
 .delete-workout-btn,
 .edit-workout-btn,
 .log-session-btn {
+<<<<<<< HEAD
+  background: var(--smu-blue, #002855);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 33px;
+  margin: 5px 4px;
+  font-size: 1.08em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.15s;
+  min-width: 96px;
+  box-shadow: 0 2px 7px #00335519;
+}
+=======
     background: var(--smu-blue, #002855);
     color: #fff;
     border: none;
@@ -495,12 +931,18 @@ button,
     box-shadow: 0 2px 7px #00335519;
 }
 
+>>>>>>> upstream/main
 button:hover,
 .button:hover,
 .smu-save-btn:hover,
 .exercise-add-btn:hover {
+<<<<<<< HEAD
+  background: var(--smu-accent);
+  color: #eaf0fb;
+=======
     background: var(--smu-accent);
     color: #eaf0fb;
+>>>>>>> upstream/main
 }
 
 .edit-workout-btn {
@@ -528,6 +970,36 @@ button:hover,
 .log-session-btn:disabled {
     background: #ccc;
 }
+<<<<<<< HEAD
+.edit-workout-btn:hover {
+  background: #168026;
+}
+.delete-workout-btn,
+.remove-set-btn {
+  background: #b02a2a;
+}
+.delete-workout-btn:hover,
+.remove-set-btn:hover {
+  background: #7a1616;
+}
+.log-session-btn {
+  background: #177e33;
+}
+.log-session-btn:disabled {
+  background: #ccc;
+}
+
+/* ========= WORKOUT HISTORY/LOGGER ========= */
+.smu-exercise-card {
+  background: var(--smu-light-blue, #e5ebf4);
+  border-radius: 16px;
+  margin: 1.6em 0 2em 0;
+  padding: 1.15em 1em 1.2em 1.3em;
+  box-shadow: 0 2px 24px #004aad15;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+=======
 
 /* ========= WORKOUT HISTORY/LOGGER ========= */
 .smu-exercise-card {
@@ -539,45 +1011,96 @@ button:hover,
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+>>>>>>> upstream/main
 }
 
 .smu-ex-header {
+<<<<<<< HEAD
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.7em;
+=======
     display: flex;
     align-items: center;
     margin-bottom: .70em;
+>>>>>>> upstream/main
 }
 
 .smu-ex-icon {
+<<<<<<< HEAD
+  width: 38px;
+  height: 38px;
+  margin-right: 0.9em;
+  filter: drop-shadow(0 1px 2px #00285512);
+=======
     width: 38px;
     height: 38px;
     margin-right: .9em;
     filter: drop-shadow(0 1px 2px #00285512);
+>>>>>>> upstream/main
 }
 
 .smu-ex-title {
+<<<<<<< HEAD
+  font-size: 1.09em;
+  font-weight: 700;
+  color: var(--smu-blue, #002855);
+  letter-spacing: 1px;
+=======
     font-size: 1.09em;
     font-weight: 700;
     color: var(--smu-blue, #002855);
     letter-spacing: 1px;
+>>>>>>> upstream/main
 }
 
 .smu-sets-table {
+<<<<<<< HEAD
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  margin: 0.6em 0;
+=======
     width: 100%;
     border-collapse: collapse;
     font-size: 1em;
     margin: 0.6em 0;
+>>>>>>> upstream/main
 }
 
 .smu-sets-table th {
+<<<<<<< HEAD
+  color: var(--smu-accent, #004aad);
+  font-weight: 600;
+  background: #f5f7fa;
+  border-bottom: 2px solid #c2d6f3;
+  padding: 0.4em 0.1em;
+  text-align: center;
+=======
     color: var(--smu-accent, #004aad);
     font-weight: 600;
     background: #f5f7fa;
     border-bottom: 2px solid #c2d6f3;
     padding: 0.40em 0.1em;
     text-align: center;
+>>>>>>> upstream/main
 }
 
 .smu-sets-table td {
+<<<<<<< HEAD
+  color: #223570;
+  font-size: 1.07em;
+  padding: 0.3em 0.13em;
+  border: none;
+  text-align: center;
+}
+.smu-sets-table tr:nth-child(even) td {
+  background: #f6f8fa;
+}
+.smu-sets-table tr td:first-child {
+  font-weight: bold;
+  background: #f7fbff;
+=======
     color: #223570;
     font-size: 1.07em;
     padding: .30em .13em;
@@ -592,25 +1115,53 @@ button:hover,
 .smu-sets-table tr td:first-child {
     font-weight: bold;
     background: #f7fbff;
+>>>>>>> upstream/main
 }
 
 /* ========= WORKOUT UI - SEARCH & GRID ========= */
 .workout-searchbar-row {
+<<<<<<< HEAD
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+=======
   margin-bottom: 18px;
   margin-top: 12px;
   gap: 16px;
+>>>>>>> upstream/main
 }
 
 #exercise-search {
+<<<<<<< HEAD
+  flex: 1;
+  border-radius: 22px;
+  padding: 0.7em 1.1em;
+  border: 2px solid #eaeaf4;
+  font-size: 1.08em;
+  background: #fcfcff;
+=======
     flex: 1;
     border-radius: 22px;
     padding: 0.7em 1.1em;
     border: 2px solid #eaeaf4;
     font-size: 1.08em;
     background: #fcfcff;
+>>>>>>> upstream/main
 }
 
 #clear-search {
+<<<<<<< HEAD
+  border: none;
+  background: #eee;
+  color: #444;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  align-self: center;
+=======
     border: none;
     background: #eee;
     color: #444;
@@ -621,16 +1172,48 @@ button:hover,
     font-size: 1.2em;
     font-weight: bold;
     align-self: center;
+>>>>>>> upstream/main
 }
 
 .workout-category-bar {
+<<<<<<< HEAD
+  display: flex;
+  gap: 1.2em;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+=======
     display: flex;
     gap: 1.2em;
     margin-bottom: 18px;
     flex-wrap: wrap;
+>>>>>>> upstream/main
 }
 
 .category-chip {
+<<<<<<< HEAD
+  border: none;
+  background: #e8ecfb;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 22px;
+  padding: 7px 13px;
+  cursor: pointer;
+  transition: background 0.14s, color 0.14s;
+  font-size: 0.97em;
+  font-weight: 500;
+}
+.category-chip img {
+  width: 38px;
+  margin-bottom: 4px;
+}
+.category-chip.active,
+.category-chip:hover {
+  background: var(--smu-yellow);
+  color: #222;
+}
+=======
   border-radius: 17px;
   background: #f6fafd;
   color: #123265;
@@ -657,12 +1240,37 @@ button:hover,
   border-color: #ffe152;
 }
 
+>>>>>>> upstream/main
 .exercise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px 2p4x;
   margin-bottom: 36px;
 }
+<<<<<<< HEAD
+@media (max-width: 800px) {
+  .exercise-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 540px) {
+  .exercise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.exercise-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f6fafd;
+  border-radius: 13px;
+  padding: 18px 12px;
+  cursor: pointer;
+  transition: box-shadow 0.14s, background 0.16s;
+  box-shadow: 0 2px 8px #668add16;
+  border: 2px solid transparent;
+  min-height: 210px;
+=======
 
 @media (max-width: 800px) {
     .exercise-grid {
@@ -688,6 +1296,7 @@ button:hover,
   display: flex;
   flex-direction: column;
   align-items: center;
+>>>>>>> upstream/main
 }
 
 .exercise-card:hover {
@@ -697,12 +1306,32 @@ button:hover,
 }
 
 .exercise-card:focus {
+<<<<<<< HEAD
+  box-shadow: 0 5px 24px #004aad33;
+  background: #f4faff;
+  border-color: var(--smu-yellow);
+=======
     box-shadow: 0 5px 24px #004aad33;
     background: #f4faff;
     border-color: var(--smu-yellow);
+>>>>>>> upstream/main
 }
 
 .exercise-img {
+<<<<<<< HEAD
+  width: 68px;
+  height: 68px;
+  border-radius: 7px;
+  background: #e8eaf3;
+  margin-bottom: 11px;
+  object-fit: cover;
+}
+.exercise-title {
+  font-weight: 700;
+  font-size: 1.07em;
+  margin-bottom: 3px;
+  text-align: center;
+=======
   width: 60px;
   height: 60px;
   object-fit: contain;
@@ -717,24 +1346,64 @@ button:hover,
     font-size: 1.07em;
     margin-bottom: 3px;
     text-align: center;
+>>>>>>> upstream/main
 }
 
 .exercise-muscle {
+<<<<<<< HEAD
+  font-size: 0.94em;
+  color: #888;
+  margin-bottom: 8px;
+  text-align: center;
+=======
     font-size: 0.94em;
     color: #888;
     margin-bottom: 8px;
     text-align: center;
+>>>>>>> upstream/main
 }
 
 .exercise-desc {
+<<<<<<< HEAD
+  font-size: 0.97em;
+  color: #666;
+  text-align: center;
+  margin-bottom: 8px;
+=======
     font-size: 0.97em;
     color: #666;
     text-align: center;
     margin-bottom: 8px;
+>>>>>>> upstream/main
 }
 
 /* ========= WORKOUT UI - MODAL ========= */
 .exercise-modal {
+<<<<<<< HEAD
+  display: none;
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #1b232f77;
+  align-items: center;
+  justify-content: center;
+}
+.exercise-modal.show {
+  display: flex;
+}
+.exercise-modal-content {
+  background: #fff;
+  border-radius: 18px;
+  max-width: 420px;
+  width: 94vw;
+  margin: 40px auto;
+  padding: 21px 18px 18px 18px;
+  position: relative;
+  box-shadow: 0 4px 30px #29409e39;
+=======
     display: none;
     position: fixed;
     z-index: 30;
@@ -760,18 +1429,39 @@ button:hover,
     padding: 21px 18px 18px 18px;
     position: relative;
     box-shadow: 0 4px 30px #29409e39;
+>>>>>>> upstream/main
 }
 
 .exercise-modal-close {
+<<<<<<< HEAD
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 2em;
+  color: #555;
+  cursor: pointer;
+=======
     position: absolute;
     top: 16px;
     right: 20px;
     font-size: 2em;
     color: #555;
     cursor: pointer;
+>>>>>>> upstream/main
 }
 
 .exercise-modal-title {
+<<<<<<< HEAD
+  font-size: 1.18em;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.input-row {
+  display: flex;
+  gap: 9px;
+  margin-bottom: 7px;
+}
+=======
     font-size: 1.18em;
     font-weight: 700;
     margin-bottom: 16px;
@@ -783,11 +1473,22 @@ button:hover,
     margin-bottom: 7px;
 }
 
+>>>>>>> upstream/main
 #modal-sets-list {
     margin-top: 5px;
 }
 
 .set-badge {
+<<<<<<< HEAD
+  background: var(--smu-yellow);
+  color: #333;
+  border-radius: 6px;
+  padding: 2px 7px;
+  margin: 0 5px;
+  font-weight: 500;
+  font-size: 0.97em;
+  display: inline-block;
+=======
     background: var(--smu-yellow);
     color: #333;
     border-radius: 6px;
@@ -796,6 +1497,7 @@ button:hover,
     font-weight: 500;
     font-size: .97em;
     display: inline-block;
+>>>>>>> upstream/main
 }
 
 .exercise-add-btn {
@@ -812,6 +1514,12 @@ button:hover,
 .exercise-add-btn:hover {
     background: #1c3797;
 }
+<<<<<<< HEAD
+.exercise-add-btn:hover {
+  background: #1c3797;
+}
+=======
+>>>>>>> upstream/main
 
 /* ========= WORKOUT SESSION BUILDER & HISTORY ========= */
 .session-builder {
@@ -821,6 +1529,14 @@ button:hover,
     margin: 14px 0;
     box-shadow: 0 1px 7px #c4d7ed19;
 }
+<<<<<<< HEAD
+#session-exercises {
+  margin-bottom: 8px;
+}
+#session-history {
+  margin: 18px 0;
+}
+=======
 
 #session-exercises {
     margin-bottom: 8px;
@@ -830,6 +1546,7 @@ button:hover,
     margin: 18px 0;
 }
 
+>>>>>>> upstream/main
 .session-card {
     background: #e8f5ff;
     border-radius: 12px;
@@ -839,6 +1556,15 @@ button:hover,
 }
 
 .session-date {
+<<<<<<< HEAD
+  font-size: 1.02em;
+  color: #0073c8;
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+.session-entry {
+  margin-bottom: 6px;
+=======
     font-size: 1.02em;
     color: #0073c8;
     font-weight: 600;
@@ -878,10 +1604,35 @@ button:hover,
 /* For any input overflow */
 #trainer-section input, #trainer-section select, #trainer-section button {
   max-width: 97vw;
+>>>>>>> upstream/main
 }
 
 /* ========= UTILITIES ========= */
 .text-center {
+<<<<<<< HEAD
+  text-align: center;
+}
+.mt-1 {
+  margin-top: 1em;
+}
+.mt-2 {
+  margin-top: 2em;
+}
+.p-1 {
+  padding: 1em;
+}
+.p-2 {
+  padding: 2em;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  background: #eef2fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7d8ec;
+  border-radius: 8px;
+=======
     text-align: center;
 }
 
@@ -909,10 +1660,36 @@ button:hover,
 ::-webkit-scrollbar-thumb {
     background: #c7d8ec;
     border-radius: 8px;
+>>>>>>> upstream/main
 }
 
 /* ========= RESPONSIVE ADJUSTMENTS ========= */
 @media (max-width: 760px) {
+<<<<<<< HEAD
+  .content {
+    padding: 0.9em 0.4em 0.7em 0.7em;
+    border-radius: 0;
+  }
+  .hero {
+    height: 105px;
+    border-radius: 0 0 12px 12px;
+  }
+  .hero h1 {
+    font-size: 1.3rem;
+    margin: 0 0 0.8em 1.2em;
+  }
+  header {
+    padding: 0.9rem 0.1rem 0.8rem 0.1rem;
+  }
+  .navbar ul {
+    flex-direction: column;
+    gap: 0.05em;
+  }
+  .smu-exercise-card {
+    padding: 0.8em 0.3em 0.9em 0.8em;
+    max-width: 99vw;
+  }
+=======
     .content {
         padding: .9em .4em .7em .7em;
         border-radius: 0;
@@ -941,9 +1718,21 @@ button:hover,
         padding: .8em .3em .9em .8em;
         max-width: 99vw;
     }
+>>>>>>> upstream/main
 }
 
 @media (max-width: 700px) {
+<<<<<<< HEAD
+  .dashboard-card,
+  .smu-exercise-card {
+    padding: 0.7em 0.6em 0.8em 0.8em;
+    min-width: 0;
+    max-width: 99vw;
+  }
+  .smu-sets-table th,
+  .smu-sets-table td {
+    font-size: 0.86em;
+=======
 
     .dashboard-card,
     .smu-exercise-card {
@@ -969,5 +1758,6 @@ button:hover,
     margin-top: 14px;
     padding: 8px 4px;
     border-radius: 10px;
+>>>>>>> upstream/main
   }
 }
