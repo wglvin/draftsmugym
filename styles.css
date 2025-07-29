@@ -49,20 +49,39 @@ a {
 header {
   background: var(--smu-blue);
   color: #fff;
-  padding: 1.4rem 0.2rem 1.2rem 0.2rem;
+  /* padding: 1.4rem 0.2rem 1.2rem 0.2rem;
   text-align: center;
   position: relative;
-  box-shadow: 0 1px 10px #01245810;
+  box-shadow: 0 1px 10px #01245810; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
 }
 header img {
-  height: 48px;
+  float: left;
+  margin-right: 16px;
+  height: 65px;
   vertical-align: middle;
   margin-bottom: 8px;
+  margin-right: 1.5rem;
 }
 header h2 {
-  margin: 0.5rem 0 0 0;
+  /* margin: 0.5rem 0 0 0; */
   font-size: 1.48rem;
-  letter-spacing: 2.2px;
+  font-family: "Oswald", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  letter-spacing: 1px;
+  flex: 1; /* Take up remaining space */
+  text-align: justify; /* Center text (handles longer title) */
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  header h2 {
+    display: none;
+  }
 }
 
 footer {
@@ -78,7 +97,7 @@ footer {
 /* ========= AUTH BUTTONS & MODAL ========= */
 .auth-btn {
   position: absolute;
-  top: 22px;
+  top: 28px;
   right: 42px;
   background: var(--smu-accent);
   color: #fff;
@@ -92,6 +111,26 @@ footer {
   transition: background var(--transition);
   z-index: 10;
 }
+
+@media (max-width: 700px) {
+  .auth-btn {
+    position: absolute;
+    top: 28px;
+    right: 10px;
+    background: var(--smu-accent);
+    color: #fff;
+    padding: 0.5em 1.5em;
+    border: none;
+    border-radius: 7px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 2px 7px #00335519;
+    font-family: inherit;
+    transition: background var(--transition);
+    z-index: 10;
+  }
+}
+
 .auth-btn:hover {
   background: #0051c3;
   color: #fafaff;
@@ -182,7 +221,8 @@ footer {
   border-radius: 0 0 var(--radius) var(--radius);
   position: relative;
   margin-bottom: 2rem;
-  overflow: hidden;
+  /* overflow: hidden; */
+  padding-top: 2rem;
 }
 .hero::after {
   content: "";
