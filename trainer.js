@@ -1,3 +1,4 @@
+//trainer.js
 import { db, auth } from "./firebase-config.js";
 import {
   collection, addDoc, query, where, getDocs, orderBy, serverTimestamp
