@@ -97,6 +97,7 @@
       const user = auth.currentUser;
       const dashDiv = document.getElementById('dashboard-latest-workout');
       if (!user || !dashDiv) return;
+      console.log("DASHBOARD: user", user.uid, dashDiv);
 
       const q = query(
         collection(db, "workout_sessions"),
@@ -104,10 +105,11 @@
         orderBy("timestamp", "desc")
       );
       const snap = await getDocs(q);
-
+      console.log("DASHBOARD: snap.size", snap.size);
       let html = '<strong>Latest Workout</strong><br>';
       if (snap.size > 0) {
         const d = snap.docs[0].data();
+        console.log("DASHBOARD: session data", d);
         html += `<div>
 <span style="color:#888;font-size:1em;">${new Date(d.timestamp.seconds * 1000).toLocaleString()}</span><br>`;
         d.session.forEach(se => {
@@ -159,25 +161,38 @@
       const dashDiv = document.getElementById('dashboard-trainer-bookings');
       if (!user || !dashDiv) return;
 
+      // Query all of this user's bookings, sorted earliest to latest
       const q = query(
         collection(db, "trainer_bookings"),
         where("userId", "==", user.uid),
-        orderBy("date", "desc"),
+        orderBy("date", "asc"),    // earliest first
         orderBy("time", "asc")
       );
-
       const snap = await getDocs(q);
-      let html = '<strong>Trainer Bookings</strong>';
-      if (snap.size > 0) {
-        snap.forEach(doc => {
-          const d = doc.data();
+
+      let html = '<strong>Trainer Booking</strong>';
+      const now = new Date();
+
+      // Find first booking that is in the future
+      let found = false;
+      snap.forEach(doc => {
+        const d = doc.data();
+
+        // Combine date+time into JS Date
+        // (Assumes 'date' is YYYY-MM-DD and 'time' is HH:mm)
+        const bookingDateTime = new Date(`${d.date}T${d.time}`);
+        // If booking is in the future
+        if (!found && bookingDateTime > now) {
           html += `<div style="background:#f5f9ff; border-radius:12px; margin:15px 0; padding:12px 18px;">
-            <strong style="color:#004aad;">${d.trainer}</strong><br>
-            <small>${d.date} at ${d.time}</small>
-          </div>`;
-        });
-      } else {
-        html += "<br/><span style='color:#888;'>No bookings yet.</span>";
+        <strong style="color:#004aad;">${d.trainer}</strong><br>
+        <small>${d.date} at ${d.time}</small>
+      </div>`;
+          found = true;
+        }
+      });
+
+      if (!found) {
+        html += "<br/><span style='color:#888;'>No upcoming bookings.</span>";
       }
       dashDiv.innerHTML = html;
     }

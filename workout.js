@@ -35,7 +35,7 @@ const EXERCISES = [
 ];
 
 const CATEGORIES = [
-  { key: "all", icon: "https://img.icons8.com/3d-fluency/44/big-muscle.png", label: "All" },
+  { key: "all", icon: "https://www.flaticon.com/free-icon/tool_14540378", label: "All" },
   { key: "legs", icon: "https://img.icons8.com/3d-fluency/44/leg.png", label: "Legs" },
   { key: "chest", icon: "https://img.icons8.com/3d-fluency/44/chest.png", label: "Chest" },
   { key: "cardio", icon: "https://img.icons8.com/fluency/44/jogging.png", label: "Cardio" }
