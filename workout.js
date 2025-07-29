@@ -32,13 +32,143 @@ const EXERCISES = [
     image: "https://img.icons8.com/3d-fluency/100/elliptical-trainer.png",
     desc: "Low impact cardio session.",
     video: "https://www.youtube.com/embed/CG5F0vv14f4"
+  }, {
+    name: "Bendover Row",
+    group: "back",
+    image: "https://img.icons8.com/deep-coral/96/barbell.png", // Closest in style
+    desc: "Barbell or dumbbell bent-over row targeting the back.",
+    video: "https://www.youtube.com/watch?v=QFq5jdwWwX4"
+  },
+  {
+    name: "Overhead Press",
+    group: "shoulders",
+    image: "https://img.icons8.com/3d-fluency/94/barbell.png", // No strict overhead press icon; barbell as fallback
+    desc: "Standing or seated barbell overhead press.",
+    video: "https://www.youtube.com/watch?v=ayBUERt_w6g"
+  },
+  {
+    name: "Kettlebell Swing",
+    group: "cardio",
+    image: "https://img.icons8.com/nolan/96/kettlebell.png", // Not 3D Fluency, but kettlebell icon from icons8
+    desc: "Two-handed kettlebell swing for full-body power.",
+    video: "https://www.youtube.com/watch?v=YSxHifyI6s8"
+  },
+  {
+    name: "Leg Press",
+    group: "legs",
+    image: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-leg-press-gym-equipment-flaticons-flat-flat-icons.png", // Stock; not 3D Fluency
+    desc: "Seated leg press machine for quads and glutes.",
+    video: "https://www.youtube.com/watch?v=p5dCqF7wWUw"
+  },
+  {
+    name: "Bench Press",
+    group: "chest",
+    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
+    desc: "Classic horizontal bench press exercise.",
+    video: "https://www.youtube.com/embed/gRVjAtPip0Y"
+  },
+  {
+    name: "T-Bar Row",
+    group: "back",
+    image: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-t-bar-row-gym-flaticons-flat-flat-icons.png", // Closest
+    desc: "T-bar row for back thickness and power.",
+    video: "https://www.youtube.com/watch?v=KP1sYz2VICk"
+  },
+  {
+    name: "Booty Builder",
+    group: "glutes",
+    image: "https://img.icons8.com/3d-fluency/100/strong-woman.png", // Closest
+    desc: "Hip thrust or kickback using Booty Builder machine.",
+    video: "https://www.youtube.com/watch?v=40"
+  },
+  {
+    name: "Hamstring Curl",
+    group: "legs",
+    image: "https://icons8.com/icon/60491/hamstrings", // Direct link: find the best available
+    desc: "Lying or seated hamstring curl for leg strength.",
+    video: "https://www.youtube.com/watch?v=F488k67BTNo"
+  },
+  {
+    name: "Hamstring Extension",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/94/leg.png", // closest, generic leg
+    desc: "Leg extension or hyperextension targeting hamstrings.",
+    video: "https://www.youtube.com/watch?v=qhqEyjP7Xs0"
+  },
+  {
+    name: "Inclined Bench Press",
+    group: "chest",
+    image: "https://img.icons8.com/3d-fluency/100/bench-press.png", // Use same as bench press
+    desc: "Inclined barbell bench press.",
+    video: "https://www.youtube.com/watch?v=SrqOu55lrYU" // Example from official sources
+  },
+  {
+    name: "Pull-Up",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/94/pullups.png", // substitute, generic
+    desc: "Classic pull-up using bodyweight.",
+    video: "https://www.youtube.com/watch?v=eGo4IYlbE5g"
+  },
+  {
+    name: "Leg Raises",
+    group: "core",
+    image: "https://img.icons8.com/3d-fluency/100/crunches.png", // use as closest
+    desc: "Hanging or lying leg raise for abs.",
+    video: "https://www.youtube.com/watch?v=JB2oyawG9KI"
+  },
+  {
+    name: "Inclined Sit-Up",
+    group: "core",
+    image: "https://img.icons8.com/3d-fluency/100/sit-up.png", // Closest
+    desc: "Inclined sit-up for core strength.",
+    video: "https://www.youtube.com/watch?v=vHCMF6IIU_c"
+  },
+  {
+    name: "Dumbbell Shoulder Press",
+    group: "shoulders",
+    image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
+    desc: "Seated or standing dumbbell press.",
+    video: "https://www.youtube.com/watch?v=B-aVuyhvLHU"
+  },
+  {
+    name: "Hammer Curls",
+    group: "arms",
+    image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
+    desc: "Hammer grip dumbbell curl for biceps.",
+    video: "https://www.youtube.com/watch?v=zC3nLlEvin4"
+  },
+  {
+    name: "Bicep Curls",
+    group: "arms",
+    image: "https://img.icons8.com/3d-fluency/100/biceps.png", // Closest
+    desc: "Classic dumbbell biceps curl.",
+    video: "https://www.youtube.com/watch?v=ykJmrZ5v0Oo"
+  },
+  {
+    name: "Lat Pulldown",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/lat-pulldown.png", // Closest
+    desc: "Wide-grip lat pulldown for upper back.",
+    video: "https://www.youtube.com/watch?v=CAwf7n6Luuc"
+  },
+  {
+    name: "V-Grip Seated Rows",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/rowing-machine.png", // Closest
+    desc: "Seated row with V-grip handle.",
+    video: "https://www.youtube.com/watch?v=Hjs7w1bAjs4"
   }
 ];
 
 const CATEGORIES = [
-  { key: "all", icon: "https://www.flaticon.com/free-icon/tool_14540378", label: "All" },
+  { key: "all", icon: "https://img.icons8.com/3d-fluency/48/dumbbell.png", label: "All" },
   { key: "legs", icon: "https://img.icons8.com/3d-fluency/44/leg.png", label: "Legs" },
   { key: "chest", icon: "https://img.icons8.com/3d-fluency/44/chest.png", label: "Chest" },
+  { key: "glutes", icon: "https://img.icons8.com/3d-fluency/48/strong-woman.png", label: "Glutes" },
+  { key: "back", icon: "https://img.icons8.com/3d-fluency/48/back.png", label: "Back" },
+  { key: "shoulders", icon: "https://img.icons8.com/3d-fluency/48/shoulders.png", label: "Shoulders" },
+  { key: "arms", icon: "https://img.icons8.com/3d-fluency/48/biceps.png", label: "Arms" },
+  { key: "core", icon: "https://img.icons8.com/3d-fluency/48/abs.png", label: "Core" },
   { key: "cardio", icon: "https://img.icons8.com/fluency/44/jogging.png", label: "Cardio" }
 ];
 
@@ -248,7 +378,7 @@ async function showSessionHistory() {
     html += `<div class="session-card">
       <div class="session-date">${d.timestamp && d.timestamp.seconds ? new Date(d.timestamp.seconds * 1000).toLocaleString() : d.date}</div>
       <div>${d.session.map(se =>
-        `<div class="session-entry">
+      `<div class="session-entry">
           <b>${se.exercise}</b> ${se.sets.map(s => `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`).join(' ')}
         </div>`).join('')}
       </div>
