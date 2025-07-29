@@ -1,269 +1,260 @@
-// workout.js
 import { db, auth } from "./firebase-config.js";
-import {
-  collection, addDoc, query, where, getDocs, orderBy, serverTimestamp, doc, updateDoc, deleteDoc, getDoc
-} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
+// EXERCISES — add more as desired, with YouTube URLs!
 const EXERCISES = [
-  { name: 'Bench Press', type: 'strength' },
-  { name: 'Squat Rack', type: 'strength' },
-  { name: 'Treadmill', type: 'cardio' },
-  { name: 'Elliptical', type: 'cardio' }
+  {
+    name: "Squat Rack",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/94/barbell.png",
+    desc: "Barbell back or front squat rack",
+    video: "https://www.youtube.com/embed/ultWZbUMPL8"
+  },
+  {
+    name: "Bench Press",
+    group: "chest",
+    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
+    desc: "Classic horizontal bench press exercise",
+    video: "https://www.youtube.com/embed/gRVjAtPip0Y"
+  },
+  {
+    name: "Treadmill",
+    group: "cardio",
+    image: "https://img.icons8.com/3d-fluency/100/running-on-treadmill.png",
+    desc: "Steady state running or interval cardio.",
+    video: "https://www.youtube.com/embed/HY5n1Q7bG0M"
+  },
+  {
+    name: "Elliptical",
+    group: "cardio",
+    image: "https://img.icons8.com/3d-fluency/100/elliptical-trainer.png",
+    desc: "Low impact cardio session.",
+    video: "https://www.youtube.com/embed/CG5F0vv14f4"
+  }
 ];
 
-let workoutSession = [];
+const CATEGORIES = [
+  { key: "all", icon: "https://img.icons8.com/3d-fluency/44/big-muscle.png", label: "All" },
+  { key: "legs", icon: "https://img.icons8.com/3d-fluency/44/leg.png", label: "Legs" },
+  { key: "chest", icon: "https://img.icons8.com/3d-fluency/44/chest.png", label: "Chest" },
+  { key: "cardio", icon: "https://img.icons8.com/fluency/44/jogging.png", label: "Cardio" }
+];
 
-export function renderLogger() {
-  const logger = document.getElementById('workout-logger');
-  if (!logger) return;
-  logger.innerHTML = `
-    <form id="workout-select-form" autocomplete="off">
-      <input type="text" id="exercise-search" placeholder="Search exercise..." required list="exercise-list">
-      <datalist id="exercise-list">
-        ${EXERCISES.map(x => `<option value="${x.name}"></option>`).join('')}
-      </datalist>
-    </form>
-    <div id="exercise-log-fields"></div>
-    <div id="session-sets-list"></div>
-  `;
-  // Setup handler
-  document.getElementById('exercise-search').addEventListener('input', handleExerciseInput);
-  renderSetsList();
-}
+let selectedGroup = "all";
+let sessionExercises = [];
+let openedExercise = null;
+let openedSets = [];
 
-function handleExerciseInput(e) {
-  const selected = e.target.value;
-  const exObj = EXERCISES.find(x => x.name.toLowerCase() === selected.toLowerCase());
-  const fields = document.getElementById('exercise-log-fields');
-  workoutSession = [];
+// --- MAIN RENDER FUNCTION FOR SPA ---
+function renderWorkoutUI() {
+  const root = document.getElementById("workout-ui-root");
+  if (!root) return;
 
-  if (!exObj) {
-    if (fields) fields.innerHTML = '';
-    renderSetsList();
-    return;
-  }
-
-  const formHTML = exObj.type === 'strength'
-    ? `<form id="add-set-form" class="smu-add-set">
-         <input type="number" id="weight" min="1" placeholder="Weight (kg)" required>
-         <input type="number" id="reps" min="1" placeholder="Reps" required>
-         <button type="submit">+ Add Set</button>
-       </form>`
-    : `<form id="add-set-form" class="smu-add-set">
-         <input type="number" id="duration" min="1" placeholder="Duration (min)" required>
-         <input type="number" id="distance" min="0" step="0.01" placeholder="Distance (km)" required>
-         <button type="submit">+ Add Session</button>
-       </form>`;
-  fields.innerHTML = formHTML;
-
-  document.getElementById('add-set-form').addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    if (exObj.type === 'strength') {
-      let weight = parseFloat(document.getElementById('weight').value);
-      let reps = parseInt(document.getElementById('reps').value);
-      if (weight < 1 || reps < 1) {
-        alert('Please enter valid values');
-        return;
-      }
-      workoutSession.push({ exercise: selected, type: exObj.type, weight, reps });
-    } else {
-      let duration = parseInt(document.getElementById('duration').value);
-      let distance = parseFloat(document.getElementById('distance').value);
-      if (duration < 1 || isNaN(distance) || distance < 0) {
-        alert('Please enter valid values');
-        return;
-      }
-      workoutSession.push({ exercise: selected, type: exObj.type, duration, distance });
-    }
-    renderSetsList();
-    evt.target.reset();
-  });
-
-  renderSetsList();
-}
-
-function renderSetsList() {
-  const listDiv = document.getElementById('session-sets-list');
-  if (!listDiv) return;
-  if (workoutSession.length === 0) {
-    listDiv.innerHTML = '';
-    return;
-  }
-  const type = workoutSession[0]?.type;
-  let html = `<table class="smu-sets-table"><thead><tr>`;
-  if (type === 'strength')
-    html += `<th>Set</th><th>Weight (kg)</th><th>Reps</th><th></th>`;
-  else
-    html += `<th>Session</th><th>Duration (min)</th><th>Distance (km)</th><th></th>`;
-  html += `</tr></thead><tbody>`;
-  workoutSession.forEach((set, i) => {
-    html += '<tr>';
-    html += `<td>${i + 1}</td>`;
-    if (type === 'strength') {
-      html += `<td>${set.weight}</td><td>${set.reps}</td>`;
-    } else {
-      html += `<td>${set.duration}</td><td>${set.distance.toFixed(2)}</td>`;
-    }
-    html += `<td><button class="remove-set-btn" data-idx="${i}" style="color:#a52e2e;background:none;border:none;cursor:pointer;font-weight:bold;">×</button></td>`;
-    html += '</tr>';
-  });
-  html += `</tbody></table>`;
-  html += `<button id="save-all-sets" class="smu-save-btn" style="margin-top:8px;">Save All to Log</button>`;
-  listDiv.innerHTML = html;
-  listDiv.querySelectorAll('.remove-set-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const idx = parseInt(e.currentTarget.dataset.idx, 10);
-      if (!Number.isNaN(idx)) window.removeSet(idx);
-    });
-  });
-  document.getElementById('save-all-sets').addEventListener('click', saveAllSets);
-}
-
-async function saveAllSets() {
-  const user = auth.currentUser;
-  if (!user) return alert("You must be logged in.");
-  for (const set of workoutSession) {
-    const entry = {
-      userId: user.uid,
-      exercise: set.exercise,
-      type: set.type,
-      timestamp: serverTimestamp()
-    };
-    if (set.type === 'strength') {
-      entry.weight = set.weight;
-      entry.reps = set.reps;
-      entry.sets = 1;
-      entry.volume = set.weight * set.reps;
-    } else {
-      entry.duration = set.duration;
-      entry.distance = set.distance;
-    }
-    await addDoc(collection(db, "workouts"), entry);
-  }
-  alert('Workout(s) logged!');
-  workoutSession = [];
-  renderSetsList();
-  await loadWorkoutHistory(user.uid);
-  document.getElementById('exercise-search').value = '';
-  document.getElementById('exercise-log-fields').innerHTML = '';
-}
-
-// Make globally callable for legacy code and inside this file
-window.removeSet = idx => {
-  workoutSession.splice(idx, 1);
-  renderSetsList();
-};
-
-function estimateCalories(d, userWeightKg = 70) {
-  let met = 4;
-  if (d.type === 'cardio') {
-    if (d.distance && d.distance > 0) {
-      let speed = d.duration && d.duration > 0 ? d.distance / (d.duration / 60) : 0;
-      if (speed > 8) met = 8;
-      else if (speed > 5) met = 5.5;
-      else met = 4;
-    } else {
-      met = 5;
-    }
-    return Math.round((d.duration || 0) * met * 3.5 * userWeightKg / 200);
-  } else if (d.type === 'strength') {
-    const sets = d.sets || 1;
-    return Math.round(sets * 5 * 6 * 3.5 * userWeightKg / 200);
-  }
-  return 0;
-}
-
-export async function loadWorkoutHistory(uid) {
-  const logDiv = document.getElementById('log-history');
-  if (!logDiv) return;
-  const q = query(collection(db, "workouts"), where("userId", "==", uid), orderBy("timestamp", "desc"));
-  const snap = await getDocs(q);
-  let logs = {};
-  snap.forEach(docRef => {
-    const d = docRef.data();
-    d._id = docRef.id;
-    let exer = d.exercise;
-    if (!logs[exer]) logs[exer] = [];
-    logs[exer].push(d);
-  });
-
-  let html = '';
-  for (const [exerciseName, entries] of Object.entries(logs)) {
-    const type = EXERCISES.find(x => x.name === exerciseName)?.type || 'strength';
-    html += `<div class="smu-exercise-card"><div class="smu-ex-header">
-      <img src="https://img.icons8.com/ios-filled/40/004aad/dumbbell.png" class="smu-ex-icon" />
-      <span class="smu-ex-title">${exerciseName}</span>
+  // Fill with full UI
+  root.innerHTML = `
+    <div class="workout-ui">
+      <div class="workout-searchbar-row">
+        <input type="text" id="exercise-search" placeholder="Search for exercises or equipment...">
+        <button id="clear-search" title="Clear Search">&times;</button>
+      </div>
+      <div class="workout-category-bar" id="muscle-filter-chips"></div>
+      <div class="exercise-grid" id="exercise-grid"></div>
+      <div id="exercise-modal" class="exercise-modal">
+        <div class="exercise-modal-content">
+          <span class="exercise-modal-close" id="close-exercise-modal">&times;</span>
+          <div class="exercise-modal-title" id="exercise-modal-title"></div>
+          <iframe id="exercise-modal-video" width="350" height="197" src="" frameborder="0" allowfullscreen></iframe>
+          <div id="exercise-modal-desc"></div>
+          <form id="add-set-form" class="smu-add-set">
+            <div class="input-row">
+              <input type="number" id="modal-weight" min="1" placeholder="Weight (kg)" required>
+              <input type="number" id="modal-reps" min="1" placeholder="Reps" required>
+              <button type="submit" class="exercise-add-btn">Add Set</button>
+            </div>
+          </form>
+          <div id="modal-sets-list"></div>
+          <button id="add-exercise-btn" class="exercise-add-btn" style="margin-top:12px;">Add Exercise to Session</button>
+        </div>
+      </div>
+      <div id="session-builder" class="session-builder">
+        <h4>Current Session <span id="session-date"></span></h4>
+        <div id="session-exercises"></div>
+        <button id="log-session-btn" class="log-session-btn" disabled>Log This Session</button>
+        <div id="log-session-msg"></div>
+      </div>
+      <div id="session-history"></div>
     </div>
-    <table class="smu-sets-table">
-      <thead><tr>`;
+  `;
 
-    if (type === 'strength')
-      html += `<th>Set</th><th>Weight (kg)</th><th>Reps</th>`;
-    else
-      html += `<th>Session</th><th>Duration (min)</th><th>Distance (km)</th>`;
-    html += `<th>Calories</th><th>Action</th></tr></thead><tbody>`;
+  // (Re)initialize all UI/events
+  selectedGroup = "all";
+  sessionExercises = [];
+  openedExercise = null;
+  openedSets = [];
 
-    entries.forEach((d, i) => {
-      html += "<tr>";
-      if (type === 'strength')
-        html += `<td>${i + 1}</td><td>${d.weight || ''}</td><td>${d.reps || ''}</td>`;
-      else
-        html += `<td>${i + 1}</td><td>${d.duration || ''}</td><td>${d.distance != null ? d.distance.toFixed(2) : ''}</td>`;
-      html += `<td>${estimateCalories(d)} kcal</td>
-        <td>
-          <button class="edit-workout-btn" data-id="${d._id}" data-type="${type}">Edit</button>
-          <button class="delete-workout-btn" data-id="${d._id}">Delete</button>
-        </td>`;
-      html += "</tr>";
-    });
+  showMuscleChips();
+  showExerciseGrid();
+  setupSearch();
+  setupModal();
+  showSessionBuilder();
 
-    html += `</tbody></table></div>`;
-  }
+  // Show session history after auth change
+  onAuthStateChanged(auth, user => { if (user) showSessionHistory(); });
+}
 
-  logDiv.innerHTML = html || "<div style='color:#555'>No workouts yet.</div>";
-
-  // Attach listeners
-  logDiv.querySelectorAll('.edit-workout-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      const id = btn.dataset.id;
-      const type = btn.dataset.type;
-      await window.editWorkout(id, type);
-    });
-  });
-  logDiv.querySelectorAll('.delete-workout-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      const id = btn.dataset.id;
-      await window.deleteWorkout(id);
-    });
+// -------- UI/Logic Functions unchanged below ----------------
+function showMuscleChips() {
+  const chips = CATEGORIES.map(cat => `
+    <button class="category-chip${cat.key == "all" ? " active" : ""}" data-cat="${cat.key}">
+      <img src="${cat.icon}"><span>${cat.label}</span>
+    </button>
+  `).join('');
+  document.getElementById("muscle-filter-chips").innerHTML = chips;
+  document.querySelectorAll(".category-chip").forEach(btn => {
+    btn.onclick = function () {
+      selectedGroup = btn.dataset.cat;
+      document.querySelectorAll(".category-chip").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      showExerciseGrid();
+    };
   });
 }
 
-// Robust single doc edit/delete handlers
-window.editWorkout = async function (id, type) {
-  const docRef = doc(db, "workouts", id);
-  const snap = await getDoc(docRef);
-  if (snap.exists()) {
-    const oldData = snap.data();
-    let newValues = prompt("Edit as JSON (advanced):", JSON.stringify(oldData));
-    if (!newValues) return;
-    try {
-      newValues = JSON.parse(newValues);
-      await updateDoc(docRef, newValues);
-      await loadWorkoutHistory(auth.currentUser.uid);
-    } catch (e) {
-      alert("Invalid JSON, edit aborted.");
+function setupSearch() {
+  const search = document.getElementById("exercise-search");
+  const clearBtn = document.getElementById("clear-search");
+  search.addEventListener("input", showExerciseGrid);
+  clearBtn.onclick = () => { search.value = ""; showExerciseGrid(); };
+}
+
+function showExerciseGrid() {
+  const group = selectedGroup;
+  const q = document.getElementById("exercise-search").value.trim().toLowerCase();
+  let items = EXERCISES.filter(ex => (group == "all" || ex.group === group) && ex.name.toLowerCase().includes(q));
+  document.getElementById("exercise-grid").innerHTML = items.map(ex => `
+    <div class="exercise-card" tabindex="0"
+     onclick="window.openExerciseModal('${ex.name.replace(/'/g, "\\'")}')"
+     onkeypress="if(event.key==='Enter'){ window.openExerciseModal('${ex.name.replace(/'/g, "\\'")}') }">
+      <img src="${ex.image}" class="exercise-img" alt="${ex.name}">
+      <div class="exercise-title">${ex.name}</div>
+      <div class="exercise-muscle">${capitalize(ex.group)}</div>
+      <div class="exercise-desc">${ex.desc}</div>
+    </div>
+  `).join('');
+}
+
+// Modal logic (now window-scoped)
+window.openExerciseModal = function (name) {
+  const ex = EXERCISES.find(x => x.name === name);
+  if (!ex) return;
+  openedExercise = ex;
+  openedSets = [];
+  document.getElementById("exercise-modal-title").innerText = ex.name;
+  document.getElementById("exercise-modal-video").src = ex.video;
+  document.getElementById("exercise-modal-desc").innerText = ex.desc;
+  document.getElementById("exercise-modal").classList.add("show");
+  refreshModalSetsList();
+}
+
+function setupModal() {
+  document.getElementById("close-exercise-modal").onclick = () => {
+    document.getElementById("exercise-modal").classList.remove("show");
+    document.getElementById("exercise-modal-video").src = "";
+  };
+  document.getElementById("add-set-form").onsubmit = function (e) {
+    e.preventDefault();
+    let weight = parseFloat(document.getElementById("modal-weight").value);
+    let reps = parseInt(document.getElementById("modal-reps").value);
+    if (weight > 0 && reps > 0) {
+      openedSets.push({ weight, reps });
+      document.getElementById("modal-weight").value = '';
+      document.getElementById("modal-reps").value = '';
+      refreshModalSetsList();
     }
-  }
-};
+  };
+  document.getElementById("add-exercise-btn").onclick = () => {
+    if (!openedExercise || !openedSets.length) return;
+    sessionExercises.push({
+      exercise: openedExercise.name,
+      group: openedExercise.group,
+      sets: [...openedSets]
+    });
+    document.getElementById("close-exercise-modal").click();
+    showSessionBuilder();
+  };
+}
 
-window.deleteWorkout = async function (id) {
-  if (!confirm("Delete this workout?")) return;
-  await deleteDoc(doc(db, "workouts", id));
-  await loadWorkoutHistory(auth.currentUser.uid);
-};
+function refreshModalSetsList() {
+  document.getElementById("modal-sets-list").innerHTML = openedSets.length
+    ? ("<div>Sets: </div>" + openedSets.map((s, i) => `
+        <span class="set-badge">${s.weight}kg x ${s.reps}
+        <button onclick="window.removeOpenedSet(${i})" style="color:#b33;background:none;border:none;margin-left:4px;cursor:pointer;">&times;</button>
+        </span>
+      `).join(' '))
+    : '';
+}
+window.removeOpenedSet = function (i) {
+  openedSets.splice(i, 1);
+  refreshModalSetsList();
+}
 
-auth.onAuthStateChanged(async user => {
-  if (!user) return;
-  renderLogger();
-  await loadWorkoutHistory(user.uid);
-});
+// ==== SESSION BUILDER ======
+function showSessionBuilder() {
+  document.getElementById("session-date").innerText = '(' + (new Date().toLocaleDateString()) + ')';
+  document.getElementById("session-exercises").innerHTML = sessionExercises.length
+    ? sessionExercises.map((se, idx) =>
+      `<div style="margin-bottom:7px;">
+        <b>${se.exercise}</b> ${se.sets.map((s, si) => `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`).join(' ')}
+        <button onclick="window.removeSessionExercise(${idx})" style="margin-left:7px;color:#c02;">×</button>
+      </div>`).join('')
+    : "<i>No exercises. Add from grid above!</i>";
+  document.getElementById("log-session-btn").disabled = !sessionExercises.length;
+
+  document.getElementById("log-session-btn").onclick = async function () {
+    const user = auth.currentUser;
+    const msgDiv = document.getElementById("log-session-msg");
+    if (!user) { msgDiv.innerText = "You must be logged in."; return; }
+    msgDiv.innerText = "Logging session...";
+    await addDoc(collection(db, "workout_sessions"), {
+      userId: user.uid,
+      date: new Date(),
+      session: sessionExercises,
+      timestamp: serverTimestamp()
+    });
+    msgDiv.innerText = "Session logged!";
+    sessionExercises = [];
+    showSessionBuilder();
+    showSessionHistory();
+  };
+}
+window.removeSessionExercise = function (idx) {
+  sessionExercises.splice(idx, 1);
+  showSessionBuilder();
+}
+
+async function showSessionHistory() {
+  const user = auth.currentUser;
+  const historyDiv = document.getElementById("session-history");
+  if (!user || !historyDiv) return;
+  const q = query(collection(db, "workout_sessions"),
+    where("userId", "==", user.uid),
+    orderBy("timestamp", "desc"));
+  const snap = await getDocs(q);
+  let html = "<h4>Your Past Sessions</h4>";
+  snap.forEach(doc => {
+    const d = doc.data();
+    html += `<div class="session-card">
+      <div class="session-date">${d.timestamp && d.timestamp.seconds ? new Date(d.timestamp.seconds * 1000).toLocaleString() : d.date}</div>
+      <div>${d.session.map(se =>
+        `<div class="session-entry">
+          <b>${se.exercise}</b> ${se.sets.map(s => `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`).join(' ')}
+        </div>`).join('')}
+      </div>
+    </div>`;
+  });
+  historyDiv.innerHTML = html;
+}
+
+function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : ""; }
+window.renderWorkoutUI = renderWorkoutUI;

@@ -1,3 +1,4 @@
+// spa-nav.js
 document.addEventListener('DOMContentLoaded', () => {
   const tabs = [
     { navId: 'nav-dashboard', sectionId: 'dashboard-section' },
@@ -13,6 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (navEl) navEl.classList.toggle('active', idx === idxToShow);
       if (secEl) secEl.style.display = idx === idxToShow ? 'block' : 'none';
     });
+    // When Dashboard is shown, fetch all summaries
+    if (tabs[idxToShow].navId === 'nav-dashboard') {
+      if (window.loadDashboardTrainerBookings) window.loadDashboardTrainerBookings();
+      if (window.loadDashboardLatestWorkout) window.loadDashboardLatestWorkout();
+      if (window.loadDashboardLatestFoodOrder) window.loadDashboardLatestFoodOrder();
+    }
   }
 
   tabs.forEach(({ navId }, idx) => {
@@ -23,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showTab(idx);
 
         // Optional: Section-specific hooks
-        if (navId === 'nav-workout' && typeof window.renderLogger === 'function') {
-          window.renderLogger();
+        if (navId === 'nav-workout' && typeof window.renderWorkoutUI === 'function') {
+          window.renderWorkoutUI();
         }
         if (navId === 'nav-food' && typeof window.renderFoodOrder === 'function') {
           window.renderFoodOrder();
@@ -33,7 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
-
   // Default: Dashboard shown
   showTab(0);
+  if (window.loadDashboardTrainerBookings) window.loadDashboardTrainerBookings();
+  if (window.loadDashboardLatestWorkout) window.loadDashboardLatestWorkout();
+  if (window.loadDashboardLatestFoodOrder) window.loadDashboardLatestFoodOrder();
+
+
 });
