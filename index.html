@@ -58,7 +58,7 @@
       </div>
       <div class="info-card">
         <h3>Crowd Level</h3>
-        <div class="crowd-level">35 / 50</div>
+        <div class="crowd-level" id="crowd-level">Loading...</div>
         <p>
           <strong>Mezzanine:</strong> 60% full<br>
           <strong>First Floor:</strong> 70% full
@@ -139,6 +139,21 @@
   </div>
   <script type="module" src="firebase-config.js"></script>
   <script type="module" src="auth.js"></script>
+  <script>
+    async function fetchCrowdLevel() {
+      try {
+        const r = await fetch("https://smugym.vercel.app/api/counter");
+        const data = await r.json();
+        document.getElementById("crowd-level").textContent = data.crowd;
+      } catch (e) {
+        document.getElementById("crowd-level").textContent = "N/A";
+      }
+    }
+    // Fetch immediately & every 5 minutes
+    fetchCrowdLevel();
+    setInterval(fetchCrowdLevel, 5 * 60 * 1000);
+  </script>
+
 </body>
 
 </html>
