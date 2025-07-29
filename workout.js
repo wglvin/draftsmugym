@@ -9,15 +9,8 @@ const EXERCISES = [
     name: "Squat Rack",
     group: "legs",
     image: "https://img.icons8.com/3d-fluency/94/barbell.png",
-    desc: "Barbell back or front squat rack",
+    desc: "Barbell back or front squat rack.",
     video: "https://www.youtube.com/embed/ultWZbUMPL8"
-  },
-  {
-    name: "Bench Press",
-    group: "chest",
-    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
-    desc: "Classic horizontal bench press exercise",
-    video: "https://www.youtube.com/embed/gRVjAtPip0Y"
   },
   {
     name: "Treadmill",
@@ -32,33 +25,6 @@ const EXERCISES = [
     image: "https://img.icons8.com/3d-fluency/100/elliptical-trainer.png",
     desc: "Low impact cardio session.",
     video: "https://www.youtube.com/embed/CG5F0vv14f4"
-  }, {
-    name: "Bendover Row",
-    group: "back",
-    image: "https://img.icons8.com/deep-coral/96/barbell.png", // Closest in style
-    desc: "Barbell or dumbbell bent-over row targeting the back.",
-    video: "https://www.youtube.com/watch?v=QFq5jdwWwX4"
-  },
-  {
-    name: "Overhead Press",
-    group: "shoulders",
-    image: "https://img.icons8.com/3d-fluency/94/barbell.png", // No strict overhead press icon; barbell as fallback
-    desc: "Standing or seated barbell overhead press.",
-    video: "https://www.youtube.com/watch?v=ayBUERt_w6g"
-  },
-  {
-    name: "Kettlebell Swing",
-    group: "cardio",
-    image: "https://img.icons8.com/nolan/96/kettlebell.png", // Not 3D Fluency, but kettlebell icon from icons8
-    desc: "Two-handed kettlebell swing for full-body power.",
-    video: "https://www.youtube.com/watch?v=YSxHifyI6s8"
-  },
-  {
-    name: "Leg Press",
-    group: "legs",
-    image: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-leg-press-gym-equipment-flaticons-flat-flat-icons.png", // Stock; not 3D Fluency
-    desc: "Seated leg press machine for quads and glutes.",
-    video: "https://www.youtube.com/watch?v=p5dCqF7wWUw"
   },
   {
     name: "Bench Press",
@@ -68,97 +34,126 @@ const EXERCISES = [
     video: "https://www.youtube.com/embed/gRVjAtPip0Y"
   },
   {
+    name: "Bendover Row",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/barbell.png",
+    desc: "Barbell or dumbbell bent-over row.",
+    video: "https://www.youtube.com/embed/vT2GjY_Umpw"
+  },
+  {
+    name: "Overhead Press",
+    group: "shoulders",
+    image: "https://img.icons8.com/3d-fluency/94/barbell.png",
+    desc: "Standing or seated barbell overhead press.",
+    video: "https://www.youtube.com/embed/qEwKCR5JCog"
+  },
+  {
+    name: "Kettlebell Swing",
+    group: "cardio",
+    image: "https://img.icons8.com/3d-fluency/100/kettlebell.png",
+    desc: "Two-handed kettlebell swing.",
+    video: "https://www.youtube.com/embed/YSxHifyI6s8"
+  },
+  {
+    name: "Leg Press",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    desc: "Seated leg press, quads and glutes.",
+    video: "https://www.youtube.com/embed/IZxyjW7MPJQ"
+  },
+  {
     name: "T-Bar Row",
     group: "back",
-    image: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-t-bar-row-gym-flaticons-flat-flat-icons.png", // Closest
-    desc: "T-bar row for back thickness and power.",
-    video: "https://www.youtube.com/watch?v=KP1sYz2VICk"
+    image: "https://img.icons8.com/3d-fluency/100/barbell.png",
+    desc: "T-bar row for back thickness.",
+    video: "https://www.youtube.com/embed/vT2GjY_Umpw"
   },
   {
     name: "Booty Builder",
     group: "glutes",
-    image: "https://img.icons8.com/3d-fluency/100/strong-woman.png", // Closest
-    desc: "Hip thrust or kickback using Booty Builder machine.",
-    video: "https://www.youtube.com/watch?v=40"
+    image: "https://img.icons8.com/3d-fluency/100/strong-woman.png",
+    desc: "Hip thrust or booty builder machine.",
+    video: "https://www.youtube.com/embed/LM8XHLYJoYs"
   },
   {
     name: "Hamstring Curl",
     group: "legs",
-    image: "https://icons8.com/icon/60491/hamstrings", // Direct link: find the best available
-    desc: "Lying or seated hamstring curl for leg strength.",
-    video: "https://www.youtube.com/watch?v=F488k67BTNo"
+    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    desc: "Lying or seated hamstring curl.",
+    video: "https://www.youtube.com/embed/1Tq3QdYUuHs"
   },
   {
-    name: "Hamstring Extension",
+    name: "Leg Extension",
     group: "legs",
-    image: "https://img.icons8.com/3d-fluency/94/leg.png", // closest, generic leg
-    desc: "Leg extension or hyperextension targeting hamstrings.",
-    video: "https://www.youtube.com/watch?v=qhqEyjP7Xs0"
+    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    desc: "Leg extension for quadriceps.",
+    video: "https://www.youtube.com/embed/YyvSfVjQeL0"
   },
   {
     name: "Inclined Bench Press",
     group: "chest",
-    image: "https://img.icons8.com/3d-fluency/100/bench-press.png", // Use same as bench press
+    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
     desc: "Inclined barbell bench press.",
-    video: "https://www.youtube.com/watch?v=SrqOu55lrYU" // Example from official sources
+    video: "https://www.youtube.com/embed/SrqOu55lrYU"
   },
   {
     name: "Pull-Up",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/94/pullups.png", // substitute, generic
+    image: "https://img.icons8.com/3d-fluency/100/pull-ups.png",
     desc: "Classic pull-up using bodyweight.",
-    video: "https://www.youtube.com/watch?v=eGo4IYlbE5g"
+    video: "https://www.youtube.com/embed/eGo4IYlbE5g"
   },
   {
     name: "Leg Raises",
     group: "core",
-    image: "https://img.icons8.com/3d-fluency/100/crunches.png", // use as closest
+    image: "https://img.icons8.com/3d-fluency/100/crunches.png",
     desc: "Hanging or lying leg raise for abs.",
-    video: "https://www.youtube.com/watch?v=JB2oyawG9KI"
+    video: "https://www.youtube.com/embed/JB2oyawG9KI"
   },
   {
     name: "Inclined Sit-Up",
     group: "core",
-    image: "https://img.icons8.com/3d-fluency/100/sit-up.png", // Closest
+    image: "https://img.icons8.com/3d-fluency/100/sit-up.png",
     desc: "Inclined sit-up for core strength.",
-    video: "https://www.youtube.com/watch?v=vHCMF6IIU_c"
+    video: "https://www.youtube.com/embed/vHCMF6IIU_c"
   },
   {
     name: "Dumbbell Shoulder Press",
     group: "shoulders",
     image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
-    desc: "Seated or standing dumbbell press.",
-    video: "https://www.youtube.com/watch?v=B-aVuyhvLHU"
+    desc: "Seated/standing dumbbell press.",
+    video: "https://www.youtube.com/embed/B-aVuyhvLHU"
   },
   {
     name: "Hammer Curls",
     group: "arms",
     image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
-    desc: "Hammer grip dumbbell curl for biceps.",
-    video: "https://www.youtube.com/watch?v=zC3nLlEvin4"
+    desc: "Hammer grip dumbbell curl.",
+    video: "https://www.youtube.com/embed/zC3nLlEvin4"
   },
   {
     name: "Bicep Curls",
     group: "arms",
-    image: "https://img.icons8.com/3d-fluency/100/biceps.png", // Closest
+    image: "https://img.icons8.com/3d-fluency/100/biceps.png",
     desc: "Classic dumbbell biceps curl.",
-    video: "https://www.youtube.com/watch?v=ykJmrZ5v0Oo"
+    video: "https://www.youtube.com/embed/ykJmrZ5v0Oo"
   },
   {
     name: "Lat Pulldown",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/lat-pulldown.png", // Closest
-    desc: "Wide-grip lat pulldown for upper back.",
-    video: "https://www.youtube.com/watch?v=CAwf7n6Luuc"
+    image: "https://img.icons8.com/3d-fluency/100/lat-pulldown.png",
+    desc: "Wide-grip lat pulldown.",
+    video: "https://www.youtube.com/embed/CAwf7n6Luuc"
   },
   {
-    name: "V-Grip Seated Rows",
+    name: "Seated Row",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/rowing-machine.png", // Closest
-    desc: "Seated row with V-grip handle.",
-    video: "https://www.youtube.com/watch?v=Hjs7w1bAjs4"
+    image: "https://img.icons8.com/3d-fluency/100/rowing-machine.png",
+    desc: "Seated row with V-grip.",
+    video: "https://www.youtube.com/embed/Hjs7w1bAjs4"
   }
 ];
+
 
 const CATEGORIES = [
   { key: "all", icon: "https://img.icons8.com/3d-fluency/48/dumbbell.png", label: "All" },
