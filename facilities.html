@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gymnasium & Fitness Centre | Singapore Management University (SMU)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:site_name" content="Singapore Management University (SMU)">
+    <meta property="og:title" content="Gymnasium & Fitness Centre | Singapore Management University (SMU)">
+    <meta property="og:url"
+        content="https://www.smu.edu.sg/campus-life/facilities/student-facilities/gymnasium-fitness-centre">
+    <meta property="og:image" content="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <img src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg" alt="SMU Logo">
+            <h2>Singapore Management University</h2>
+            <button id="auth-btn" class="auth-btn">Login / Sign Up</button>
+        </header>
+        <section class="hero">
+            <h1>Gymnasium & Fitness Centre</h1>
+        </section>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#" class="active">Overview</a></li>
+                <li><a href="#">Facilities</a></li>
+            </ul>
+        </nav>
+        <div class="facilities-header">
+            <h2>Facilities</h2>
+            <label for="level-sort">Sort by Floor:
+                <select id="level">
+                    <option value="all">All levels</option>
+                    <option value="SquatRacks">Squat Racks (B1M)</option>
+                    <option value="FreeWeights">Free Weights (B1M)</option>
+                    <option value="Cardio">Cardio (Level 1)</option>
+                </select>
+            </label>
+        </div>
+        <div class="facility-grid" id="facility-grid"></div>
+
+        <script type="module" src="firebase-config.js"></script>
+        <script type="module" src="auth.js"></script>
+    <script>
+        const EXERCISES = [
+  {
+    name: "Squat Rack",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/94/barbell.png",
+    desc: "Barbell back or front squat rack.",
+    video: "https://www.youtube.com/embed/ultWZbUMPL8"
+    
+  },
+  {
+    name: "Treadmill",
+    group: "cardio",
+    image: "https://img.icons8.com/3d-fluency/100/running-on-treadmill.png",
+    desc: "Steady state running or interval cardio.",
+    video: "https://www.youtube.com/embed/HY5n1Q7bG0M"
+  },
+  {
+    name: "Bench Press",
+    group: "chest",
+    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
+    desc: "Classic horizontal bench press exercise.",
+    video: "https://www.youtube.com/embed/gRVjAtPip0Y"
+  },
+  {
+    name: "Bendover Row",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/barbell.png",
+    desc: "Barbell or dumbbell bent-over row.",
+    video: "https://www.youtube.com/embed/vT2GjY_Umpw"
+  },
+  {
+    name: "Overhead Press",
+    group: "shoulders",
+    image: "https://img.icons8.com/3d-fluency/94/barbell.png",
+    desc: "Standing or seated barbell overhead press.",
+    video: "https://www.youtube.com/embed/qEwKCR5JCog"
+  },
+  {
+    name: "Kettlebell Swing",
+    group: "cardio",
+    image: "https://img.icons8.com/3d-fluency/100/kettlebell.png",
+    desc: "Two-handed kettlebell swing.",
+    video: "https://www.youtube.com/embed/YSxHifyI6s8"
+  },
+  {
+    name: "Leg Press",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    desc: "Seated leg press, quads and glutes.",
+    video: "https://www.youtube.com/embed/IZxyjW7MPJQ"
+  },
+  {
+    name: "T-Bar Row",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/barbell.png",
+    desc: "T-bar row for back thickness.",
+    video: "https://www.youtube.com/embed/vT2GjY_Umpw"
+  },
+  {
+    name: "Booty Builder",
+    group: "glutes",
+    image: "https://img.icons8.com/3d-fluency/100/strong-woman.png",
+    desc: "Hip thrust or booty builder machine.",
+    video: "https://www.youtube.com/embed/LM8XHLYJoYs"
+  },
+  {
+    name: "Hamstring Curl",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    desc: "Lying or seated hamstring curl.",
+    video: "https://www.youtube.com/embed/1Tq3QdYUuHs"
+  },
+  {
+    name: "Leg Extension",
+    group: "legs",
+    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    desc: "Leg extension for quadriceps.",
+    video: "https://www.youtube.com/embed/YyvSfVjQeL0"
+  },
+  {
+    name: "Inclined Bench Press",
+    group: "chest",
+    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
+    desc: "Inclined barbell bench press.",
+    video: "https://www.youtube.com/embed/SrqOu55lrYU"
+  },
+  {
+    name: "Pull-Up",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/pull-ups.png",
+    desc: "Classic pull-up using bodyweight.",
+    video: "https://www.youtube.com/embed/eGo4IYlbE5g"
+  },
+  {
+    name: "Leg Raises",
+    group: "core",
+    image: "https://img.icons8.com/3d-fluency/100/crunches.png",
+    desc: "Hanging or lying leg raise for abs.",
+    video: "https://www.youtube.com/embed/JB2oyawG9KI"
+  },
+  {
+    name: "Inclined Sit-Up",
+    group: "core",
+    image: "https://img.icons8.com/3d-fluency/100/sit-up.png",
+    desc: "Inclined sit-up for core strength.",
+    video: "https://www.youtube.com/embed/vHCMF6IIU_c"
+  },
+  {
+    name: "Dumbbell Shoulder Press",
+    group: "shoulders",
+    image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
+    desc: "Seated/standing dumbbell press.",
+    video: "https://www.youtube.com/embed/B-aVuyhvLHU"
+  },
+  {
+    name: "Hammer Curls",
+    group: "arms",
+    image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
+    desc: "Hammer grip dumbbell curl.",
+    video: "https://www.youtube.com/embed/zC3nLlEvin4"
+  },
+  {
+    name: "Bicep Curls",
+    group: "arms",
+    image: "https://img.icons8.com/3d-fluency/100/biceps.png",
+    desc: "Classic dumbbell biceps curl.",
+    video: "https://www.youtube.com/embed/ykJmrZ5v0Oo"
+  },
+  {
+    name: "Lat Pulldown",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/lat-pulldown.png",
+    desc: "Wide-grip lat pulldown.",
+    video: "https://www.youtube.com/embed/CAwf7n6Luuc"
+  },
+  {
+    name: "Seated Row",
+    group: "back",
+    image: "https://img.icons8.com/3d-fluency/100/rowing-machine.png",
+    desc: "Seated row with V-grip.",
+    video: "https://www.youtube.com/embed/Hjs7w1bAjs4"
+  }
+];
+    </script>
+</body>
+
+</html>
