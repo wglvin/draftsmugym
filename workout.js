@@ -20,13 +20,6 @@ const EXERCISES = [
     video: "https://www.youtube.com/embed/HY5n1Q7bG0M"
   },
   {
-    name: "Elliptical",
-    group: "cardio",
-    image: "https://img.icons8.com/3d-fluency/100/elliptical-trainer.png",
-    desc: "Low impact cardio session.",
-    video: "https://www.youtube.com/embed/CG5F0vv14f4"
-  },
-  {
     name: "Bench Press",
     group: "chest",
     image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
