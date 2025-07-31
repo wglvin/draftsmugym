@@ -54,7 +54,7 @@
           desc: "Barbell back or front squat rack.",
           video: "https://www.youtube.com/embed/ultWZbUMPL8",
           level: "SquatRacks"
-  },
+        },
         {
           name: "Treadmill",
           group: "cardio",
@@ -200,6 +200,27 @@
           level: "Cardio"
         }
       ];
+
+      function renderFacilities() {
+        let level = document.getElementById("level").value;
+        let grid = document.getElementById("facility-grid");
+        let toShow = EXERCISES.filter(ex => level === "all" || ex.level === level);
+        grid.innerHTML = toShow.map(ex => `
+      <div class="exercise-card">
+        <img src="${ex.image}" class="exercise-img" alt="${ex.name}">
+        <div class="exercise-title">${ex.name}</div>
+        <div class="exercise-muscle">${ex.group.charAt(0).toUpperCase() + ex.group.slice(1)}</div>
+        <div class="exercise-desc">${ex.desc}</div>
+        <a href="${ex.video}" target="_blank" rel="noopener noreferrer">Demo Video</a>
+      </div>
+    `).join('');
+        if (!toShow.length) grid.innerHTML = "<div>No facilities for this floor.</div>";
+      }
+
+      document.getElementById("level").addEventListener("change", renderFacilities);
+
+      // Render on startup
+      renderFacilities();
     </script>
 </body>
 

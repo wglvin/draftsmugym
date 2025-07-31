@@ -204,6 +204,36 @@ footer {
   min-height: 1em;
 }
 
+/* --- FACILITY GRID LAYOUT --- */
+.facility-grid {
+  display: grid;
+  gap: 32px 32px;           /* Row and column spacing */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin: 36px 0 20px 0;    /* Space before/after the grid */
+  padding: 0 10px;
+}
+
+/* On large screens (≥ 900px): 3 per row */
+@media (min-width: 900px) {
+  .facility-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* On medium screens (≥ 600px): 2 per row */
+@media (max-width: 899px) and (min-width: 600px) {
+  .facility-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* On small screens (<600px): 1 per row for mobile */
+@media (max-width: 599px) {
+  .facility-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ========= HERO SECTION ========= */
 .hero {
   background: url("gym.png") center/cover no-repeat;
