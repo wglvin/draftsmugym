@@ -97,13 +97,6 @@ const EXERCISES = [
     video: "https://www.youtube.com/embed/eGo4IYlbE5g"
   },
   {
-    name: "Leg Raises",
-    group: "core",
-    image: "https://img.icons8.com/3d-fluency/100/crunches.png",
-    desc: "Hanging or lying leg raise for abs.",
-    video: "https://www.youtube.com/embed/JB2oyawG9KI"
-  },
-  {
     name: "Inclined Sit-Up",
     group: "core",
     image: "https://img.icons8.com/3d-fluency/100/sit-up.png",
