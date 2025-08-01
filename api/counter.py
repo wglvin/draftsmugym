@@ -8,7 +8,7 @@ GOOGLE_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGjYeAiT6Nm
 TIMEZONE_OFFSET = 8  # Singapore time
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)  # Allow CORS for all domains (for local/frontend testing)
 
 def get_current_slot():
     slots = [
@@ -32,16 +32,19 @@ def normalize_slot(slot):
 @app.route('/api/counter')
 def crowd_level():
     df = pd.read_csv(GOOGLE_SHEET_CSV)
-    slot = get_current_slot()
-    normalized_slot = normalize_slot(slot)
+    slot = get_current_slot()         # e.g. "6:30 pm"
+    normalized_slot = normalize_slot(slot)  # e.g. "18:30"
     try:
-        # Match after stripping whitespace
+        # Strip whitespace and match time in the sheet
         row = df[df["Time"].astype(str).str.strip() == normalized_slot]
         n_people = int(row["Number of people"].values[0])
     except Exception as ex:
         print(f"Exception: {ex}")
         n_people = "?"
-    return jsonify({"crowd": f"{n_people} / 50", "slot": slot})
+    return jsonify({
+        "crowd": f"{n_people} / 50",
+        "slot": slot
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
