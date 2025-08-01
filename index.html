@@ -136,7 +136,7 @@
       try {
         const r = await fetch("http://127.0.0.1:5000/api/counter"); // For local testing
         const data = await r.json();
-        document.getElementById("crowd-level").textContent = data.crowd + " (Slot: " + data.slot + ")";
+        document.getElementById("crowd-level").textContent = data.crowd + " As of " + slotFormatted;
       } catch (e) {
         document.getElementById("crowd-level").textContent = "N/A";
       }
