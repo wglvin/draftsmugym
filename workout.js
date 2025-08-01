@@ -1,6 +1,14 @@
 // workout.js
 import { db, auth } from "./firebase-config.js";
-import { collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
 // EXERCISES — add more as desired, with YouTube URLs!
@@ -8,149 +16,195 @@ const EXERCISES = [
   {
     name: "Squat Rack",
     group: "legs",
-    image: "https://img.icons8.com/3d-fluency/94/barbell.png",
+    image:
+      "https://img.icons8.com/?size=100&id=of8Oky6tb5KR&format=png&color=000000",
     desc: "Barbell back or front squat rack.",
-    video: "https://www.youtube.com/embed/ultWZbUMPL8"
+    video: "https://www.youtube.com/embed/ultWZbUMPL8",
   },
   {
     name: "Treadmill",
     group: "cardio",
-    image: "https://img.icons8.com/3d-fluency/100/running-on-treadmill.png",
+    image:
+      "https://img.icons8.com/?size=100&id=T7064sphPN04&format=png&color=000000",
     desc: "Steady state running or interval cardio.",
-    video: "https://www.youtube.com/embed/HY5n1Q7bG0M"
+    video: "https://www.youtube.com/embed/HxsFneJFM2c?si=GuIZ03Yt2OddC12J",
   },
   {
     name: "Bench Press",
     group: "chest",
-    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
+    image: "https://img.icons8.com/?size=100&id=13386&format=png&color=000000",
     desc: "Classic horizontal bench press exercise.",
-    video: "https://www.youtube.com/embed/gRVjAtPip0Y"
+    video: "https://www.youtube.com/embed/gRVjAtPip0Y",
   },
   {
     name: "Bendover Row",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/barbell.png",
+    image: "https://img.icons8.com/?size=100&id=9848&format=png&color=000000",
     desc: "Barbell or dumbbell bent-over row.",
-    video: "https://www.youtube.com/embed/vT2GjY_Umpw"
+    video: "https://www.youtube.com/embed/vT2GjY_Umpw",
   },
   {
     name: "Overhead Press",
     group: "shoulders",
-    image: "https://img.icons8.com/3d-fluency/94/barbell.png",
+    image:
+      "https://img.icons8.com/?size=100&id=7dnnkVyiaOaF&format=png&color=000000",
     desc: "Standing or seated barbell overhead press.",
-    video: "https://www.youtube.com/embed/qEwKCR5JCog"
+    video: "https://www.youtube.com/embed/qEwKCR5JCog",
   },
   {
     name: "Kettlebell Swing",
     group: "cardio",
-    image: "https://img.icons8.com/3d-fluency/100/kettlebell.png",
+    image:
+      "https://img.icons8.com/?size=100&id=i2L7dXldAQEJ&format=png&color=000000",
     desc: "Two-handed kettlebell swing.",
-    video: "https://www.youtube.com/embed/YSxHifyI6s8"
+    video: "https://www.youtube.com/embed/YSxHifyI6s8",
   },
   {
     name: "Leg Press",
     group: "legs",
-    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    image:
+      "https://img.icons8.com/?size=100&id=HWFf22gwkjw2&format=png&color=000000",
     desc: "Seated leg press, quads and glutes.",
-    video: "https://www.youtube.com/embed/IZxyjW7MPJQ"
+    video: "https://www.youtube.com/embed/IZxyjW7MPJQ",
   },
   {
     name: "T-Bar Row",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/barbell.png",
+    image: "https://img.icons8.com/?size=100&id=9773&format=png&color=000000",
     desc: "T-bar row for back thickness.",
-    video: "https://www.youtube.com/embed/vT2GjY_Umpw"
+    video: "https://www.youtube.com/embed/vT2GjY_Umpw",
   },
   {
     name: "Booty Builder",
     group: "glutes",
-    image: "https://img.icons8.com/3d-fluency/100/strong-woman.png",
+    image:
+      "https://img.icons8.com/?size=100&id=BrDcQRlJp1QG&format=png&color=000000",
     desc: "Hip thrust or booty builder machine.",
-    video: "https://www.youtube.com/embed/LM8XHLYJoYs"
+    video: "https://www.youtube.com/embed/LM8XHLYJoYs",
   },
   {
     name: "Hamstring Curl",
     group: "legs",
-    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    image:
+      "https://img.icons8.com/?size=100&id=y08mr67xxkx2&format=png&color=000000",
     desc: "Lying or seated hamstring curl.",
-    video: "https://www.youtube.com/embed/1Tq3QdYUuHs"
+    video: "https://www.youtube.com/embed/1Tq3QdYUuHs",
   },
   {
     name: "Leg Extension",
     group: "legs",
-    image: "https://img.icons8.com/3d-fluency/100/leg.png",
+    image: "https://img.icons8.com/?size=100&id=100013&format=png&color=000000",
     desc: "Leg extension for quadriceps.",
-    video: "https://www.youtube.com/embed/YyvSfVjQeL0"
+    video: "https://www.youtube.com/embed/YyvSfVjQeL0",
   },
   {
     name: "Inclined Bench Press",
     group: "chest",
-    image: "https://img.icons8.com/3d-fluency/100/bench-press.png",
+    image: "https://img.icons8.com/?size=100&id=13386&format=png&color=000000",
     desc: "Inclined barbell bench press.",
-    video: "https://www.youtube.com/embed/SrqOu55lrYU"
+    video: "https://www.youtube.com/embed/SrqOu55lrYU",
   },
   {
     name: "Pull-Up",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/pull-ups.png",
+    image:
+      "https://img.icons8.com/?size=100&id=hLvRN9LQ1WfQ&format=png&color=000000",
     desc: "Classic pull-up using bodyweight.",
-    video: "https://www.youtube.com/embed/eGo4IYlbE5g"
+    video: "https://www.youtube.com/embed/eGo4IYlbE5g",
   },
   {
     name: "Inclined Sit-Up",
     group: "core",
-    image: "https://img.icons8.com/3d-fluency/100/sit-up.png",
+    image:
+      "https://img.icons8.com/?size=100&id=N4A97yF1ltfI&format=png&color=000000",
     desc: "Inclined sit-up for core strength.",
-    video: "https://www.youtube.com/embed/vHCMF6IIU_c"
+    video: "https://www.youtube.com/embed/2m9LKDVHTec?si=3uTk9pSCHQpTuTbP",
   },
   {
     name: "Dumbbell Shoulder Press",
     group: "shoulders",
-    image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
+    image:
+      "https://img.icons8.com/?size=100&id=VUI7vvoIOen4&format=png&color=000000",
     desc: "Seated/standing dumbbell press.",
-    video: "https://www.youtube.com/embed/B-aVuyhvLHU"
+    video: "https://www.youtube.com/embed/B-aVuyhvLHU",
   },
   {
     name: "Hammer Curls",
     group: "arms",
-    image: "https://img.icons8.com/3d-fluency/100/dumbbell.png",
+    image: "https://img.icons8.com/?size=100&id=9782&format=png&color=000000",
     desc: "Hammer grip dumbbell curl.",
-    video: "https://www.youtube.com/embed/zC3nLlEvin4"
+    video: "https://www.youtube.com/embed/zC3nLlEvin4",
   },
   {
     name: "Bicep Curls",
     group: "arms",
-    image: "https://img.icons8.com/3d-fluency/100/biceps.png",
+    image: "https://img.icons8.com/?size=100&id=9782&format=png&color=000000",
     desc: "Classic dumbbell biceps curl.",
-    video: "https://www.youtube.com/embed/ykJmrZ5v0Oo"
+    video: "https://www.youtube.com/embed/ykJmrZ5v0Oo",
   },
   {
     name: "Lat Pulldown",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/lat-pulldown.png",
+    image:
+      "https://img.icons8.com/?size=100&id=p9hPWYPOW8Xn&format=png&color=000000",
     desc: "Wide-grip lat pulldown.",
-    video: "https://www.youtube.com/embed/CAwf7n6Luuc"
+    video: "https://www.youtube.com/embed/CAwf7n6Luuc",
   },
   {
     name: "Seated Row",
     group: "back",
-    image: "https://img.icons8.com/3d-fluency/100/rowing-machine.png",
+    image: "https://img.icons8.com/?size=100&id=9786&format=png&color=000000",
     desc: "Seated row with V-grip.",
-    video: "https://www.youtube.com/embed/Hjs7w1bAjs4"
-  }
+    video: "https://www.youtube.com/embed/GZbfZ033f74?si=DvrgoMYKnmyAynYu",
+  },
 ];
 
-
 const CATEGORIES = [
-  { key: "all", icon: "https://img.icons8.com/3d-fluency/48/dumbbell.png", label: "All" },
-  { key: "legs", icon: "https://img.icons8.com/3d-fluency/44/leg.png", label: "Legs" },
-  { key: "chest", icon: "https://img.icons8.com/3d-fluency/44/chest.png", label: "Chest" },
-  { key: "glutes", icon: "https://img.icons8.com/3d-fluency/48/strong-woman.png", label: "Glutes" },
-  { key: "back", icon: "https://img.icons8.com/3d-fluency/48/back.png", label: "Back" },
-  { key: "shoulders", icon: "https://img.icons8.com/3d-fluency/48/shoulders.png", label: "Shoulders" },
-  { key: "arms", icon: "https://img.icons8.com/3d-fluency/48/biceps.png", label: "Arms" },
-  { key: "core", icon: "https://img.icons8.com/3d-fluency/48/abs.png", label: "Core" },
-  { key: "cardio", icon: "https://img.icons8.com/fluency/44/jogging.png", label: "Cardio" }
+  {
+    key: "all",
+    icon: "https://img.icons8.com/?size=100&id=9773&format=png&color=000000",
+    label: "All",
+  },
+  {
+    key: "legs",
+    icon: "https://img.icons8.com/?size=100&id=of8Oky6tb5KR&format=png&color=000000",
+    label: "Legs",
+  },
+  {
+    key: "chest",
+    icon: "https://img.icons8.com/?size=100&id=13386&format=png&color=000000",
+    label: "Chest",
+  },
+  {
+    key: "glutes",
+    icon: "https://img.icons8.com/?size=100&id=60490&format=png&color=000000",
+    label: "Glutes",
+  },
+  {
+    key: "back",
+    icon: "https://img.icons8.com/?size=100&id=p9hPWYPOW8Xn&format=png&color=000000",
+    label: "Back",
+  },
+  {
+    key: "shoulders",
+    icon: "https://img.icons8.com/?size=100&id=VUI7vvoIOen4&format=png&color=000000",
+    label: "Shoulders",
+  },
+  {
+    key: "arms",
+    icon: "https://img.icons8.com/?size=100&id=60488&format=png&color=000000",
+    label: "Arms",
+  },
+  {
+    key: "core",
+    icon: "https://img.icons8.com/?size=100&id=2eDRoUrTXQ3d&format=png&color=000000",
+    label: "Core",
+  },
+  {
+    key: "cardio",
+    icon: "https://img.icons8.com/?size=100&id=T7064sphPN04&format=png&color=000000",
+    label: "Cardio",
+  },
 ];
 
 let selectedGroup = "all";
@@ -212,21 +266,29 @@ function renderWorkoutUI() {
   showSessionBuilder();
 
   // Show session history after auth change
-  onAuthStateChanged(auth, user => { if (user) showSessionHistory(); });
+  onAuthStateChanged(auth, (user) => {
+    if (user) showSessionHistory();
+  });
 }
 
 // -------- UI/Logic Functions unchanged below ----------------
 function showMuscleChips() {
-  const chips = CATEGORIES.map(cat => `
-    <button class="category-chip${cat.key == "all" ? " active" : ""}" data-cat="${cat.key}">
+  const chips = CATEGORIES.map(
+    (cat) => `
+    <button class="category-chip${
+      cat.key == "all" ? " active" : ""
+    }" data-cat="${cat.key}">
       <img src="${cat.icon}"><span>${cat.label}</span>
     </button>
-  `).join('');
+  `
+  ).join("");
   document.getElementById("muscle-filter-chips").innerHTML = chips;
-  document.querySelectorAll(".category-chip").forEach(btn => {
+  document.querySelectorAll(".category-chip").forEach((btn) => {
     btn.onclick = function () {
       selectedGroup = btn.dataset.cat;
-      document.querySelectorAll(".category-chip").forEach(b => b.classList.remove("active"));
+      document
+        .querySelectorAll(".category-chip")
+        .forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       showExerciseGrid();
     };
@@ -237,28 +299,45 @@ function setupSearch() {
   const search = document.getElementById("exercise-search");
   const clearBtn = document.getElementById("clear-search");
   search.addEventListener("input", showExerciseGrid);
-  clearBtn.onclick = () => { search.value = ""; showExerciseGrid(); };
+  clearBtn.onclick = () => {
+    search.value = "";
+    showExerciseGrid();
+  };
 }
 
 function showExerciseGrid() {
   const group = selectedGroup;
-  const q = document.getElementById("exercise-search").value.trim().toLowerCase();
-  let items = EXERCISES.filter(ex => (group == "all" || ex.group === group) && ex.name.toLowerCase().includes(q));
-  document.getElementById("exercise-grid").innerHTML = items.map(ex => `
+  const q = document
+    .getElementById("exercise-search")
+    .value.trim()
+    .toLowerCase();
+  let items = EXERCISES.filter(
+    (ex) =>
+      (group == "all" || ex.group === group) &&
+      ex.name.toLowerCase().includes(q)
+  );
+  document.getElementById("exercise-grid").innerHTML = items
+    .map(
+      (ex) => `
     <div class="exercise-card" tabindex="0"
      onclick="window.openExerciseModal('${ex.name.replace(/'/g, "\\'")}')"
-     onkeypress="if(event.key==='Enter'){ window.openExerciseModal('${ex.name.replace(/'/g, "\\'")}') }">
+     onkeypress="if(event.key==='Enter'){ window.openExerciseModal('${ex.name.replace(
+       /'/g,
+       "\\'"
+     )}') }">
       <img src="${ex.image}" class="exercise-img" alt="${ex.name}">
       <div class="exercise-title">${ex.name}</div>
       <div class="exercise-muscle">${capitalize(ex.group)}</div>
       <div class="exercise-desc">${ex.desc}</div>
     </div>
-  `).join('');
+  `
+    )
+    .join("");
 }
 
 // Modal logic (now window-scoped)
 window.openExerciseModal = function (name) {
-  const ex = EXERCISES.find(x => x.name === name);
+  const ex = EXERCISES.find((x) => x.name === name);
   if (!ex) return;
   openedExercise = ex;
   openedSets = [];
@@ -267,7 +346,7 @@ window.openExerciseModal = function (name) {
   document.getElementById("exercise-modal-desc").innerText = ex.desc;
   document.getElementById("exercise-modal").classList.add("show");
   refreshModalSetsList();
-}
+};
 
 function setupModal() {
   document.getElementById("close-exercise-modal").onclick = () => {
@@ -280,8 +359,8 @@ function setupModal() {
     let reps = parseInt(document.getElementById("modal-reps").value);
     if (weight > 0 && reps > 0) {
       openedSets.push({ weight, reps });
-      document.getElementById("modal-weight").value = '';
-      document.getElementById("modal-reps").value = '';
+      document.getElementById("modal-weight").value = "";
+      document.getElementById("modal-reps").value = "";
       refreshModalSetsList();
     }
   };
@@ -290,7 +369,7 @@ function setupModal() {
     sessionExercises.push({
       exercise: openedExercise.name,
       group: openedExercise.group,
-      sets: [...openedSets]
+      sets: [...openedSets],
     });
     document.getElementById("close-exercise-modal").click();
     showSessionBuilder();
@@ -299,40 +378,60 @@ function setupModal() {
 
 function refreshModalSetsList() {
   document.getElementById("modal-sets-list").innerHTML = openedSets.length
-    ? ("<div>Sets: </div>" + openedSets.map((s, i) => `
+    ? "<div>Sets: </div>" +
+      openedSets
+        .map(
+          (s, i) => `
         <span class="set-badge">${s.weight}kg x ${s.reps}
         <button onclick="window.removeOpenedSet(${i})" style="color:#b33;background:none;border:none;margin-left:4px;cursor:pointer;">&times;</button>
         </span>
-      `).join(' '))
-    : '';
+      `
+        )
+        .join(" ")
+    : "";
 }
 window.removeOpenedSet = function (i) {
   openedSets.splice(i, 1);
   refreshModalSetsList();
-}
+};
 
 // ==== SESSION BUILDER ======
 function showSessionBuilder() {
-  document.getElementById("session-date").innerText = '(' + (new Date().toLocaleDateString()) + ')';
-  document.getElementById("session-exercises").innerHTML = sessionExercises.length
-    ? sessionExercises.map((se, idx) =>
-      `<div style="margin-bottom:7px;">
-        <b>${se.exercise}</b> ${se.sets.map((s, si) => `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`).join(' ')}
+  document.getElementById("session-date").innerText =
+    "(" + new Date().toLocaleDateString() + ")";
+  document.getElementById("session-exercises").innerHTML =
+    sessionExercises.length
+      ? sessionExercises
+          .map(
+            (se, idx) =>
+              `<div style="margin-bottom:7px;">
+        <b>${se.exercise}</b> ${se.sets
+                .map(
+                  (s, si) =>
+                    `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`
+                )
+                .join(" ")}
         <button onclick="window.removeSessionExercise(${idx})" style="margin-left:7px;color:#c02;">×</button>
-      </div>`).join('')
-    : "<i>No exercises. Add from grid above!</i>";
-  document.getElementById("log-session-btn").disabled = !sessionExercises.length;
+      </div>`
+          )
+          .join("")
+      : "<i>No exercises. Add from grid above!</i>";
+  document.getElementById("log-session-btn").disabled =
+    !sessionExercises.length;
 
   document.getElementById("log-session-btn").onclick = async function () {
     const user = auth.currentUser;
     const msgDiv = document.getElementById("log-session-msg");
-    if (!user) { msgDiv.innerText = "You must be logged in."; return; }
+    if (!user) {
+      msgDiv.innerText = "You must be logged in.";
+      return;
+    }
     msgDiv.innerText = "Logging session...";
     await addDoc(collection(db, "workout_sessions"), {
       userId: user.uid,
       date: new Date(),
       session: sessionExercises,
-      timestamp: serverTimestamp()
+      timestamp: serverTimestamp(),
     });
     msgDiv.innerText = "Session logged!";
     sessionExercises = [];
@@ -343,30 +442,47 @@ function showSessionBuilder() {
 window.removeSessionExercise = function (idx) {
   sessionExercises.splice(idx, 1);
   showSessionBuilder();
-}
+};
 
 async function showSessionHistory() {
   const user = auth.currentUser;
   const historyDiv = document.getElementById("session-history");
   if (!user || !historyDiv) return;
-  const q = query(collection(db, "workout_sessions"),
+  const q = query(
+    collection(db, "workout_sessions"),
     where("userId", "==", user.uid),
-    orderBy("timestamp", "desc"));
+    orderBy("timestamp", "desc")
+  );
   const snap = await getDocs(q);
   let html = "<h4>Your Past Sessions</h4>";
-  snap.forEach(doc => {
+  snap.forEach((doc) => {
     const d = doc.data();
     html += `<div class="session-card">
-      <div class="session-date">${d.timestamp && d.timestamp.seconds ? new Date(d.timestamp.seconds * 1000).toLocaleString() : d.date}</div>
-      <div>${d.session.map(se =>
-      `<div class="session-entry">
-          <b>${se.exercise}</b> ${se.sets.map(s => `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`).join(' ')}
-        </div>`).join('')}
+      <div class="session-date">${
+        d.timestamp && d.timestamp.seconds
+          ? new Date(d.timestamp.seconds * 1000).toLocaleString()
+          : d.date
+      }</div>
+      <div>${d.session
+        .map(
+          (se) =>
+            `<div class="session-entry">
+          <b>${se.exercise}</b> ${se.sets
+              .map(
+                (s) =>
+                  `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`
+              )
+              .join(" ")}
+        </div>`
+        )
+        .join("")}
       </div>
     </div>`;
   });
   historyDiv.innerHTML = html;
 }
 
-function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : ""; }
+function capitalize(s) {
+  return s ? s[0].toUpperCase() + s.slice(1) : "";
+}
 window.renderWorkoutUI = renderWorkoutUI;
