@@ -1,3 +1,5 @@
+# /api/calorie_calculator.py
+# calorie_calculator.py
 def estimate_calories(weight_lifted_kg, reps, sets, body_weight_kg=None):
     """
     Estimates calories burned during weightlifting.

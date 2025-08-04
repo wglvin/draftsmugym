@@ -46,6 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.loadDashboardTrainerBookings) window.loadDashboardTrainerBookings();
   if (window.loadDashboardLatestWorkout) window.loadDashboardLatestWorkout();
   if (window.loadDashboardLatestFoodOrder) window.loadDashboardLatestFoodOrder();
-
-
+  if (window.loadDashboardProfile) window.loadDashboardProfile();
 });
