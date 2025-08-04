@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { navId: 'nav-dashboard', sectionId: 'dashboard-section' },
     { navId: 'nav-workout', sectionId: 'workout-section' },
     { navId: 'nav-food', sectionId: 'food-section' },
-    { navId: 'nav-trainer', sectionId: 'trainer-section' }
+    { navId: 'nav-trainer', sectionId: 'trainer-section' },
+    { navId: 'nav-profile', sectionId: 'profile-section' }
   ];
 
   function showTab(idxToShow) {
