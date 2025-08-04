@@ -136,9 +136,10 @@
       try {
         const r = await fetch("http://127.0.0.1:5000/api/counter"); // For local testing
         const data = await r.json();
+        const slotFormatted = data.slot.replace(" am", " am").replace(" pm", " pm");
         document.getElementById("crowd-level").textContent = data.crowd + " As of " + slotFormatted;
       } catch (e) {
-        document.getElementById("crowd-level").textContent = "N/A";
+        document.getElementById("crowd-level").textContent = "Come back later at 08:30 am for the next update.";
       }
     }
     fetchCrowdLevel();
