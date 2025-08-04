@@ -71,12 +71,17 @@ async function loadTrainerBookings() {
   const q = query(collection(db, "trainer_bookings"), where("userId", "==", user.uid), orderBy("date", "desc"), orderBy("time", "asc"));
   const snap = await getDocs(q);
   let html = '';
+  const now = new Date();
   snap.forEach(doc => {
     const d = doc.data();
-    html += `<div class="dashboard-card">
-      <strong>${d.trainer}</strong><br>
-      <small>${d.date} at ${d.time}</small>
-    </div>`;
+    // Combine date and time into a single Date object
+    const bookingDateTime = new Date(`${d.date}T${d.time}`);
+    if (bookingDateTime >= now) {
+      html += `<div class="dashboard-card">
+        <strong>${d.trainer}</strong><br>
+        <small>${d.date} at ${d.time}</small>
+      </div>`;
+    }
   });
   historyDiv.innerHTML = html || "<i>No bookings yet.</i>";
 }
