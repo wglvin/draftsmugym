@@ -1,268 +1,374 @@
 <!--dashboard.html-->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>SMU Gym Super App Dashboard</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
 
-  <body>
-    <header>
-      <img
-        src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg"
-        alt="SMU Logo"
-      />
-      <h2>Singapore Management University</h2>
-      <button class="auth-btn" id="logout-btn-header">Logout</button>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <title>SMU Gym Super App Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-    <section class="hero">
-      <h1>Gym User Dashboard</h1>
-    </section>
+<body>
+  <header>
+    <img src="https://www.smu.edu.sg/sites/default/files/smu-logo.jpg" alt="SMU Logo" />
+    <h2>Singapore Management University</h2>
+    <button class="auth-btn" id="logout-btn-header">Logout</button>
+  </header>
 
-    <div class="layout-flex">
-      <div class="menu-container">
-        <!-- Hamburger Button -->
-        <button
-          class="hamburger"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-        >
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
+  <section class="hero">
+    <h1>Gym User Dashboard</h1>
+  </section>
 
-      <!-- Sidebar -->
-      <ul class="menu-list sidebar">
-        <li><a id="nav-dashboard" class="active" href="#">Dashboard</a></li>
-        <li><a id="nav-workout" href="#">Workout Log</a></li>
-        <li><a id="nav-food" href="#">Food Orders (Pending)</a></li>
-        <li><a id="nav-trainer" href="#">Personal Trainer (Pending)</a></li>
-        <li><a id="nav-profile" href="#">Your Profile</a></li>
-        </ul>
-      <div class="main-content">
-        <!-- Dashboard Overview -->
-        <div id="dashboard-section">
-          <div class="dashboard-card">
-            <h3>Welcome, <span id="user-name">User</span>!</h3>
-            <p>
-              Your personalized fitness dashboard is ready.<br />
-              Use the navigation on the left to log workouts, order food, or
-              book a trainer.
-            </p>
-          </div>
-          <div class="workout-summary"></div>
-            <h2>Dashboard Overview</h2>
-          <div class="dashboard-overview-flex">
-            <div id="dashboard-latest-workout" class="dashboard-card"></div>
-            <div id="dashboard-latest-food" class="dashboard-card"></div>
-            <div id="dashboard-trainer-bookings" class="dashboard-card"></div>
-          </div>
-        </div>
-        <!-- Workout Tab -->
-        <div id="workout-section" style="display: none">
-          <h3>Workout Log</h3>
-          <div class="dashboard-card">
-            <p>Log your workouts here.</p>
-          </div>
-          <div id="workout-ui-root"></div>
-        </div>
-        <!-- Food Tab -->
-        <div id="food-section" style="display: none">
-          <h3>Food Orders</h3>
-          <div class="dashboard-card">
-            <p>Order your post-workout meals here.</p>
-          </div>
-          <div id="food-order-section"></div>
-          <div id="food-order-history"></div>
-        </div>
-        <!-- Trainer Tab -->
-        <div id="trainer-section" style="display: none">
-          <h3>Personal Trainer</h3>
-          <div class="dashboard-card">
-            <p>Book your personal trainer session here.</p>
-          </div>
-          <form id="trainer-booking-form"></form>
-          <div id="trainer-booking-message"></div>
-          <div id="trainer-bookings-history"></div>
-        </div>
-      </div>
+  <div class="layout-flex">
+    <div class="menu-container">
+      <!-- Hamburger Button -->
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
 
-    <footer>
-      &copy; 2025 Singapore Management University. All Rights Reserved.
-    </footer>
+    <!-- Sidebar -->
+    <ul class="menu-list sidebar">
+      <li><a id="nav-dashboard" class="active" href="#">Dashboard</a></li>
+      <li><a id="nav-workout" href="#">Workout Log</a></li>
+      <li><a id="nav-food" href="#">Food Orders (Pending)</a></li>
+      <li><a id="nav-trainer" href="#">Personal Trainer (Pending)</a></li>
+      <li><a id="nav-profile" href="#">Your Profile</a></li>
+    </ul>
+    <div class="main-content">
+      <!-- Dashboard Overview -->
+      <div id="dashboard-section">
+        <div class="dashboard-card">
+          <h3>Welcome, <span id="user-name">User</span>!</h3>
+          <p>
+            Your personalized fitness dashboard is ready.<br />
+            Use the navigation on the left to log workouts, order food, or
+            book a trainer.
+          </p>
+        </div>
+        <!-- Calories Burnt Chart Section -->
+        <div class="dashboard-card" style="margin-top:32px;">
+          <h3>Calories Burnt Overview</h3>
+          <div style="margin-bottom:10px;">
+            <label for="calorie-chart-range">Show: </label>
+            <select id="calorie-chart-range">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+          <canvas id="calorie-burnt-chart" height="80"></canvas>
+        </div>
+      </div>
+      <h2>Dashboard Overview</h2>
+      <div class="dashboard-overview-flex">
+        <div id="dashboard-latest-workout" class="dashboard-card"></div>
+        <div id="dashboard-latest-food" class="dashboard-card"></div>
+        <div id="dashboard-trainer-bookings" class="dashboard-card"></div>
+      </div>
+    </div>
+    <!-- Workout Tab -->
+    <div id="workout-section" style="display: none">
+      <h3>Workout Log</h3>
+      <div class="dashboard-card">
+        <p>Log your workouts here.</p>
+      </div>
+      <div id="workout-ui-root"></div>
+    </div>
+    <!-- Food Tab -->
+    <div id="food-section" style="display: none">
+      <h3>Food Orders</h3>
+      <div class="dashboard-card">
+        <p>Order your post-workout meals here.</p>
+      </div>
+      <div id="food-order-section"></div>
+      <div id="food-order-history"></div>
+    </div>
+    <!-- Trainer Tab -->
+    <div id="trainer-section" style="display: none">
+      <h3>Personal Trainer</h3>
+      <div class="dashboard-card">
+        <p>Book your personal trainer session here.</p>
+      </div>
+      <form id="trainer-booking-form"></form>
+      <div id="trainer-booking-message"></div>
+      <div id="trainer-bookings-history"></div>
+    </div>
+  </div>
+  </div>
 
-    <!-- Firebase config/module scripts -->
-    <script type="module" src="firebase-config.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script src="spa-nav.js"></script>
-    <!-- <script type="module" src="app.js"></script> -->
-    <script type="module" src="food-order.js"></script>
-    <script type="module" src="trainer.js"></script>
-    <script type="module" src="workout.js"></script>
+  <footer>
+    &copy; 2025 Singapore Management University. All Rights Reserved.
+  </footer>
 
-    <script type="module">
-      import { db, auth } from "./firebase-config.js";
-      import {
-        collection,
-        query,
-        where,
-        orderBy,
-        getDocs,
-      } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+  <!-- Firebase config/module scripts -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script src="spa-nav.js"></script>
+  <!-- <script type="module" src="app.js"></script> -->
+  <script type="module" src="food-order.js"></script>
+  <script type="module" src="trainer.js"></script>
+  <script type="module" src="workout.js"></script>
 
-      // LATEST WORKOUT SUMMARY
-      async function loadDashboardLatestWorkout() {
-        const user = auth.currentUser;
-        const dashDiv = document.getElementById("dashboard-latest-workout");
-        if (!user || !dashDiv) return;
-        console.log("DASHBOARD: user", user.uid, dashDiv);
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        const q = query(
-          collection(db, "workout_sessions"),
-          where("userId", "==", user.uid),
-          orderBy("timestamp", "desc")
-        );
-        const snap = await getDocs(q);
-        console.log("DASHBOARD: snap.size", snap.size);
-        let html = "<strong>Latest Workout</strong><br>";
-        if (snap.size > 0) {
-          const d = snap.docs[0].data();
-          console.log("DASHBOARD: session data", d);
-          html += `<div>
-<span style="color:#888;font-size:1em;">${new Date(
-            d.timestamp.seconds * 1000
-          ).toLocaleString()}</span><br>`;
-          d.session.forEach((se) => {
-            html += `<b>${se.exercise}</b> `;
-            html += se.sets
-              .map(
-                (s) =>
-                  `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`
-              )
-              .join(" ");
-            html += `<br>`;
-          });
-          html += `</div>`;
-        } else {
-          html += "<span style='color:#888;'>No workouts logged yet.</span>";
+  <script type="module">
+    import { db, auth } from "./firebase-config.js";
+    import {
+      collection,
+      query,
+      where,
+      orderBy,
+      getDocs,
+    } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+    import { getUserBodyWeight } from "./profile.js";
+
+    // LATEST WORKOUT SUMMARY
+
+    // CALORIES BURNT CHART
+    let calorieChart;
+    async function fetchCaloriesData(range) {
+      const user = auth.currentUser;
+      if (!user) return { labels: [], data: [] };
+      const q = query(
+        collection(db, "workout_sessions"),
+        where("userId", "==", user.uid),
+        orderBy("timestamp", "asc")
+      );
+      const snap = await getDocs(q);
+      if (snap.empty) return { labels: [], data: [] };
+
+      const bodyWeight = await getUserBodyWeight(user.uid);
+
+      function formatDate(ts, type) {
+        const d = new Date(ts.seconds * 1000);
+        if (type === "daily") return d.toLocaleDateString();
+        if (type === "weekly") {
+          const year = d.getFullYear();
+          const week = Math.ceil(((d - new Date(year, 0, 1)) / 86400000 + new Date(year, 0, 1).getDay() + 1) / 7);
+          return `${year}-W${week}`;
         }
-        dashDiv.innerHTML = html;
+        if (type === "monthly") return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}`;
       }
-      window.loadDashboardLatestWorkout = loadDashboardLatestWorkout;
 
-      // LATEST FOOD SUMMARY
-      async function loadDashboardLatestFoodOrder() {
-        const user = auth.currentUser;
-        const dashDiv = document.getElementById("dashboard-latest-food");
-        if (!user || !dashDiv) return;
+      const group = {};
+      snap.forEach(doc => {
+        const d = doc.data();
+        const label = formatDate(d.timestamp, range);
+        let sessionCals = 0;
+        if (Array.isArray(d.session)) {
+          d.session.forEach(se => {
+            if (Array.isArray(se.sets)) {
+              se.sets.forEach(s => {
+                let cals = 0.1 * (s.weight * s.reps * 1) * 0.035;
+                if (bodyWeight) cals *= (bodyWeight / 70);
+                sessionCals += cals;
+              });
+            }
+          });
+        }
+        if (!group[label]) group[label] = 0;
+        group[label] += sessionCals;
+      });
+      const labels = Object.keys(group).sort();
+      const data = labels.map(l => Math.round(group[l] * 100) / 100);
+      return { labels, data };
+    }
 
-        const q = query(
-          collection(db, "food_orders"),
-          where("userId", "==", user.uid),
-          orderBy("date", "desc")
-        );
-        const snap = await getDocs(q);
+    async function renderCalorieChart(range) {
+      const ctx = document.getElementById("calorie-burnt-chart").getContext("2d");
+      const { labels, data } = await fetchCaloriesData(range);
+      if (calorieChart) calorieChart.destroy();
+      calorieChart = new window.Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Calories Burnt (kcal)",
+            data,
+            borderColor: "#004aad",
+            backgroundColor: "rgba(0,74,173,0.1)",
+            fill: true,
+            tension: 0.3,
+            pointRadius: 4,
+            pointBackgroundColor: "#004aad"
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+            title: { display: false }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
 
-        let html = "<strong>Latest Food Order</strong><br>";
-        if (snap.size > 0) {
-          const d = snap.docs[0].data();
-          html += `
+    document.addEventListener("DOMContentLoaded", () => {
+      const sel = document.getElementById("calorie-chart-range");
+      if (sel) {
+        sel.addEventListener("change", e => {
+          renderCalorieChart(e.target.value);
+        });
+        onAuthStateChanged(auth, (user) => {
+          if (user) renderCalorieChart(sel.value);
+        });
+      }
+    });
+    async function loadDashboardLatestWorkout() {
+      const user = auth.currentUser;
+      const dashDiv = document.getElementById("dashboard-latest-workout");
+      if (!user || !dashDiv) return;
+      console.log("DASHBOARD: user", user.uid, dashDiv);
+
+      const q = query(
+        collection(db, "workout_sessions"),
+        where("userId", "==", user.uid),
+        orderBy("timestamp", "desc")
+      );
+      const snap = await getDocs(q);
+      console.log("DASHBOARD: snap.size", snap.size);
+      let html = "<strong>Latest Workout</strong><br>";
+      if (snap.size > 0) {
+        const d = snap.docs[0].data();
+        console.log("DASHBOARD: session data", d);
+        html += `<div>
+<span style="color:#888;font-size:1em;">${new Date(
+          d.timestamp.seconds * 1000
+        ).toLocaleString()}</span><br>`;
+        d.session.forEach((se) => {
+          html += `<b>${se.exercise}</b> `;
+          html += se.sets
+            .map(
+              (s) =>
+                `<span class="set-badge">${s.weight}kg x ${s.reps}</span>`
+            )
+            .join(" ");
+          html += `<br>`;
+        });
+        html += `</div>`;
+      } else {
+        html += "<span style='color:#888;'>No workouts logged yet.</span>";
+      }
+      dashDiv.innerHTML = html;
+    }
+    window.loadDashboardLatestWorkout = loadDashboardLatestWorkout;
+
+    // LATEST FOOD SUMMARY
+    async function loadDashboardLatestFoodOrder() {
+      const user = auth.currentUser;
+      const dashDiv = document.getElementById("dashboard-latest-food");
+      if (!user || !dashDiv) return;
+
+      const q = query(
+        collection(db, "food_orders"),
+        where("userId", "==", user.uid),
+        orderBy("date", "desc")
+      );
+      const snap = await getDocs(q);
+
+      let html = "<strong>Latest Food Order</strong><br>";
+      if (snap.size > 0) {
+        const d = snap.docs[0].data();
+        html += `
           <div>
             <strong style="color:#004aad">${d.meal}</strong> &bull; ${d.gym}<br>
             <span>Collection: ${d.date}</span><br>
             <span style="color:#888;font-size:0.97em;">${d.desc}</span>
           </div>
         `;
-        } else {
-          html += "<span style='color:#888;'>No food orders yet.</span>";
-        }
-        dashDiv.innerHTML = html;
+      } else {
+        html += "<span style='color:#888;'>No food orders yet.</span>";
       }
-      window.loadDashboardLatestFoodOrder = loadDashboardLatestFoodOrder;
+      dashDiv.innerHTML = html;
+    }
+    window.loadDashboardLatestFoodOrder = loadDashboardLatestFoodOrder;
 
-      // TRAINER BOOKINGS SUMMARY
-      async function loadDashboardTrainerBookings() {
-        const user = auth.currentUser;
-        const dashDiv = document.getElementById("dashboard-trainer-bookings");
-        if (!user || !dashDiv) return;
+    // TRAINER BOOKINGS SUMMARY
+    async function loadDashboardTrainerBookings() {
+      const user = auth.currentUser;
+      const dashDiv = document.getElementById("dashboard-trainer-bookings");
+      if (!user || !dashDiv) return;
 
-        // Query all of this user's bookings, sorted earliest to latest
-        const q = query(
-          collection(db, "trainer_bookings"),
-          where("userId", "==", user.uid),
-          orderBy("date", "asc"), // earliest first
-          orderBy("time", "asc")
-        );
-        const snap = await getDocs(q);
+      // Query all of this user's bookings, sorted earliest to latest
+      const q = query(
+        collection(db, "trainer_bookings"),
+        where("userId", "==", user.uid),
+        orderBy("date", "asc"), // earliest first
+        orderBy("time", "asc")
+      );
+      const snap = await getDocs(q);
 
-        let html = "<strong>Trainer Booking</strong>";
-        const now = new Date();
+      let html = "<strong>Trainer Booking</strong>";
+      const now = new Date();
 
-        // Find first booking that is in the future
-        let found = false;
-        snap.forEach((doc) => {
-          const d = doc.data();
+      // Find first booking that is in the future
+      let found = false;
+      snap.forEach((doc) => {
+        const d = doc.data();
 
-          // Combine date+time into JS Date
-          // (Assumes 'date' is YYYY-MM-DD and 'time' is HH:mm)
-          const bookingDateTime = new Date(`${d.date}T${d.time}`);
-          // If booking is in the future
-          if (!found && bookingDateTime > now) {
-            html += `<div style="background:#f5f9ff; border-radius:12px; margin:15px 0; padding:12px 18px;">
+        // Combine date+time into JS Date
+        // (Assumes 'date' is YYYY-MM-DD and 'time' is HH:mm)
+        const bookingDateTime = new Date(`${d.date}T${d.time}`);
+        // If booking is in the future
+        if (!found && bookingDateTime > now) {
+          html += `<div style="background:#f5f9ff; border-radius:12px; margin:15px 0; padding:12px 18px;">
         <strong style="color:#004aad;">${d.trainer}</strong><br>
         <small>${d.date} at ${d.time}</small>
       </div>`;
-            found = true;
-          }
-        });
-
-        if (!found) {
-          html += "<br/><span style='color:#888;'>No upcoming bookings.</span>";
+          found = true;
         }
-        dashDiv.innerHTML = html;
+      });
+
+      if (!found) {
+        html += "<br/><span style='color:#888;'>No upcoming bookings.</span>";
       }
-      window.loadDashboardTrainerBookings = loadDashboardTrainerBookings;
+      dashDiv.innerHTML = html;
+    }
+    window.loadDashboardTrainerBookings = loadDashboardTrainerBookings;
 
-      // Ensure dashboard summaries update after auth loads
-      import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          loadDashboardLatestWorkout();
-          loadDashboardLatestFoodOrder();
-          loadDashboardTrainerBookings();
+    // Ensure dashboard summaries update after auth loads
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loadDashboardLatestWorkout();
+        loadDashboardLatestFoodOrder();
+        loadDashboardTrainerBookings();
+      }
+    });
+
+    // Hamburger menu toggle
+    const hamburger = document.querySelector(".hamburger");
+    const sidebarMenu = document.querySelector(".menu-list.sidebar");
+    const menuLinks = document.querySelectorAll(".menu-list.sidebar a"); // Select all links
+
+    hamburger.addEventListener("click", () => {
+      const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", !isExpanded);
+      sidebarMenu.classList.toggle("active");
+    });
+
+    // Add the following:
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        // Only close menu if it's open (active) and if we're on mobile
+        if (
+          window.innerWidth <= 768 &&
+          sidebarMenu.classList.contains("active")
+        ) {
+          sidebarMenu.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", false);
         }
       });
+    });
+  </script>
+</body>
 
-      // Hamburger menu toggle
-      const hamburger = document.querySelector(".hamburger");
-      const sidebarMenu = document.querySelector(".menu-list.sidebar");
-      const menuLinks = document.querySelectorAll(".menu-list.sidebar a"); // Select all links
-
-      hamburger.addEventListener("click", () => {
-        const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
-        hamburger.setAttribute("aria-expanded", !isExpanded);
-        sidebarMenu.classList.toggle("active");
-      });
-
-      // Add the following:
-      menuLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          // Only close menu if it's open (active) and if we're on mobile
-          if (
-            window.innerWidth <= 768 &&
-            sidebarMenu.classList.contains("active")
-          ) {
-            sidebarMenu.classList.remove("active");
-            hamburger.setAttribute("aria-expanded", false);
-          }
-        });
-      });
-    </script>
-  </body>
 </html>
