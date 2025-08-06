@@ -213,6 +213,10 @@ footer {
   padding: 0 10px;
 }
 
+.facilities-header {
+  margin-left: 13px;
+}
+
 /* On large screens (≥ 900px): 3 per row */
 @media (min-width: 900px) {
   .facility-grid {
