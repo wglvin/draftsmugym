@@ -241,7 +241,7 @@ footer {
 /* ========= HERO SECTION ========= */
 .hero {
   background: url("gym.png") center/cover no-repeat;
-  height: 190px;
+  height: 150px;
   display: flex;
   align-items: flex-end;
   border-radius: 0 0 var(--radius) var(--radius);
@@ -252,7 +252,7 @@ footer {
 
 .hero::after {
   content: "";
-  background: linear-gradient(0deg, #002855c6 80%, transparent 100%);
+  background: linear-gradient(0deg, #002855c6 50%, transparent 100%);
   position: absolute;
   left: 0;
   top: 0;
