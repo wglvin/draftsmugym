@@ -21,13 +21,15 @@
   </section>
 
   <div class="layout-flex">
-    <div class="menu-container">
-      <!-- Hamburger Button -->
-      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+    <div class="dropdown">
+      <select id="mobileDropdown">
+        <option value="nav-dashboard">Dashboard</option>
+        <option value="nav-workout">Workout Log</option>
+        <option value="nav-food">Food Orders (Pending)</option>
+        <option value="nav-trainer">Personal Trainer (Pending)</option>
+        <option value="nav-profile">Your Profile</option>
+      </select>
+
     </div>
 
     <!-- Sidebar -->
@@ -344,30 +346,8 @@
       }
     });
 
-    // Hamburger menu toggle
-    const hamburger = document.querySelector(".hamburger");
     const sidebarMenu = document.querySelector(".menu-list.sidebar");
     const menuLinks = document.querySelectorAll(".menu-list.sidebar a"); // Select all links
-
-    hamburger.addEventListener("click", () => {
-      const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
-      hamburger.setAttribute("aria-expanded", !isExpanded);
-      sidebarMenu.classList.toggle("active");
-    });
-
-    // Add the following:
-    menuLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        // Only close menu if it's open (active) and if we're on mobile
-        if (
-          window.innerWidth <= 768 &&
-          sidebarMenu.classList.contains("active")
-        ) {
-          sidebarMenu.classList.remove("active");
-          hamburger.setAttribute("aria-expanded", false);
-        }
-      });
-    });
   </script>
 </body>
 

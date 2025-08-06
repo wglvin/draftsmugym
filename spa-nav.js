@@ -41,10 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+
+  const dropdown = document.getElementById('mobileDropdown');
+  if (dropdown) {
+    dropdown.addEventListener('change', () => {
+      const selectedNavId = dropdown.value;
+      const tabIndex = tabs.findIndex(tab => tab.navId === selectedNavId);
+      if (tabIndex !== -1) {
+        showTab(tabIndex);
+      }
+    });
+  }
   // Default: Dashboard shown
   showTab(0);
   if (window.loadDashboardTrainerBookings) window.loadDashboardTrainerBookings();
   if (window.loadDashboardLatestWorkout) window.loadDashboardLatestWorkout();
   if (window.loadDashboardLatestFoodOrder) window.loadDashboardLatestFoodOrder();
   if (window.loadDashboardProfile) window.loadDashboardProfile();
+
 });
+
