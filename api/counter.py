@@ -1,15 +1,27 @@
 # /api/counter.py
 # counter.py
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 import pandas as pd
 from datetime import datetime, timedelta
 from flask_cors import CORS
+from calorie_calculator import estimate_calories
 
 GOOGLE_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGjYeAiT6NmupmUoyv9iuAgn7eCEcmkPfxXdy7MfCUHMb_JucMta7ba-95ulPa1Fk-eoKEWJvu3GJQ/pub?gid=0&single=true&output=csv"
 TIMEZONE_OFFSET = 8  # Singapore time
 
 app = Flask(__name__)
 CORS(app)  # Allow CORS for all domains (for local/frontend testing)
+
+@app.route('/api/calculate', methods=['POST'])
+def calculate():
+    data = request.get_json()
+    calories = estimate_calories(
+        data['weight_lifted_kg'],
+        data['reps'],
+        data['sets'],
+        data.get('body_weight_kg')
+    )
+    return jsonify({'calories': calories})
 
 def get_current_slot():
     slots = [
