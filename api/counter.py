@@ -10,7 +10,7 @@ GOOGLE_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGjYeAiT6Nm
 TIMEZONE_OFFSET = 8  # Singapore time
 
 app = Flask(__name__)
-CORS(app)  # Allow CORS for all domains (for local/frontend testing)
+CORS(app, origins=["https://draftsmugym.vercel.app"])
 
 @app.route('/api/calculate', methods=['POST'])
 def calculate():
