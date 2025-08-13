@@ -15,15 +15,29 @@
 
     <style>
         .anatomy-container {
+            display: grid;
             grid-template-columns: 1.05fr 1fr;
             /* slightly tighter left pane */
             gap: 1.25rem;
             padding: 0.8rem 1.2rem;
         }
 
+        .anatomy-container>.panel:nth-of-type(1) {
+            grid-column: 1;
+        }
+
+        .anatomy-container>.panel.details {
+            grid-column: 2;
+        }
+
         @media (max-width: 900px) {
             .anatomy-container {
                 grid-template-columns: 1fr;
+            }
+
+            .anatomy-container>.panel:nth-of-type(1),
+            .anatomy-container>.panel.details {
+                grid-column: 1;
             }
         }
 
