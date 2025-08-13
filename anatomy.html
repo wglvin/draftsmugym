@@ -200,40 +200,43 @@
                         <title id="frontTitle">Human Anatomy Front View</title>
                         <desc id="frontDesc">Interactive front view with selectable body regions.</desc>
 
-                        <!-- Chest -->
-                        <path id="region-chest" class="region" tabindex="0" data-key="chest"
-                            d="M120,180 C100,190 95,220 95,245 L205,245 C205,220 200,190 180,180 L150,170 Z"></path>
+                        <!-- shift content up by 100 units -->
+                        <g transform="translate(0,-100)">
+                            <!-- Chest -->
+                            <path id="region-chest" class="region" tabindex="0" data-key="chest"
+                                d="M120,180 C100,190 95,220 95,245 L205,245 C205,220 200,190 180,180 L150,170 Z"></path>
 
-                        <!-- Abs -->
-                        <rect id="region-abs" class="region" tabindex="0" data-key="core" x="120" y="250" width="60"
-                            height="90" rx="10" ry="10"></rect>
+                            <!-- Abs -->
+                            <rect id="region-abs" class="region" tabindex="0" data-key="core" x="120" y="250" width="60"
+                                height="90" rx="10" ry="10"></rect>
 
-                        <!-- Quads -->
-                        <path id="region-quads" class="region" tabindex="0" data-key="quads"
-                            d="M110,350 L140,350 L145,500 L120,500 Z M160,350 L190,350 L180,500 L155,500 Z"></path>
+                            <!-- Quads -->
+                            <path id="region-quads" class="region" tabindex="0" data-key="quads"
+                                d="M110,350 L140,350 L145,500 L120,500 Z M160,350 L190,350 L180,500 L155,500 Z"></path>
 
-                        <!-- Biceps -->
-                        <path id="region-biceps-l" class="region" tabindex="0" data-key="biceps"
-                            d="M85,240 C70,260 70,300 85,315 L100,305 C95,285 95,260 100,245 Z"></path>
-                        <path id="region-biceps-r" class="region" tabindex="0" data-key="biceps"
-                            d="M215,240 C230,260 230,300 215,315 L200,305 C205,285 205,260 200,245 Z"></path>
+                            <!-- Biceps -->
+                            <path id="region-biceps-l" class="region" tabindex="0" data-key="biceps"
+                                d="M85,240 C70,260 70,300 85,315 L100,305 C95,285 95,260 100,245 Z"></path>
+                            <path id="region-biceps-r" class="region" tabindex="0" data-key="biceps"
+                                d="M215,240 C230,260 230,300 215,315 L200,305 C205,285 205,260 200,245 Z"></path>
 
-                        <!-- Deltoids -->
-                        <circle id="region-delts-l" class="region" tabindex="0" data-key="shoulders" cx="110" cy="205"
-                            r="18"></circle>
-                        <circle id="region-delts-r" class="region" tabindex="0" data-key="shoulders" cx="190" cy="205"
-                            r="18"></circle>
+                            <!-- Deltoids -->
+                            <circle id="region-delts-l" class="region" tabindex="0" data-key="shoulders" cx="110"
+                                cy="205" r="18"></circle>
+                            <circle id="region-delts-r" class="region" tabindex="0" data-key="shoulders" cx="190"
+                                cy="205" r="18"></circle>
 
-                        <!-- Forearms -->
-                        <rect id="region-forearm-l" class="region" tabindex="0" data-key="forearms" x="88" y="315"
-                            width="18" height="55" rx="8"></rect>
-                        <rect id="region-forearm-r" class="region" tabindex="0" data-key="forearms" x="194" y="315"
-                            width="18" height="55" rx="8"></rect>
+                            <!-- Forearms -->
+                            <rect id="region-forearm-l" class="region" tabindex="0" data-key="forearms" x="88" y="315"
+                                width="18" height="55" rx="8"></rect>
+                            <rect id="region-forearm-r" class="region" tabindex="0" data-key="forearms" x="194" y="315"
+                                width="18" height="55" rx="8"></rect>
 
-                        <!-- Calves -->
-                        <path id="region-calves" class="region" tabindex="0" data-key="calves"
-                            d="M125,520 C120,560 120,610 130,635 L145,635 C155,610 155,560 150,520 Z M155,520 C160,560 160,610 150,635 L165,635 C175,610 175,560 170,520 Z">
-                        </path>
+                            <!-- Calves -->
+                            <path id="region-calves" class="region" tabindex="0" data-key="calves"
+                                d="M125,520 C120,560 120,610 130,635 L145,635 C155,610 155,560 150,520 Z M155,520 C160,560 160,610 150,635 L165,635 C175,610 175,560 170,520 Z">
+                            </path>
+                        </g>
                     </svg>
 
                     <!-- Back view -->
@@ -242,43 +245,46 @@
                         <title id="backTitle">Human Anatomy Back View</title>
                         <desc id="backDesc">Interactive back view with selectable body regions.</desc>
 
-                        <!-- Traps -->
-                        <path id="region-traps" class="region" tabindex="0" data-key="traps"
-                            d="M120,170 L150,150 L180,170 L165,195 L135,195 Z"></path>
+                        <!-- shift back artwork up by the same amount -->
+                        <g transform="translate(0,-100)">
+                            <!-- Traps -->
+                            <path id="region-traps" class="region" tabindex="0" data-key="traps"
+                                d="M120,170 L150,150 L180,170 L165,195 L135,195 Z"></path>
 
-                        <!-- Lats -->
-                        <path id="region-lats" class="region" tabindex="0" data-key="lats"
-                            d="M105,200 C90,230 90,270 105,290 L195,290 C210,270 210,230 195,200 Z"></path>
+                            <!-- Lats -->
+                            <path id="region-lats" class="region" tabindex="0" data-key="lats"
+                                d="M105,200 C90,230 90,270 105,290 L195,290 C210,270 210,230 195,200 Z"></path>
 
-                        <!-- Lower back -->
-                        <rect id="region-lowerback" class="region" tabindex="0" data-key="lower_back" x="125" y="295"
-                            width="50" height="60" rx="10"></rect>
+                            <!-- Lower back -->
+                            <rect id="region-lowerback" class="region" tabindex="0" data-key="lower_back" x="125"
+                                y="295" width="50" height="60" rx="10"></rect>
 
-                        <!-- Glutes -->
-                        <path id="region-glutes" class="region" tabindex="0" data-key="glutes"
-                            d="M110,360 C110,400 130,425 150,425 C170,425 190,400 190,360 C175,350 125,350 110,360 Z">
-                        </path>
+                            <!-- Glutes -->
+                            <path id="region-glutes" class="region" tabindex="0" data-key="glutes"
+                                d="M110,360 C110,400 130,425 150,425 C170,425 190,400 190,360 C175,350 125,350 110,360 Z">
+                            </path>
 
-                        <!-- Hamstrings -->
-                        <path id="region-hamstrings" class="region" tabindex="0" data-key="hamstrings"
-                            d="M115,430 L140,430 L145,560 L125,560 Z M160,430 L185,430 L175,560 L155,560 Z"></path>
+                            <!-- Hamstrings -->
+                            <path id="region-hamstrings" class="region" tabindex="0" data-key="hamstrings"
+                                d="M115,430 L140,430 L145,560 L125,560 Z M160,430 L185,430 L175,560 L155,560 Z"></path>
 
-                        <!-- Rear delts -->
-                        <circle id="region-rear-delts-l" class="region" tabindex="0" data-key="shoulders" cx="110"
-                            cy="205" r="18"></circle>
-                        <circle id="region-rear-delts-r" class="region" tabindex="0" data-key="shoulders" cx="190"
-                            cy="205" r="18"></circle>
+                            <!-- Rear delts -->
+                            <circle id="region-rear-delts-l" class="region" tabindex="0" data-key="shoulders" cx="110"
+                                cy="205" r="18"></circle>
+                            <circle id="region-rear-delts-r" class="region" tabindex="0" data-key="shoulders" cx="190"
+                                cy="205" r="18"></circle>
 
-                        <!-- Triceps -->
-                        <path id="region-triceps-l" class="region" tabindex="0" data-key="triceps"
-                            d="M85,240 C70,260 70,300 85,315 L100,305 C95,285 95,260 100,245 Z"></path>
-                        <path id="region-triceps-r" class="region" tabindex="0" data-key="triceps"
-                            d="M215,240 C230,260 230,300 215,315 L200,305 C205,285 205,260 200,245 Z"></path>
+                            <!-- Triceps -->
+                            <path id="region-triceps-l" class="region" tabindex="0" data-key="triceps"
+                                d="M85,240 C70,260 70,300 85,315 L100,305 C95,285 95,260 100,245 Z"></path>
+                            <path id="region-triceps-r" class="region" tabindex="0" data-key="triceps"
+                                d="M215,240 C230,260 230,300 215,315 L200,305 C205,285 205,260 200,245 Z"></path>
 
-                        <!-- Calves (back) -->
-                        <path id="region-calves-back" class="region" tabindex="0" data-key="calves"
-                            d="M125,520 C120,560 120,610 130,635 L145,635 C155,610 155,560 150,520 Z M155,520 C160,560 160,610 150,635 L165,635 C175,610 175,560 170,520 Z">
-                        </path>
+                            <!-- Calves (back) -->
+                            <path id="region-calves-back" class="region" tabindex="0" data-key="calves"
+                                d="M125,520 C120,560 120,610 130,635 L145,635 C155,610 155,560 150,520 Z M155,520 C160,560 160,610 150,635 L165,635 C175,610 175,560 170,520 Z">
+                            </path>
+                        </g>
                     </svg>
                 </div>
             </div>
@@ -315,7 +321,159 @@
             <div id="auth-error"></div>
         </div>
     </div>
-    <script> // Safe fallback EXERCISES if not globally defined. Remove this block if you already load EXERCISES elsewhere. if (typeof window.EXERCISES === "undefined") { window.EXERCISES = [ { name: "Squat Rack", group: "legs", image: "https://img.icons8.com/?size=100&id=of8Oky6tb5KR&format=png&color=000000", desc: "Barbell back or front squat rack.", video: "https://www.youtube.com/embed/ultWZbUMPL8", level: "SquatRacks" }, { name: "Treadmill", group: "cardio", image: "https://img.icons8.com/?size=100&id=T7064sphPN04&format=png&color=000000", desc: "Steady state running or interval cardio.", video: "https://www.youtube.com/embed/HxsFneJFM2c?si=GuIZ03Yt2OddC12J", level: "Cardio" }, { name: "Bench Press", group: "chest", image: "https://img.icons8.com/?size=100&id=13386&format=png&color=000000", desc: "Classic horizontal bench press.", video: "https://www.youtube.com/embed/gRVjAtPip0Y", level: "FreeWeights" }, { name: "Bent-over Row", group: "back", image: "https://img.icons8.com/?size=100&id=9848&format=png&color=000000", desc: "Barbell or dumbbell bent-over row.", video: "https://www.youtube.com/embed/vT2GjY_Umpw", level: "FreeWeights" }, { name: "Overhead Press", group: "shoulders", image: "https://img.icons8.com/?size=100&id=7dnnkVyiaOaF&format=png&color=000000", desc: "Standing or seated barbell overhead press.", video: "https://www.youtube.com/embed/qEwKCR5JCog", level: "SquatRacks" }, { name: "Booty Builder", group: "glutes", image: "https://img.icons8.com/?size=100&id=BrDcQRlJp1QG&format=png&color=000000", desc: "Hip thrust or booty builder machine.", video: "https://www.youtube.com/embed/LM8XHLYJoYs", level: "FreeWeights" }, { name: "Hamstring Curl", group: "legs", image: "https://img.icons8.com/?size=100&id=y08mr67xxkx2&format=png&color=000000", desc: "Lying or seated hamstring curl.", video: "https://www.youtube.com/embed/1Tq3QdYUuHs", level: "FreeWeights" }, { name: "Leg Extension", group: "legs", image: "https://img.icons8.com/?size=100&id=100013&format=png&color=000000", desc: "Leg extension for quadriceps.", video: "https://www.youtube.com/embed/YyvSfVjQeL0", level: "FreeWeights" }, { name: "Pull-Up", group: "back", image: "https://img.icons8.com/?size=100&id=hLvRN9LQ1WfQ&format=png&color=000000", desc: "Classic pull-up using bodyweight.", video: "https://www.youtube.com/embed/eGo4IYlbE5g", level: "FreeWeights" }, { name: "Dumbbell Shoulder Press", group: "shoulders", image: "https://img.icons8.com/?size=100&id=VUI7vvoIOen4&format=png&color=000000", desc: "Seated/standing dumbbell press.", video: "https://www.youtube.com/embed/B-aVuyhvLHU", level: "FreeWeights" }, { name: "Hammer Curls", group: "arms", image: "https://img.icons8.com/?size=100&id=9782&format=png&color=000000", desc: "Hammer grip dumbbell curl.", video: "https://www.youtube.com/embed/zC3nLlEvin4", level: "FreeWeights" }, { name: "Bicep Curls", group: "arms", image: "https://img.icons8.com/?size=100&id=9782&format=png&color=000000", desc: "Classic dumbbell biceps curl.", video: "https://www.youtube.com/embed/ykJmrZ5v0Oo", level: "FreeWeights" }, { name: "Lat Pulldown", group: "back", image: "https://img.icons8.com/?size=100&id=p9hPWYPOW8Xn&format=png&color=000000", desc: "Wide-grip lat pulldown.", video: "https://www.youtube.com/embed/CAwf7n6Luuc", level: "Cardio" }, { name: "Seated Row", group: "back", image: "https://img.icons8.com/?size=100&id=9786&format=png&color=000000", desc: "Seated row with V-grip.", video: "https://www.youtube.com/embed/GZbfZ033f74?si=DvrgoMYKnmyAynYu", level: "Cardio" } ]; } const ANATOMY = { chest: { common: "Chest", medical: "Pectoralis Major (and Minor)", groups: ["chest"] }, core: { common: "Abs", medical: "Rectus Abdominis (with Obliques)", groups: ["core"] }, quads: { common: "Quads", medical: "Quadriceps Femoris (Vastus Lateralis, Medialis, Intermedius, Rectus Femoris)", groups: ["legs"] }, biceps: { common: "Biceps", medical: "Biceps Brachii", groups: ["arms"] }, triceps: { common: "Triceps", medical: "Triceps Brachii", groups: ["arms"] }, shoulders: { common: "Shoulders", medical: "Deltoideus (Anterior, Lateral, Posterior)", groups: ["shoulders"] }, forearms: { common: "Forearms", medical: "Wrist Flexors and Extensors (Forearm Compartment)", groups: ["arms"] }, calves: { common: "Calves", medical: "Gastrocnemius and Soleus (Triceps Surae)", groups: ["legs"] }, traps: { common: "Upper Back (Traps)", medical: "Trapezius", groups: ["back","shoulders"] }, lats: { common: "Lats", medical: "Latissimus Dorsi", groups: ["back"] }, lower_back: { common: "Lower Back", medical: "Erector Spinae (Iliocostalis, Longissimus, Spinalis)", groups: ["back"] }, glutes: { common: "Butt", medical: "Gluteus Maximus (with Medius/Minimus)", groups: ["glutes","legs"] }, hamstrings: { common: "Hamstrings", medical: "Biceps Femoris, Semitendinosus, Semimembranosus", groups: ["legs"] } }; function getExercisesFor(anatomyKey) { const info = ANATOMY[anatomyKey]; if (!info) return []; const tags = new Set(info.groups); return EXERCISES.filter(ex => { const g = (ex.group || "").toLowerCase(); const name = (ex.name || "").toLowerCase(); if (tags.has(g)) return true; if (anatomyKey === "glutes" && (name.includes("hip") || name.includes("booty") || name.includes("glute"))) return true; if (anatomyKey === "quads" && (name.includes("squat") || name.includes("leg extension"))) return true; if (anatomyKey === "hamstrings" && (name.includes("hamstring") || name.includes("deadlift"))) return true; if (anatomyKey === "biceps" && name.includes("curl")) return true; if (anatomyKey === "triceps" && name.includes("tricep")) return true; if (anatomyKey === "calves" && name.includes("calf")) return true; if (anatomyKey === "lats" && (name.includes("row") || name.includes("pulldown") || name.includes("pull-up") || name.includes("pull up"))) return true; if (anatomyKey === "lower_back" && (name.includes("row") || name.includes("back"))) return true; if (anatomyKey === "shoulders" && (name.includes("press") || name.includes("overhead"))) return true; if (anatomyKey === "chest" && (g === "chest" || name.includes("bench") || name.includes("press"))) return true; return false; }); } const frontBtn = document.getElementById("btn-front"); const backBtn = document.getElementById("btn-back"); const svgFront = document.getElementById("svg-front"); const svgBack = document.getElementById("svg-back"); const detailsCommon = document.getElementById("muscle-common"); const detailsMedical = document.getElementById("muscle-medical"); const detailsNotes = document.getElementById("muscle-notes"); const exerciseList = document.getElementById("exercise-list"); function setView(view) { const front = view === "front"; svgFront.style.display = front ? "" : "none"; svgBack.style.display = front ? "none" : ""; frontBtn.classList.toggle("active", front); backBtn.classList.toggle("active", !front); frontBtn.setAttribute("aria-pressed", String(front)); backBtn.setAttribute("aria-pressed", String(!front)); document.querySelectorAll(".region.selected").forEach(n => n.classList.remove("selected")); resetDetails(); } function resetDetails() { detailsCommon.textContent = "Select a body region"; detailsMedical.textContent = "You’ll see the medical name here."; detailsNotes.textContent = "Tip: Try glutes, lats, quads, chest, or hamstrings."; exerciseList.innerHTML = '<div class="muted">No selection yet.</div>'; } function renderExercises(items) { if (!items.length) { exerciseList.innerHTML = '<div class="muted">No mapped exercises yet for this region.</div>'; return; } exerciseList.innerHTML = items.map(ex => ` <div class="exercise-card"> <img src="${ex.image}" alt="${ex.name}"> <div> <div class="title">${ex.name}</div> <div class="muted">${ex.desc || ""}</div> </div> <a href="${ex.video}" target="_blank" rel="noopener noreferrer" aria-label="Open ${ex.name} demo video">Demo</a> </div> `).join(""); } function selectRegion(key, el) { document.querySelectorAll(".region").forEach(n => n.classList.remove("selected")); if (el) el.classList.add("selected"); const info = ANATOMY[key]; if (!info) return; detailsCommon.textContent = info.common; detailsMedical.textContent = info.medical; const notesMap = { glutes: "Primary hip extensor important for squats, deadlifts, and hip thrusts.", lats: "Major shoulder adductor and extensor; crucial for pull-ups and rows.", quads: "Primary knee extensors; dominate squats and leg extensions.", hamstrings: "Hip extensors and knee flexors; targeted by deadlifts and leg curls.", chest: "Horizontal adduction and internal rotation of shoulder; trained by presses and flyes.", shoulders: "Three heads control shoulder abduction and presses.", lower_back: "Postural muscles supporting spinal extension and stability.", calves: "Plantarflexion of ankle; trained with calf raises.", biceps: "Elbow flexion and forearm supination; curls emphasize them.", triceps: "Elbow extension; trained by presses and extensions.", core: "Spinal flexion and anti-extension; train with planks, rollouts, crunches.", traps: "Elevate, retract, and depress scapula; shrugs and rows hit them." }; detailsNotes.textContent = notesMap[key] || ""; const items = getExercisesFor(key); renderExercises(items); } function wireRegions(root) { root.querySelectorAll(".region").forEach(region => { region.addEventListener("click", () => { const key = region.getAttribute("data-key"); selectRegion(key, region); }); region.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const key = region.getAttribute("data-key"); selectRegion(key, region); } }); }); } wireRegions(svgFront); wireRegions(svgBack); frontBtn.addEventListener("click", () => setView("front")); backBtn.addEventListener("click", () => setView("back")); </script>
+    <script>
+        // ---------- Data ----------
+        if (typeof window.EXERCISES === "undefined") {
+            window.EXERCISES = [
+                { name: "Squat Rack", group: "legs", image: "https://img.icons8.com/?size=100&id=of8Oky6tb5KR&format=png&color=000000", desc: "Barbell back or front squat rack.", video: "https://www.youtube.com/embed/ultWZbUMPL8", level: "SquatRacks" },
+                { name: "Treadmill", group: "cardio", image: "https://img.icons8.com/?size=100&id=T7064sphPN04&format=png&color=000000", desc: "Steady state running or interval cardio.", video: "https://www.youtube.com/embed/HxsFneJFM2c?si=GuIZ03Yt2OddC12J", level: "Cardio" },
+                { name: "Bench Press", group: "chest", image: "https://img.icons8.com/?size=100&id=13386&format=png&color=000000", desc: "Classic horizontal bench press.", video: "https://www.youtube.com/embed/gRVjAtPip0Y", level: "FreeWeights" },
+                { name: "Bent-over Row", group: "back", image: "https://img.icons8.com/?size=100&id=9848&format=png&color=000000", desc: "Barbell or dumbbell bent-over row.", video: "https://www.youtube.com/embed/vT2GjY_Umpw", level: "FreeWeights" },
+                { name: "Overhead Press", group: "shoulders", image: "https://img.icons8.com/?size=100&id=7dnnkVyiaOaF&format=png&color=000000", desc: "Standing or seated barbell overhead press.", video: "https://www.youtube.com/embed/qEwKCR5JCog", level: "SquatRacks" },
+                { name: "Booty Builder", group: "glutes", image: "https://img.icons8.com/?size=100&id=BrDcQRlJp1QG&format=png&color=000000", desc: "Hip thrust or booty builder machine.", video: "https://www.youtube.com/embed/LM8XHLYJoYs", level: "FreeWeights" },
+                { name: "Hamstring Curl", group: "legs", image: "https://img.icons8.com/?size=100&id=y08mr67xxkx2&format=png&color=000000", desc: "Lying or seated hamstring curl.", video: "https://www.youtube.com/embed/1Tq3QdYUuHs", level: "FreeWeights" },
+                { name: "Leg Extension", group: "legs", image: "https://img.icons8.com/?size=100&id=100013&format=png&color=000000", desc: "Leg extension for quadriceps.", video: "https://www.youtube.com/embed/YyvSfVjQeL0", level: "FreeWeights" },
+                { name: "Pull-Up", group: "back", image: "https://img.icons8.com/?size=100&id=hLvRN9LQ1WfQ&format=png&color=000000", desc: "Classic pull-up using bodyweight.", video: "https://www.youtube.com/embed/eGo4IYlbE5g", level: "FreeWeights" },
+                { name: "Dumbbell Shoulder Press", group: "shoulders", image: "https://img.icons8.com/?size=100&id=VUI7vvoIOen4&format=png&color=000000", desc: "Seated/standing dumbbell press.", video: "https://www.youtube.com/embed/B-aVuyhvLHU", level: "FreeWeights" },
+                { name: "Hammer Curls", group: "arms", image: "https://img.icons8.com/?size=100&id=9782&format=png&color=000000", desc: "Hammer grip dumbbell curl.", video: "https://www.youtube.com/embed/zC3nLlEvin4", level: "FreeWeights" },
+                { name: "Bicep Curls", group: "arms", image: "https://img.icons8.com/?size=100&id=9782&format=png&color=000000", desc: "Classic dumbbell biceps curl.", video: "https://www.youtube.com/embed/ykJmrZ5v0Oo", level: "FreeWeights" },
+                { name: "Lat Pulldown", group: "back", image: "https://img.icons8.com/?size=100&id=p9hPWYPOW8Xn&format=png&color=000000", desc: "Wide-grip lat pulldown.", video: "https://www.youtube.com/embed/CAwf7n6Luuc", level: "Cardio" },
+                { name: "Seated Row", group: "back", image: "https://img.icons8.com/?size=100&id=9786&format=png&color=000000", desc: "Seated row with V-grip.", video: "https://www.youtube.com/embed/GZbfZ033f74?si=DvrgoMYKnmyAynYu", level: "Cardio" }
+            ];
+        }
+
+        const ANATOMY = {
+            chest: { common: "Chest", medical: "Pectoralis Major (and Minor)", groups: ["chest"] },
+            core: { common: "Abs", medical: "Rectus Abdominis (with Obliques)", groups: ["core"] },
+            quads: { common: "Quads", medical: "Quadriceps Femoris (Vastus Lateralis, Medialis, Intermedius, Rectus Femoris)", groups: ["legs"] },
+            biceps: { common: "Biceps", medical: "Biceps Brachii", groups: ["arms"] },
+            triceps: { common: "Triceps", medical: "Triceps Brachii", groups: ["arms"] },
+            shoulders: { common: "Shoulders", medical: "Deltoideus (Anterior, Lateral, Posterior)", groups: ["shoulders"] },
+            forearms: { common: "Forearms", medical: "Wrist Flexors and Extensors (Forearm Compartment)", groups: ["arms"] },
+            calves: { common: "Calves", medical: "Gastrocnemius and Soleus (Triceps Surae)", groups: ["legs"] },
+            traps: { common: "Upper Back (Traps)", medical: "Trapezius", groups: ["back", "shoulders"] },
+            lats: { common: "Lats", medical: "Latissimus Dorsi", groups: ["back"] },
+            lower_back: { common: "Lower Back", medical: "Erector Spinae (Iliocostalis, Longissimus, Spinalis)", groups: ["back"] },
+            glutes: { common: "Butt", medical: "Gluteus Maximus (with Medius/Minimus)", groups: ["glutes", "legs"] },
+            hamstrings: { common: "Hamstrings", medical: "Biceps Femoris, Semitendinosus, Semimembranosus", groups: ["legs"] }
+        };
+
+        // ---------- DOM ----------
+        const frontBtn = document.getElementById("btn-front");
+        const backBtn = document.getElementById("btn-back");
+        const svgFront = document.getElementById("svg-front");
+        const svgBack = document.getElementById("svg-back");
+        const detailsCommon = document.getElementById("muscle-common");
+        const detailsMedical = document.getElementById("muscle-medical");
+        const detailsNotes = document.getElementById("muscle-notes");
+        const exerciseList = document.getElementById("exercise-list");
+
+        // ---------- Helpers ----------
+        function getExercisesFor(anatomyKey) {
+            const info = ANATOMY[anatomyKey]; if (!info) return [];
+            const tags = new Set(info.groups);
+            return EXERCISES.filter(ex => {
+                const g = (ex.group || "").toLowerCase();
+                const name = (ex.name || "").toLowerCase();
+                if (tags.has(g)) return true;
+                if (anatomyKey === "glutes" && (name.includes("hip") || name.includes("booty") || name.includes("glute"))) return true;
+                if (anatomyKey === "quads" && (name.includes("squat") || name.includes("leg extension"))) return true;
+                if (anatomyKey === "hamstrings" && (name.includes("hamstring") || name.includes("deadlift"))) return true;
+                if (anatomyKey === "biceps" && name.includes("curl")) return true;
+                if (anatomyKey === "triceps" && name.includes("tricep")) return true;
+                if (anatomyKey === "calves" && name.includes("calf")) return true;
+                if (anatomyKey === "lats" && (name.includes("row") || name.includes("pulldown") || name.includes("pull-up") || name.includes("pull up"))) return true;
+                if (anatomyKey === "lower_back" && (name.includes("row") || name.includes("back"))) return true;
+                if (anatomyKey === "shoulders" && (name.includes("press") || name.includes("overhead"))) return true;
+                if (anatomyKey === "chest" && (g === "chest" || name.includes("bench") || name.includes("press"))) return true;
+                return false;
+            });
+        }
+
+        function renderExercises(items) {
+            if (!items.length) {
+                exerciseList.innerHTML = '<div class="muted">No mapped exercises yet for this region.</div>';
+                return;
+            }
+            exerciseList.innerHTML = items.map(ex => `
+    <div class="exercise-card">
+      <img src="${ex.image}" alt="${ex.name}">
+      <div>
+        <div class="title">${ex.name}</div>
+        <div class="muted">${ex.desc || ""}</div>
+      </div>
+      <a href="${ex.video}" target="_blank" rel="noopener noreferrer" aria-label="Open ${ex.name} demo video">Demo</a>
+    </div>
+  `).join("");
+        }
+
+        function resetDetails() {
+            detailsCommon.textContent = "Select a body region";
+            detailsMedical.textContent = "You’ll see the medical name here.";
+            detailsNotes.textContent = "Tip: Try glutes, lats, quads, chest, or hamstrings.";
+            exerciseList.innerHTML = '<div class="muted">No selection yet.</div>';
+        }
+
+        function selectRegion(key, el) {
+            document.querySelectorAll(".region").forEach(n => n.classList.remove("selected"));
+            if (el) el.classList.add("selected");
+            const info = ANATOMY[key]; if (!info) return;
+            detailsCommon.textContent = info.common;
+            detailsMedical.textContent = info.medical;
+
+            const notesMap = {
+                glutes: "Primary hip extensor important for squats, deadlifts, and hip thrusts.",
+                lats: "Major shoulder adductor and extensor; crucial for pull-ups and rows.",
+                quads: "Primary knee extensors; dominate squats and leg extensions.",
+                hamstrings: "Hip extensors and knee flexors; targeted by deadlifts and leg curls.",
+                chest: "Horizontal adduction/internal rotation; trained by presses and flyes.",
+                shoulders: "Three heads control shoulder abduction and presses.",
+                lower_back: "Postural muscles supporting spinal extension and stability.",
+                calves: "Plantarflexion of the ankle; trained with calf raises.",
+                biceps: "Elbow flexion and forearm supination; curls emphasize them.",
+                triceps: "Elbow extension; trained by presses and extensions.",
+                core: "Spinal flexion and anti‑extension; train with planks, rollouts, crunches.",
+                traps: "Elevate, retract, and depress scapula; shrugs and rows hit them."
+            };
+            detailsNotes.textContent = notesMap[key] || "";
+            renderExercises(getExercisesFor(key));
+        }
+
+        function setView(view) {
+            const front = view === "front";
+            svgFront.style.display = front ? "" : "none";
+            svgBack.style.display = front ? "none" : "";
+            frontBtn.classList.toggle("active", front);
+            backBtn.classList.toggle("active", !front);
+            frontBtn.setAttribute("aria-pressed", String(front));
+            backBtn.setAttribute("aria-pressed", String(!front));
+            document.querySelectorAll(".region.selected").forEach(n => n.classList.remove("selected"));
+            resetDetails();
+        }
+
+        // ---------- Wiring ----------
+        function wireRegions(root) {
+            root.querySelectorAll(".region").forEach(region => {
+                const activate = () => {
+                    const key = region.getAttribute("data-key");
+                    selectRegion(key, region);
+                };
+                region.addEventListener("click", activate);
+                region.addEventListener("keydown", e => {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); }
+                });
+            });
+        }
+
+        wireRegions(svgFront);
+        wireRegions(svgBack);
+
+        frontBtn.addEventListener("click", () => setView("front"));
+        backBtn.addEventListener("click", () => setView("back"));
+
+        resetDetails(); // initialize panel
+    </script>
+
 </body>
 
 </html>
